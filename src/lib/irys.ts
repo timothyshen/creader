@@ -1,6 +1,7 @@
 import { WebIrys } from '@irys/sdk'
 import { createWalletClient, custom, parseEther } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
+
 import { baseSepolia } from 'viem/chains'
 
 const getWebIrys = async () => {
@@ -8,10 +9,8 @@ const getWebIrys = async () => {
     const token = 'base-eth'
     const rpcUrl = 'https://base-sepolia.blockpi.network/v1/rpc/public'
 
-    const account = privateKeyToAccount(process.env.PK as `0x${string}`)
 
     const client = createWalletClient({
-        account,
         chain: baseSepolia,
         transport: custom(window.ethereum),
     })
