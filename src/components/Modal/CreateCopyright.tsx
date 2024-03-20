@@ -7,7 +7,23 @@ import {
     DialogContent,
     DialogHeader,
 } from "@/components/ui/dialog"
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea"
+
 import {
     useAccount, useChainId, type BaseError,
     useWaitForTransactionReceipt,
@@ -26,6 +42,15 @@ type CreateCopyrightProps = {
 
 };
 
+const formSchema = z.object({
+    title: z.string().min(2, {
+        message: "Username must be at least 2 characters.",
+    }),
+    description: z.string().max(280, {
+        message: "Description must be less than 280 characters.",
+    }),
+})
+
 export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted }) => {
     const {
         data: hash,
@@ -38,14 +63,21 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
 
     const account = useAccount()
     const chainId = useChainId()
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            title: "",
+            description: ""
+        },
+    })
 
-    const handleSubmit = async () => {
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
         const data = {
             to: account.address,
             chainId: chainId,
-            title: 'title',
-            description: 'description',
-            status: 'status',
+            title: values.title,
+            description: values.description,
+            status: 'OnGoing',
         }
 
         // address: '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9',
@@ -90,7 +122,45 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                     <DialogDescription>
                         Mint a new cover for the 6551 contract.
                     </DialogDescription>
-                    <Button onClick={handleSubmit}>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                            <FormField
+                                control={form.control}
+                                name="title"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Title</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="shadcn" {...field} />
+                                        </FormControl>
+                                        <FormDescription>
+                                            This is the title of your Book
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="Description"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Description</FormLabel>
+                                        <FormControl>
+                                            <Textarea placeholder="Short Description of the book" className="resize-none" {...field} />
+                                        </FormControl>
+                                        <FormDescription>
+                                            This is the Descripton of your Book. Max 280 Characters
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+
+                                )}
+                            />
+                        </form>
+                    </Form>
+                    <Button type="submit">
                         Create
                     </Button>
                     <div>
@@ -105,7 +175,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                     <DialogFooter>
                     </DialogFooter>
                 </DialogContent>
-            </Dialog>
+            </Dialog >
         </>
     )
 }
