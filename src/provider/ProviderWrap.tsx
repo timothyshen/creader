@@ -15,12 +15,11 @@ interface WagmiProviderProps {
 
 const ProviderWrap = ({ children }: WagmiProviderProps) => {
   const price = useNativeCurrencyPrice();
+  console.log('price', price);
   const { setNativeCurrencyPrice } = useGlobalState();
 
   useEffect(() => {
-    console.log('price', price);
     if (price > 0) {
-      console.log('init', price);
       setNativeCurrencyPrice(price);
     }
   }, [setNativeCurrencyPrice, price]);

@@ -59,7 +59,6 @@ export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: 
                 setFilePriceUSD(usd);
                 console.log('eth', eth);
                 console.log('usd', usd);
-                console.log('price', price);
             });
         }
     }, [supply]);

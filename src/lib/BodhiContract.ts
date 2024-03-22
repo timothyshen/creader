@@ -11,7 +11,7 @@ export async function getAssetIdsByAddress(address: `0x${string}`) {
     address: BodhiAddress as `0x${string}`,
     args: [address],
   });
-  console.log("getAssetsId", getAssetsId);
+  //   console.log("getAssetsId", getAssetsId);
   return getAssetsId;
 }
 
@@ -88,6 +88,6 @@ export async function getAssetsSupply(id: bigint) {
     address: BodhiAddress as `0x${string}`,
     args: [id],
   });
-  console.log("totalSupply", totalSupply);
+  //   console.log("totalSupply", totalSupply);
   return totalSupply;
 }
