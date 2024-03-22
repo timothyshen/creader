@@ -12,6 +12,9 @@ import { getPrice } from '@/lib/BodhiContract';
 import { fetchEtherPrice } from '@/contract/getEthPrice';
 import { BuyButton } from '@/components/PurchaseButton/BuyButton';
 import { SellButton } from '@/components/PurchaseButton/SellButton';
+import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
+import { useGlobalState } from '@/stores/useGlobalState';
+import { fetchPriceFromUni } from '@/lib/fetchPriceFromUni';
 
 interface BodhiCardProps {
     order: number;
@@ -27,7 +30,8 @@ const fetchPrices = async (supply: bigint) => {
     const getPriceFeedETH = await getPrice(supply, weiAmount);
     const getPriceStr = Number(getPriceFeedETH) / 10 ** 18;
 
-    const priceEth = await fetchEtherPrice();
+    // const priceEth = await fetchEtherPrice();
+    const priceEth = 3300;
     const priceUsd = (getPriceStr * priceEth).toFixed(2);
 
     return { eth: getPriceStr.toString(), usd: priceUsd };
@@ -36,6 +40,9 @@ const fetchPrices = async (supply: bigint) => {
 export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: BodhiCardProps) => {
     const [filePriceETH, setFilePriceETH] = useState<string>();
     const [filePriceUSD, setFilePriceUSD] = useState<string>();
+    const newPrice = useNativeCurrencyPrice();
+    console.log('newPrice', newPrice);
+
 
     const sliceOwner = useCallback((owner: `0x${string}`) => (
         `${owner.slice(0, 6)}...${owner.slice(-4)}`
@@ -52,7 +59,7 @@ export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: 
                 setFilePriceUSD(usd);
                 console.log('eth', eth);
                 console.log('usd', usd);
-
+                console.log('price', price);
             });
         }
     }, [supply]);

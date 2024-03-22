@@ -12,7 +12,7 @@ import {
     useWriteContract,
 } from "wagmi";
 import { encodeFunctionData, parseEther } from "viem";
-import getWebIrys from "@/lib/irys";
+import getWebIrys from "@/provider/irys";
 import { useState } from "react";
 import { BodhiAddress } from '@/constant/contract'
 

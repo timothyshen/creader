@@ -143,7 +143,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                             />
                             <FormField
                                 control={form.control}
-                                name="Description"
+                                name="description"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Description</FormLabel>
@@ -158,11 +158,12 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
 
                                 )}
                             />
+                            <Button type="submit" className="w-full">
+                                Create
+                            </Button>
                         </form>
                     </Form>
-                    <Button type="submit">
-                        Create
-                    </Button>
+
                     <div>
                         {isConfirmed && <div>Transaction confirmed.</div>}
                         {hash &&
@@ -172,8 +173,6 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                                 </a>
                             </div>}
                     </div>
-                    <DialogFooter>
-                    </DialogFooter>
                 </DialogContent>
             </Dialog >
         </>
