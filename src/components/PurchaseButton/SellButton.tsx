@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@/components/ui/button';
-import { useBodhiSell } from '@/hooks/useBodhiSell';
+import { useBodhiSell } from '@/hooks/Bodhi/useBodhiSell';
 
 export const SellButton = () => {
 

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Connector, useConnect } from 'wagmi';
 import { Button } from './ui/button';
+import { useAutoConnect } from '@/hooks/useAutoConnect';
 
 const WalletOptions = () => {
     const { connectors, connect } = useConnect();
@@ -22,6 +23,7 @@ const WalletOptions = () => {
 
 const WalletOption = ({ className, connector, onClick }: { className: string, connector: Connector; onClick: () => void }) => {
     const [ready, setReady] = useState(false);
+    useAutoConnect();
 
     useEffect(() => {
         // Async function to check if the provider is ready

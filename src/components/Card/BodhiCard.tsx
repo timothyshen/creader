@@ -25,17 +25,7 @@ interface BodhiCardProps {
     onPriceUpdate: (owner: `0x${string}` | undefined, eth: number, usd: number) => void;
 }
 
-const fetchPrices = async (supply: bigint, newPrice: number) => {
-    const weiAmount = BigInt(1 * 10 ** 18);
-    const getPriceFeedETH = await getPrice(supply, weiAmount);
-    const getPriceStr = Number(getPriceFeedETH) / 10 ** 18;
 
-    // const priceEth = await fetchEtherPrice();
-    const priceEth = newPrice;
-    const priceUsd = (getPriceStr * priceEth).toFixed(2);
-
-    return { eth: getPriceStr.toString(), usd: priceUsd };
-};
 
 export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: BodhiCardProps) => {
     const [filePriceETH, setFilePriceETH] = useState<string>();
@@ -52,15 +42,24 @@ export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: 
         `${arTxId.slice(0, 6)}...${arTxId.slice(-4)}`
     ), []);
 
+    const fetchPrices = async (supply: bigint, newPrice: number) => {
+        const weiAmount = BigInt(1 * 10 ** 18);
+        const getPriceFeedETH = await getPrice(supply, weiAmount);
+        const getPriceStr = Number(getPriceFeedETH) / 10 ** 18;
+
+        // const priceEth = await fetchEtherPrice();
+        const priceEth = newPrice;
+        const priceUsd = (getPriceStr * priceEth).toFixed(2);
+        onPriceUpdate(owner, Number(priceEth), Number(priceUsd));
+        return { eth: getPriceStr.toString(), usd: priceUsd };
+    };
+
 
     useEffect(() => {
         if (supply) {
             fetchPrices(supply, newPrice).then(({ eth, usd }) => {
                 setFilePriceETH(eth);
                 setFilePriceUSD(usd);
-                onPriceUpdate(owner, Number(eth), Number(usd));
-                console.log('eth', eth);
-                console.log('usd', usd);
             });
         }
     }, [supply, newPrice]);

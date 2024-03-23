@@ -47,7 +47,7 @@ export const CopyrightCard = ({
                         <p>TBA by {sliceAddress(coverAcc)}</p>
                     </CardDescription>
                 </div>
-                <div>
+                <div className='pt-[10px] text-left'>
                     {aggregatePrice && (
                         <div>
                             <p>{aggregatePrice[coverAcc].eth.toFixed(5)} ETH</p>
