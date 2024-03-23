@@ -13,7 +13,7 @@ export function Account() {
         <div className='mb-4'>
             {/* // eslint-disable-next-line @next/next/no-img-element */}
             {address && <div className='mb-2'>{address}</div>}
-            <div className='mb-2'>Balance: {data?.formatted} {data?.symbol}</div>
+            <div className='mb-2'>Balance: {Number(data?.formatted).toFixed(4)} {data?.symbol}</div>
             <Button onClick={() => disconnect()}>Disconnect</Button>
         </div>
     )

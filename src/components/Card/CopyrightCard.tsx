@@ -17,6 +17,7 @@ interface CopyrightCardProps {
     content: string,
     coverAcc: `0x${string}`
     setIsMintedBodhi: (isMintedBodhi: boolean) => void
+    aggregatePrice: any
 }
 
 export const CopyrightCard = ({
@@ -26,22 +27,34 @@ export const CopyrightCard = ({
     title,
     content,
     coverAcc,
-    setIsMintedBodhi
+    setIsMintedBodhi,
+    aggregatePrice
 }: CopyrightCardProps) => {
 
     const sliceAddress = (address: string) => {
         return address.slice(0, 6) + '...' + address.slice(-4);
     }
-
+    console.log('aggregatePrice', aggregatePrice)
 
     return (
         <Card className='mb-2 px-2'>
-            <CardHeader>
-                <CardTitle>#{id.toString()} {title}</CardTitle>
-                <CardDescription>
-                    <p>Created by {sliceAddress(address)}</p>
-                    <p>TBA by {sliceAddress(coverAcc)}</p>
-                </CardDescription>
+            <CardHeader className='flex flex-row justify-between'>
+
+                <div>
+                    <CardTitle>#{id.toString()} {title}</CardTitle>
+                    <CardDescription>
+                        <p>Created by {sliceAddress(address)}</p>
+                        <p>TBA by {sliceAddress(coverAcc)}</p>
+                    </CardDescription>
+                </div>
+                <div>
+                    {aggregatePrice && (
+                        <div>
+                            <p>{aggregatePrice[coverAcc].eth.toFixed(5)} ETH</p>
+                            <p>{aggregatePrice[coverAcc].usd.toFixed(2)} USD</p>
+                        </div>
+                    )}
+                </div>
 
             </CardHeader>
             <CardContent>

@@ -41,7 +41,7 @@ export const BodhiCardView = ({ nftAccount, isMintedBodhi, onPriceUpdate }: Bodh
                 <BodhiCard
                     key={index}
                     order={index}
-                    owner={account.address}
+                    owner={nftAccount}
                     id={chapter.arTxId}
                     content={chapter.content}
                     supply={chapter.supply as bigint | undefined}

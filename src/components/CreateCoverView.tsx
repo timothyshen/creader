@@ -28,6 +28,7 @@ const CreateCoverView = () => {
                 };
             }
             const existing = prevPrices[coverAcc] || { eth: 0, usd: 0 };
+            console.log('existing', existing)
             return {
                 ...prevPrices,
                 [coverAcc]: {
@@ -70,6 +71,7 @@ const CreateCoverView = () => {
                         title={work.title}
                         coverAcc={work.nftAccount}
                         setIsMintedBodhi={setIsMintedBodhi}
+                        aggregatePrice={prices}
                     />
                     <BodhiCardView nftAccount={work.nftAccount as `0x${string}`} onPriceUpdate={handlePriceUpdate} isMintedBodhi={isMintedBodhi} /> {/* Update the type of `nftAccount` prop */}
                 </>
