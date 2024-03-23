@@ -34,7 +34,6 @@ export const CopyrightCard = ({
     const sliceAddress = (address: string) => {
         return address.slice(0, 6) + '...' + address.slice(-4);
     }
-    console.log('aggregatePrice', aggregatePrice)
 
     return (
         <Card className='mb-2 px-2'>

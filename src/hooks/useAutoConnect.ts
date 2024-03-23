@@ -53,7 +53,6 @@ export const useAutoConnect = (): void => {
       walletId,
       connectState.connectors
     );
-
     if (initialConnector?.connector) {
       connectState.connect({
         connector: initialConnector.connector,

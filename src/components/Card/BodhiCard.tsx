@@ -50,7 +50,7 @@ export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: 
         // const priceEth = await fetchEtherPrice();
         const priceEth = newPrice;
         const priceUsd = (getPriceStr * priceEth).toFixed(2);
-        onPriceUpdate(owner, Number(priceEth), Number(priceUsd));
+        onPriceUpdate(owner, Number(getPriceStr), Number(priceUsd));
         return { eth: getPriceStr.toString(), usd: priceUsd };
     };
 
