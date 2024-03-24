@@ -10,7 +10,7 @@ import { PriceData, } from '@/types/steptypes';
 
 const CreateCoverView = () => {
     const [loading, setLoading] = useState<boolean>(false);
-    const [works, setWorks] = useState<any[]>([]); // Ensure this is typed correctly as an array
+    const [works, setWorks] = useState<any[]>([]); 
     const [isMintedCopyright, setIsMintedCopyright] = useState<boolean>(false)
     const [isMintedBodhi, setIsMintedBodhi] = useState<boolean>(false)
     const [prices, setPrices] = useState<PriceData>();
@@ -59,6 +59,7 @@ const CreateCoverView = () => {
     return (
         <>
             <CreateCopyright setIsMinted={setIsMintedCopyright} />
+            <p className='my-2 py-2 text-lg font-bold'>Book: </p >
             {works && works.map((work: any, index: number) => (
                 // Notice the return statement here and the key prop
                 <>

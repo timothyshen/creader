@@ -16,8 +16,8 @@ interface CopyrightCardProps {
     title: string,
     content: string,
     coverAcc: `0x${string}`
-    setIsMintedBodhi: (isMintedBodhi: boolean) => void
-    aggregatePrice: any
+    setIsMintedBodhi?: (isMintedBodhi: boolean) => void
+    aggregatePrice?: any
 }
 
 export const CopyrightCard = ({
@@ -62,7 +62,7 @@ export const CopyrightCard = ({
                 </div>
             </CardContent>
             <CardFooter className='justify-center'>
-                {owner && (
+                {owner && setIsMintedBodhi && (
                     <AddNew nftAcc={coverAcc} setIsMintedBodhi={setIsMintedBodhi} />
                 )}
             </CardFooter>

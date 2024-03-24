@@ -12,7 +12,6 @@ const WalletConnectComponent = () => {
         <div className="max-h-52 flex flex-col">
             {isConnected ?
                 (<>
-
                     <Account />
                     <CreateCoverView />
                 </>) :
