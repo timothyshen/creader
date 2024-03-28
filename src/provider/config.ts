@@ -1,7 +1,12 @@
 import { createConfig, http } from "wagmi";
 import { baseSepolia } from "wagmi/chains";
-import { createClient, createPublicClient, defineChain } from "viem";
-import { injected } from "wagmi/connectors";
+import {
+  createClient,
+  createPublicClient,
+  defineChain,
+  createWalletClient,
+  custom,
+} from "viem";
 
 const localhost = defineChain({
   id: 1,
@@ -18,14 +23,17 @@ const localhost = defineChain({
 
 export const config = createConfig({
   chains: [baseSepolia],
-  connectors: [injected()],
   client({ chain }) {
     return createClient({ chain, transport: http() });
   },
+});
+
+export const walletClient = createWalletClient({
+  chain: baseSepolia,
+  transport: custom((window as any).ethereum),
 });
 
 export const client = createPublicClient({
   chain: baseSepolia,
   transport: http(),
 });
-

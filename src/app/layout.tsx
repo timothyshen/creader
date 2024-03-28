@@ -14,20 +14,31 @@ export const metadata: Metadata = {
   description: "Creader | Next generation Content",
 };
 
+
+const LayoutWrap = ({ children }: { children: ReactNode }) => {
+  return (
+    <>
+      <Header />
+      {children}
+      <Footer />
+    </>
+  );
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-
-
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <ProviderWrap>{children}</ProviderWrap>
-        <Toaster />
-        <Footer />
+        <ProviderWrap>
+          <div className={inter.className}>
+            <LayoutWrap>{children}</LayoutWrap>
+            <Toaster />
+          </div>
+        </ProviderWrap>
       </body>
     </html>
 

@@ -1,32 +1,37 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import { Connector, useConnect } from 'wagmi';
 import { Button } from './ui/button';
-import { useAutoConnect } from '@/hooks/useAutoConnect';
+import { useGlobalState } from '@/stores/useGlobalState';
+import { switchChain } from '@wagmi/core'
+import { walletClient } from '@/provider/config';
+
 
 const WalletOptions = () => {
     const { connectors, connect } = useConnect();
+    const { currentChain, setCurrentChain } = useGlobalState();
 
     return (
         <>
             {connectors.map((connector) => (
                 <WalletOption
                     className='mb-2'
-                    key={connector.uid}
+                    key={connector.id} // Assuming connectors have an 'id' or similar unique identifier
                     connector={connector}
-                    onClick={() => connect({ connector })}
+                    onClick={() => {
+                        connect({ connector });
+                        walletClient.switchChain(currentChain);
+                    }}
                 />
             ))}
         </>
-    )
-}
+    );
+};
 
-const WalletOption = ({ className, connector, onClick }: { className: string, connector: Connector; onClick: () => void }) => {
+const WalletOption = ({ className, connector, onClick }: { className: string; connector: Connector; onClick: () => void }) => {
     const [ready, setReady] = useState(false);
-    useAutoConnect();
 
     useEffect(() => {
-        // Async function to check if the provider is ready
         const checkProvider = async () => {
             try {
                 const provider = await connector.getProvider();
@@ -45,6 +50,6 @@ const WalletOption = ({ className, connector, onClick }: { className: string, co
             {connector.name}
         </Button>
     );
-}
+};
 
-export default WalletOptions
+export default WalletOptions;
