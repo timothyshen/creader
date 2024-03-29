@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ProviderWrap from "@/provider/ProviderWrap";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/Header/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 
-const LayoutWrap = ({ children }: { children: ReactNode }) => {
+const LayoutWrap = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Header />

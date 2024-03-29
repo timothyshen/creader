@@ -1,7 +1,6 @@
 'use client'
 import {
     DialogDescription,
-    DialogFooter,
     Dialog,
     DialogTrigger,
     DialogContent,

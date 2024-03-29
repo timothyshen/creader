@@ -1,5 +1,6 @@
 import { WebIrys } from "@irys/sdk";
 import { walletClient as client } from "@/provider/config";
+import { parseEther } from "viem";
 
 const getWebIrys = async () => {
   const url = "https://devnet.irys.xyz";

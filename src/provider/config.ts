@@ -30,7 +30,7 @@ export const config = createConfig({
 
 export const walletClient = createWalletClient({
   chain: baseSepolia,
-  transport: custom((window as any).ethereum),
+  transport: custom((window as any)?.ethereum),
 });
 
 export const client = createPublicClient({
