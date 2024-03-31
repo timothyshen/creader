@@ -2,7 +2,12 @@ import React from 'react'
 import { Button } from '@/components/ui/button';
 import { useBodhiSell } from '@/hooks/Bodhi/useBodhiSell';
 
-export const SellButton = () => {
+type SellButtonProp = {
+    id: number,
+    amount: number
+}
+
+export const SellButton = ({ id, amount }: SellButtonProp) => {
 
     const {
         bodhiSell,
@@ -15,7 +20,7 @@ export const SellButton = () => {
     //TODO: add model for sell
 
     const handleSell = () => {
-        bodhiSell(0, 0.01)
+        bodhiSell(id, amount)
     }
 
     return (

@@ -2,19 +2,22 @@ import React from 'react'
 import { Button } from '@/components/ui/button';
 import { useBodhiBuy } from '@/hooks/Bodhi/useBodhiBuy';
 
-export const BuyButton = () => {
+type BuyButtonProps = {
+    id: number,
+    amount: number,
+    ethPrice: string,
+}
+
+export const BuyButton = ({ id, amount, ethPrice }: BuyButtonProps) => {
 
     const {
         bodhiBuy,
         isPending,
         isConfirming,
-        isConfirmed,
         error } = useBodhiBuy();
 
-    
-    //TODO: add model for buy
     const handleBuy = () => {
-        bodhiBuy(0, 1)
+        bodhiBuy(id, amount, ethPrice);
     }
 
     return (
@@ -28,7 +31,5 @@ export const BuyButton = () => {
             </Button>
             {error && <p>{error.message}</p>}
         </>
-
-
     )
 }

@@ -12,6 +12,7 @@ import { getPrice } from '@/lib/BodhiContract';
 import { BuyButton } from '@/components/PurchaseButton/BuyButton';
 import { SellButton } from '@/components/PurchaseButton/SellButton';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
+import { TradeModal } from '../PurchaseButton/TradeModal';
 
 interface BodhiCardProps {
     order: number;
@@ -80,7 +81,7 @@ export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: 
                 </div>
                 <Button
                     onClick={toggleContent}
-                    variant="outline" 
+                    variant="outline"
                     className='w-full'
                 >
                     {/* Button text based on isExpanded state */}
@@ -97,8 +98,18 @@ export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: 
                     </div>
                 </div>
                 <div className='flex gap-x-2'>
-                    <BuyButton />
-                    <SellButton />
+                    <TradeModal chapterId={order} context="Buy" price={
+                        {
+                            eth: filePriceETH,
+                            usd: filePriceUSD
+                        }
+                    } isBuy />
+                    <TradeModal chapterId={order} context="Sell" price={
+                        {
+                            eth: filePriceETH,
+                            usd: filePriceUSD
+                        }
+                    } isBuy={false} />
                 </div>
             </CardFooter>
         </Card >

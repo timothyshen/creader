@@ -1,3 +1,4 @@
+"use client";
 import { createConfig, http } from "wagmi";
 import { baseSepolia } from "wagmi/chains";
 import {
@@ -28,10 +29,19 @@ export const config = createConfig({
   },
 });
 
-export const walletClient = createWalletClient({
-  chain: baseSepolia,
-  transport: custom((window as any)?.ethereum),
-});
+export const walletClient = () => {
+  if (typeof window === "undefined") {
+    return createWalletClient({
+      chain: baseSepolia,
+      transport: http(),
+    });
+  } else {
+    return createWalletClient({
+      chain: baseSepolia,
+      transport: custom((window as any)?.ethereum),
+    });
+  }
+};
 
 export const client = createPublicClient({
   chain: baseSepolia,

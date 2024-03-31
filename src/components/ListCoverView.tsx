@@ -55,7 +55,7 @@ export const ListCoverView = () => {
             </div>
             <Tabs defaultValue="listAll">
                 <TabsList className="grid w-full grid-cols-2 mb-4">
-                    <TabsTrigger value="listAll" default>
+                    <TabsTrigger value="listAll">
                         List all
                     </TabsTrigger>
                     <TabsTrigger value="recent">Recent</TabsTrigger>
