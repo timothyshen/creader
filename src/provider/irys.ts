@@ -1,24 +1,26 @@
 import { WebIrys } from "@irys/sdk";
-import { walletClient as client } from "@/provider/config";
+import { ConnectWalletClient } from "@/provider/config";
 import { parseEther } from "viem";
 
 const getWebIrys = async () => {
   const url = "https://devnet.irys.xyz";
   const token = "base-eth";
   const rpcUrl = "https://base-sepolia.blockpi.network/v1/rpc/public";
+  const walletClient = ConnectWalletClient();
 
-  console.log("client=", client);
+  console.log("client=", walletClient);
   //@ts-expect-error injected
-  client.getSigner = () => client;
+  walletClient.getSigner = () => walletClient;
   //@ts-expect-error injected
-  client.getAddress = async () => client.getAddresses().then((a) => a[0]);
-  console.log("client=", client);
+  walletClient.getAddress = async () =>
+    walletClient.getAddresses().then((a) => a[0]);
+  console.log("client=", walletClient);
 
-  const wallet = { name: "viem", provider: client };
+  const wallet = { name: "viem", provider: walletClient };
   const webIrys = new WebIrys({ url, token, wallet });
 
   webIrys.tokenConfig.sendTx = async (data): Promise<string> => {
-    const hash = await client.sendTransaction({
+    const hash = await walletClient.sendTransaction({
       to: data.to,
       value: parseEther(data.amount.toString()),
       account: webIrys.address as `0x${string}`,
@@ -37,12 +39,12 @@ const getWebIrys = async () => {
   await webIrys.ready();
 
   //@ts-expect-error injected
-  client._signTypedData = async (domain, types, message) => {
+  walletClient._signTypedData = async (domain, types, message) => {
     console.log("client._signTypedData", domain, types, message);
     message["Transaction hash"] =
       "0x" + Buffer.from(message["Transaction hash"]).toString("hex");
     //@ts-ignore
-    return await client.signTypedData({
+    return await walletClient.signTypedData({
       domain,
       message,
       types,

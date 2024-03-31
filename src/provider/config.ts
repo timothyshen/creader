@@ -29,18 +29,23 @@ export const config = createConfig({
   },
 });
 
-export const walletClient = () => {
-  if (typeof window === "undefined") {
-    return createWalletClient({
-      chain: baseSepolia,
-      transport: http(),
-    });
+export const ConnectWalletClient = () => {
+  let transport;
+  if (typeof window !== "undefined") {
+    // @ts-ignore
+    transport = custom(window.ethereum!);
   } else {
-    return createWalletClient({
-      chain: baseSepolia,
-      transport: custom((window as any)?.ethereum),
-    });
+    const errorMessage =
+      "MetaMask or another web3 wallet is not installed. Please install one to proceed.";
+    throw new Error(errorMessage);
   }
+
+  const walletClient = createWalletClient({
+    chain: baseSepolia,
+    transport: transport,
+  });
+
+  return walletClient;
 };
 
 export const client = createPublicClient({

@@ -42,25 +42,25 @@ export const CopyrightCard = ({
                 <div>
                     <CardTitle>#{id.toString()} {title}</CardTitle>
                     <CardDescription>
-                        <p>Created by {sliceAddress(address)}</p>
-                        <p>TBA by {sliceAddress(coverAcc)}</p>
+                        Created by {sliceAddress(address)} <br />
+                        TBA by {sliceAddress(coverAcc)}
                     </CardDescription>
                 </div>
                 <div className='pt-[10px] text-left'>
                     {aggregatePrice && (
                         <div>
-                            <p>{aggregatePrice[coverAcc]?.eth.toFixed(5)} ETH</p>
-                            <p>{aggregatePrice[coverAcc]?.usd.toFixed(2)} USD</p>
+                            <div>{aggregatePrice[coverAcc]?.eth.toFixed(5)} ETH</div>
+                            <div>{aggregatePrice[coverAcc]?.usd.toFixed(2)} USD</div>
                         </div>
                     )}
                 </div>
 
             </CardHeader>
-            <CardContent>
-                <div>
-                    {content}
-                </div>
-            </CardContent>
+            {/* <CardContent>
+
+                {content}
+
+            </CardContent> */}
             <CardFooter className='justify-center'>
                 {owner && setIsMintedBodhi && (
                     <AddNew nftAcc={coverAcc} setIsMintedBodhi={setIsMintedBodhi} />

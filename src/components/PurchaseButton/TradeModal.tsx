@@ -49,7 +49,7 @@ export const TradeModal = ({
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button className='text-lg text-white'>
           {context}
         </Button>

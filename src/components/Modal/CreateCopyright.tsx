@@ -111,7 +111,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
     return (
         <>
             <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger>
+                <DialogTrigger asChild>
                     <Button variant='default' className='mb-5 w-full'>Mint 6551</Button>
                 </DialogTrigger>
                 <DialogContent>

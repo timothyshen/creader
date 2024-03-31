@@ -2,9 +2,7 @@
 import { AccountDisplayHeader } from "@/components/Header/AccountDisplayHeader";
 import WalletOptions from "@/components/WalletOption";
 import { useAccount } from "wagmi";
-import CreateCoverView from "../CreateCoverView";
 import {
-    DialogDescription,
     DialogTitle,
     Dialog,
     DialogTrigger,
@@ -26,7 +24,7 @@ const WalletConnectComponentHeader = () => {
                 </>) :
                 (<>
                     <Dialog>
-                        <DialogTrigger>
+                        <DialogTrigger asChild>
                             <Button variant="link" className='text-xl text-white'>
                                 Connect
                             </Button>

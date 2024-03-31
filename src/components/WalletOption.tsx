@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { Connector, useConnect } from 'wagmi';
 import { Button } from './ui/button';
 import { useGlobalState } from '@/stores/useGlobalState';
-import { switchChain } from '@wagmi/core'
-import { walletClient } from '@/provider/config';
+import { ConnectWalletClient } from '@/provider/config';
 
 
 const WalletOptions = () => {
     const { connectors, connect } = useConnect();
     const { currentChain, setCurrentChain } = useGlobalState();
+    const walletClient = ConnectWalletClient();
 
     return (
         <>
@@ -20,6 +20,7 @@ const WalletOptions = () => {
                     connector={connector}
                     onClick={() => {
                         connect({ connector });
+                        console.log('currentChain', currentChain);
                         walletClient.switchChain(currentChain);
                     }}
                 />
