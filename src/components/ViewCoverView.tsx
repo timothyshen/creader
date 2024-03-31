@@ -1,0 +1,84 @@
+import { useEffect, useState } from 'react';
+import { getCover } from '@/lib/CopyrightContract';
+import { CopyrightCard } from './Card/CopyrightCard';
+import { useAccount } from 'wagmi';
+import { BodhiCardView } from '@/components/BodhiCardView';
+import { PriceData } from '@/types/steptypes';
+import { useRouter } from 'next/navigation';
+
+
+
+const ViewCoverView = () => {
+    const [loading, setLoading] = useState<boolean>(false);
+    const [works, setWorks] = useState<any>();
+    const [isMintedBodhi, setIsMintedBodhi] = useState<boolean>(false)
+    const [prices, setPrices] = useState<PriceData>();
+    const router = useRouter();
+
+    const account = useAccount();
+
+    const handlePriceUpdate = (coverAcc: any, ethPrice: any, usdPrice: any) => {
+        setPrices(prevPrices => {
+            if (!prevPrices) {
+                return {
+                    [coverAcc]: {
+                        eth: ethPrice,
+                        usd: usdPrice,
+                    },
+                };
+            }
+            const existing = prevPrices[coverAcc] || { eth: 0, usd: 0 };
+            console.log('existing', existing)
+            return {
+                ...prevPrices,
+                [coverAcc]: {
+                    eth: existing.eth + ethPrice,
+                    usd: existing.usd + usdPrice,
+                },
+            };
+        });
+    };
+
+    useEffect(() => {
+        const init = async () => {
+            setLoading(true);
+            try {
+                const work = await getCover(0);
+                console.log('work', work)
+                setWorks(work);
+            } catch (error) {
+                console.error("Failed to fetch works:", error);
+            }
+            setLoading(false); // Correctly set loading to false after the operation
+        };
+        init();
+    }, []);
+
+
+    return (
+        <>
+            <p className='my-2 py-2 text-lg font-bold'>Book: </p >
+            {works && (
+                // Notice the return statement here and the key prop
+                <>
+                    <CopyrightCard
+                        key={works.id} // Assuming `work.id` is unique
+                        id={Number(works.id)}
+                        address={(works.owner).slice(0, 6) + '...' + (works.owner).slice(-4)}
+                        owner={account.address == works.owner}
+                        content={works.description}
+                        title={works.title}
+                        coverAcc={works.nftAccount}
+                        setIsMintedBodhi={setIsMintedBodhi}
+                        aggregatePrice={prices}
+                    />
+                    <BodhiCardView nftAccount={works.nftAccount as `0x${string}`} onPriceUpdate={handlePriceUpdate} isMintedBodhi={isMintedBodhi} />
+                </>
+            )}
+
+            {loading && <p>Loading...</p>}
+        </>
+    );
+};
+
+export default ViewCoverView;

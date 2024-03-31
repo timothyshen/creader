@@ -17,8 +17,6 @@ export const BodhiCardView = ({ nftAccount, isMintedBodhi, onPriceUpdate }: Bodh
     const [chapter, setChapter] = useState<Asset[]>([])
     const [loading, setLoading] = useState<boolean>(false);
 
-    const account = useAccount();
-
     useEffect(() => {
         const init = async () => {
             setLoading(true);

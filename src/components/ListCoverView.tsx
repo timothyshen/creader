@@ -22,9 +22,9 @@ export const ListCoverView = () => {
     const router = useRouter();
 
 
-    const handleToBookDetail = (coverAcc: `0x${string}`) => {
+    const handleToBookDetail = (id: string) => {
         console.log('to book detail')
-        router.push(`/cover/${coverAcc}`)
+        router.push(`/cover/${id}`)
     }
 
 
@@ -74,7 +74,7 @@ export const ListCoverView = () => {
                                     title={work.title}
                                     coverAcc={work.nftAccount}
                                 />
-                                <Button className='my-2' onClick={() => handleToBookDetail(work.nftAccount)}>Read More</Button>
+                                <Button className='my-2' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
                             </>
                         ))}
 
