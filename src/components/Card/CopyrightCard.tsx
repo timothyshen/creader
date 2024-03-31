@@ -30,7 +30,7 @@ export const CopyrightCard = ({
     setIsMintedBodhi,
     aggregatePrice
 }: CopyrightCardProps) => {
-
+    console.log('aggregatePrice', aggregatePrice)
     const sliceAddress = (address: string) => {
         return address.slice(0, 6) + '...' + address.slice(-4);
     }
@@ -49,8 +49,8 @@ export const CopyrightCard = ({
                 <div className='pt-[10px] text-left'>
                     {aggregatePrice && (
                         <div>
-                            <p>{aggregatePrice[coverAcc].eth.toFixed(5)} ETH</p>
-                            <p>{aggregatePrice[coverAcc].usd.toFixed(2)} USD</p>
+                            <p>{aggregatePrice[coverAcc]?.eth.toFixed(5)} ETH</p>
+                            <p>{aggregatePrice[coverAcc]?.usd.toFixed(2)} USD</p>
                         </div>
                     )}
                 </div>

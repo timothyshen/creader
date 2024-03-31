@@ -9,12 +9,9 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { getPrice } from '@/lib/BodhiContract';
-import { fetchEtherPrice } from '@/contract/getEthPrice';
 import { BuyButton } from '@/components/PurchaseButton/BuyButton';
 import { SellButton } from '@/components/PurchaseButton/SellButton';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
-import { useGlobalState } from '@/stores/useGlobalState';
-import { fetchPriceFromUni } from '@/lib/fetchPriceFromUni';
 
 interface BodhiCardProps {
     order: number;
@@ -30,6 +27,9 @@ interface BodhiCardProps {
 export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: BodhiCardProps) => {
     const [filePriceETH, setFilePriceETH] = useState<string>();
     const [filePriceUSD, setFilePriceUSD] = useState<string>();
+    const [isExpanded, setIsExpanded] = useState<boolean>(false);
+
+
     const newPrice = useNativeCurrencyPrice();
 
 
@@ -41,6 +41,8 @@ export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: 
     const sliceArTxId = useCallback((arTxId: string) => (
         `${arTxId.slice(0, 6)}...${arTxId.slice(-4)}`
     ), []);
+
+    const toggleContent = () => setIsExpanded(!isExpanded);
 
     const fetchPrices = async (supply: bigint, newPrice: number) => {
         const weiAmount = BigInt(1 * 10 ** 18);
@@ -73,9 +75,16 @@ export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: 
                 }}>{sliceArTxId(id)}</span></CardDescription>
             </CardHeader>
             <CardContent>
-                <div className='my-2 overflow-hidden relative max-h-48 w-96'>{content}</div>
-                <Button variant="outline" className='w-full'>
-                    View more
+                <div className={`my-2 overflow-hidden relative ${isExpanded ? 'max-h-full' : 'max-h-48'} w-96`}>
+                    {content}
+                </div>
+                <Button
+                    onClick={toggleContent}
+                    variant="outline" 
+                    className='w-full'
+                >
+                    {/* Button text based on isExpanded state */}
+                    {isExpanded ? 'View less' : 'View more'}
                 </Button>
             </CardContent>
             <CardFooter className='flex justify-between border-t-2 py-3 px-4'>

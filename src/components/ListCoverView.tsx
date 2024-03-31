@@ -12,11 +12,20 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
+import { useRouter } from 'next/navigation'
+
 
 export const ListCoverView = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [works, setWorks] = useState<any[]>([]);
     const account = useAccount();
+    const router = useRouter();
+
+
+    const handleToBookDetail = (coverAcc: `0x${string}`) => {
+        console.log('to book detail')
+        router.push(`/cover/${coverAcc}`)
+    }
 
 
     useEffect(() => {
@@ -44,14 +53,14 @@ export const ListCoverView = () => {
                     className="w-full rounded-lg bg-background pl-8"
                 />
             </div>
-            <Tabs defaultValue="account">
-                <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="account">
+            <Tabs defaultValue="listAll">
+                <TabsList className="grid w-full grid-cols-2 mb-4">
+                    <TabsTrigger value="listAll" default>
                         List all
                     </TabsTrigger>
-                    <TabsTrigger value="password">Password</TabsTrigger>
+                    <TabsTrigger value="recent">Recent</TabsTrigger>
                 </TabsList>
-                <TabsContent value="account">
+                <TabsContent value="listAll">
                     <div className="max-h-52 flex flex-col w-[450px]">
                         {works && works.map((work: any, index: number) => (
                             // Notice the return statement here and the key prop
@@ -65,17 +74,19 @@ export const ListCoverView = () => {
                                     title={work.title}
                                     coverAcc={work.nftAccount}
                                 />
-                                <Button className='mt-2'>Read More</Button>
+                                <Button className='my-2' onClick={() => handleToBookDetail(work.nftAccount)}>Read More</Button>
                             </>
                         ))}
 
                         {loading && <p>Loading...</p>} {/* Display loading state */}
                     </div>
                 </TabsContent>
-                <TabsContent value="password">Change your password here.</TabsContent>
+                <TabsContent value="recent">
+                    <div className="max-h-52 flex flex-col w-[450px]">
+                        Change your password here.
+                    </div>
+                </TabsContent>
             </Tabs>
         </div>
-
-
     )
 }
