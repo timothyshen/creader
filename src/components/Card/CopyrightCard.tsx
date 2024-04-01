@@ -56,11 +56,11 @@ export const CopyrightCard = ({
                 </div>
 
             </CardHeader>
-            {/* <CardContent>
+            <CardContent>
 
-                {content}
+                <p>{content}</p>
 
-            </CardContent> */}
+            </CardContent>
             <CardFooter className='justify-center'>
                 {owner && setIsMintedBodhi && (
                     <AddNew nftAcc={coverAcc} setIsMintedBodhi={setIsMintedBodhi} />

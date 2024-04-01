@@ -46,7 +46,7 @@ export const ListCoverView = () => {
     return (
         <div>
             <div className='mb-4'>
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Search className=" absolute h-4 w-4 m-3 text-muted-foreground" />
                 <Input
                     type="search"
                     placeholder="Search..."
@@ -74,7 +74,7 @@ export const ListCoverView = () => {
                                     title={work.title}
                                     coverAcc={work.nftAccount}
                                 />
-                                <Button className='my-2' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
+                                <Button className='mb-4' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
                             </>
                         ))}
 

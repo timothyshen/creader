@@ -2,6 +2,7 @@
 import { useAccount, useDisconnect, useBalance } from 'wagmi'
 import { Button } from '@/components/ui/button'
 import { sliceAddress } from '@/lib/supportFunction'
+import { CreateCopyright } from '@/components/Modal/CreateCopyright'
 
 export function AccountDisplayHeader() {
     const { address } = useAccount()
@@ -13,9 +14,9 @@ export function AccountDisplayHeader() {
     return (
         <div className='flex items-center gap-3'>
             {/* // eslint-disable-next-line @next/next/no-img-element */}
-            <Button>Create +</Button>
+            <CreateCopyright />
             {address &&
-                <div className='w-max'>
+                <div className='w-max py-2 px-4 rounded-md bg-black'>
                     {sliceAddress(address)}
                 </div>
             }

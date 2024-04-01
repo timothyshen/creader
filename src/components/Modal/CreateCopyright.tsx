@@ -37,8 +37,7 @@ import { CopyrightNFT__factory } from '@/contract-config/typechain'
 import { useEffect, useState } from "react";
 
 type CreateCopyrightProps = {
-    setIsMinted: (isMinted: boolean) => void;
-
+    setIsMinted?: (isMinted: boolean) => void;
 };
 
 const formSchema = z.object({
@@ -112,7 +111,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
         <>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button variant='default' className='mb-5 w-full'>Mint 6551</Button>
+                    <Button variant='default' className='w-full'>Create +</Button>
                 </DialogTrigger>
                 <DialogContent>
                     <DialogHeader>
