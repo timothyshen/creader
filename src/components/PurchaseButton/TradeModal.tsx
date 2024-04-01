@@ -76,7 +76,7 @@ export const TradeModal = ({
             <p className="text-gray-700">Prices in USD: <span className="font-semibold">{usdPrice}</span></p>
           </div>
         </div>
-        {isBuy ? <BuyButton id={chapterId} amount={amount} ethPrice={ethPrice} /> : <SellButton id={chapterId} amount={amount} />}
+        {isBuy && ethPrice ? <BuyButton id={chapterId} amount={amount} ethPrice={ethPrice} /> : <SellButton id={chapterId} amount={amount} />}
       </DialogContent>
     </Dialog>
   )

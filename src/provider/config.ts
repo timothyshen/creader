@@ -1,4 +1,3 @@
-"use client";
 import { createConfig, http } from "wagmi";
 import { baseSepolia } from "wagmi/chains";
 import {
@@ -30,14 +29,10 @@ export const config = createConfig({
 });
 
 export const ConnectWalletClient = () => {
-  let transport;
+  let transport = http();
   if (typeof window !== "undefined") {
     // @ts-ignore
     transport = custom(window.ethereum!);
-  } else {
-    const errorMessage =
-      "MetaMask or another web3 wallet is not installed. Please install one to proceed.";
-    throw new Error(errorMessage);
   }
 
   const walletClient = createWalletClient({
