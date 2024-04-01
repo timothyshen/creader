@@ -29,8 +29,8 @@ export async function getAuthorCover(author: `0x${string}`) {
     abi: CopyrightNFT__factory.abi,
     functionName: "getAuthorCover",
     address: CopyrightNFTAddress as `0x${string}`,
-    args: [author],
+    args: ["0xcC2042a7c7997a04e26389B9689f2AE766342732"],
   });
-  // console.log('author_cover', author_cover)
+  console.log("author_cover", author_cover);
   return author_cover;
 }

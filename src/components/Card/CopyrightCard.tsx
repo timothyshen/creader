@@ -36,7 +36,7 @@ export const CopyrightCard = ({
     }
 
     return (
-        <Card className='mb-2 px-2'>
+        <Card className='mb-2 px-2 w-full'>
             <CardHeader className='flex flex-row justify-between'>
 
                 <div>

@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from 'react';
 import { getAllCopyright } from '@/lib/CopyrightContract';
 import { CopyrightCard } from './Card/CopyrightCard';
@@ -6,11 +7,13 @@ import { useAccount } from 'wagmi';
 import { BodhiCardView } from '@/components/BodhiCardView';
 import { PriceData, } from '@/types/steptypes';
 
+type AuthorCoverViewProps = {
+    addr: `0x${string}`;
+};
 
-
-const CreateCoverView = () => {
+const AuthorCoverView: React.FC<AuthorCoverViewProps> = ({ addr }) => {
     const [loading, setLoading] = useState<boolean>(false);
-    const [works, setWorks] = useState<any[]>([]); 
+    const [works, setWorks] = useState<any[]>([]);
     const [isMintedCopyright, setIsMintedCopyright] = useState<boolean>(false)
     const [isMintedBodhi, setIsMintedBodhi] = useState<boolean>(false)
     const [prices, setPrices] = useState<PriceData>();
@@ -57,10 +60,10 @@ const CreateCoverView = () => {
 
     // TODO: fix onPriceUpdate
     return (
-        <>
+        <div className='flex flex-col'>
             <CreateCopyright setIsMinted={setIsMintedCopyright} />
-            <p className='my-2 py-2 text-lg font-bold'>Book: </p >
-            {works && works.map((work: any, index: number) => (
+            <p className='my-2 py-2 text-lg font-bold'>Book: </p>
+            {works && works.filter(item => item.owner == account.address).map((work: any, index: number) => (
                 // Notice the return statement here and the key prop
                 <>
                     <CopyrightCard
@@ -79,8 +82,8 @@ const CreateCoverView = () => {
             ))}
 
             {loading && <p>Loading...</p>} {/* Display loading state */}
-        </>
+        </div>
     );
 };
 
-export default CreateCoverView;
+export default AuthorCoverView;

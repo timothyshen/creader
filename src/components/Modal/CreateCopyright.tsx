@@ -102,9 +102,9 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
     useEffect(() => {
         if (isConfirmed) {
             toast.success("Transaction confirmed")
+            // @ts-ignore
             setIsMinted(true)
         }
-
     }, [isConfirmed, setIsMinted, setOpen]);
 
     return (
