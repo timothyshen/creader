@@ -60,7 +60,7 @@ const AuthorCoverView: React.FC<AuthorCoverViewProps> = ({ addr }) => {
 
     // TODO: fix onPriceUpdate
     return (
-        <div className='flex flex-col'>
+        <div className='flex flex-col w-[450px]'>
             <CreateCopyright setIsMinted={setIsMintedCopyright} />
             <p className='my-2 py-2 text-lg font-bold'>Book: </p>
             {works && works.filter(item => item.owner == account.address).map((work: any, index: number) => (

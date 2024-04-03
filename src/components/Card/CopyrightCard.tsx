@@ -50,7 +50,7 @@ export const CopyrightCard = ({
                     {aggregatePrice && (
                         <div>
                             <div>{aggregatePrice[coverAcc]?.eth.toFixed(5)} ETH</div>
-                            <div>{aggregatePrice[coverAcc]?.usd.toFixed(2)} USD</div>
+                            <div>${aggregatePrice[coverAcc]?.usd.toFixed(2)}</div>
                         </div>
                     )}
                 </div>

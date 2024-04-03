@@ -129,7 +129,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                                     <FormItem>
                                         <FormLabel>Title</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="shadcn" {...field} />
+                                            <Input placeholder="Title of the book" {...field} />
                                         </FormControl>
                                         <FormDescription>
                                             This is the title of your Book

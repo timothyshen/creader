@@ -1,10 +1,10 @@
 import {
+    DialogContent,
     DialogDescription,
     DialogFooter,
     DialogTitle,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { StepProps } from "@/types/steptypes"
 import { AccountERC6551__factory, Bodhi__factory } from "@/contract-config/typechain";
 import {
@@ -15,6 +15,7 @@ import { encodeFunctionData, parseEther } from "viem";
 import getWebIrys from "@/provider/irys";
 import { useState } from "react";
 import { BodhiAddress } from '@/constant/contract'
+import MarkdownEditor from "@/components/MarkdownEditor"
 
 
 export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setIsMintedBodhi }) => {
@@ -92,8 +93,11 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
                 </Button>
             </DialogTitle>
             <DialogDescription>
-                <Textarea onChange={(e) => setText(e.target.value)} placeholder="Type your message here." />
+                Upload your book
             </DialogDescription>
+            <DialogContent>
+                <MarkdownEditor />
+            </DialogContent>
             <DialogFooter>
                 <div className="flex justify-between">
                     <Button variant='link' onClick={() => setStep("select")}>

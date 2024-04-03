@@ -12,9 +12,6 @@ export const Header = () => {
                         <li>
                             <Link href="/" className='hover:text-gray-200 transition duration-150 ease-in-out'>Home</Link>
                         </li>
-                        <li>
-                            <Link href="/cover" className='hover:text-gray-200 transition duration-150 ease-in-out'>Blog</Link>
-                        </li>
                     </ul>
                 </div>
                 <WalletConnectComponentHeader />

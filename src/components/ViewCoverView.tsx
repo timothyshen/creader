@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 
 
-const ViewCoverView = ({ id }: { id: string }) => {
+const ViewCoverView = ({ id }: { id: string | undefined }) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [works, setWorks] = useState<any>();
     const [isMintedBodhi, setIsMintedBodhi] = useState<boolean>(false)

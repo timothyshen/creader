@@ -14,7 +14,7 @@ const WalletConnectComponent = ({ id }: WalletConnectComponentProps) => {
     const { isConnected } = useAccount()
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col w-[450px]">
             {isConnected ?
                 (<>
                     <Account />
