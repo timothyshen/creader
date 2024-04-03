@@ -5,7 +5,12 @@ import { useAccount } from "wagmi";
 import ViewCoverView from "./ViewCoverView";
 
 
-const WalletConnectComponent = () => {
+type WalletConnectComponentProps = {
+    id?: string;
+};
+
+
+const WalletConnectComponent = ({ id }: WalletConnectComponentProps) => {
     const { isConnected } = useAccount()
 
     return (
@@ -13,7 +18,7 @@ const WalletConnectComponent = () => {
             {isConnected ?
                 (<>
                     <Account />
-                    <ViewCoverView />
+                    <ViewCoverView id={id} />
                 </>) :
                 (<>
                     <div className="text-2xl font-bold mb-4">Connect to a wallet</div>

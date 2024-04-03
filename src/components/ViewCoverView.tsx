@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 
 
-const ViewCoverView = () => {
+const ViewCoverView = ({ id }: { id: string }) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [works, setWorks] = useState<any>();
     const [isMintedBodhi, setIsMintedBodhi] = useState<boolean>(false)
@@ -43,7 +43,8 @@ const ViewCoverView = () => {
         const init = async () => {
             setLoading(true);
             try {
-                const work = await getCover(0);
+                console.log('id', id)
+                const work = await getCover(Number(id));
                 console.log('work', work)
                 setWorks(work);
             } catch (error) {

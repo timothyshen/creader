@@ -58,32 +58,52 @@ export const ListCoverView = () => {
                     <TabsTrigger value="listAll">
                         List all
                     </TabsTrigger>
-                    <TabsTrigger value="recent">Recent</TabsTrigger>
+                    <TabsTrigger value="recent">Most Recent</TabsTrigger>
                 </TabsList>
                 <TabsContent value="listAll">
                     <div className="max-h-52 flex flex-col w-[450px]">
-                        {works && works.map((work: any, index: number) => (
-                            // Notice the return statement here and the key prop
-                            <>
-                                <CopyrightCard
-                                    key={work.id} // Assuming `work.id` is unique
-                                    id={Number(work.id)}
-                                    address={(work.owner).slice(0, 6) + '...' + (work.owner).slice(-4)}
-                                    owner={account.address == work.owner}
-                                    content={work.description}
-                                    title={work.title}
-                                    coverAcc={work.nftAccount}
-                                />
-                                <Button className='mb-4' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
-                            </>
-                        ))}
+                        {works && works
+                            .sort((a, b) => Number(a.id) - Number(b.id))
+                            .map((work: any, index: number) => (
+                                // Notice the return statement here and the key prop
+                                <>
+                                    <CopyrightCard
+                                        key={work.id} // Assuming `work.id` is unique
+                                        id={Number(work.id)}
+                                        address={(work.owner).slice(0, 6) + '...' + (work.owner).slice(-4)}
+                                        owner={account.address == work.owner}
+                                        content={work.description}
+                                        title={work.title}
+                                        coverAcc={work.nftAccount}
+                                    />
+                                    <Button className='mb-4' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
+                                </>
+                            ))}
 
                         {loading && <p>Loading...</p>} {/* Display loading state */}
                     </div>
                 </TabsContent>
                 <TabsContent value="recent">
                     <div className="max-h-52 flex flex-col w-[450px]">
-                        Change your password here.
+                        {works && works
+                            .sort((a, b) => Number(b.id) - Number(a.id))
+                            .map((work: any, index: number) => (
+                                // Notice the return statement here and the key prop
+                                <>
+                                    <CopyrightCard
+                                        key={work.id} // Assuming `work.id` is unique
+                                        id={Number(work.id)}
+                                        address={(work.owner).slice(0, 6) + '...' + (work.owner).slice(-4)}
+                                        owner={account.address == work.owner}
+                                        content={work.description}
+                                        title={work.title}
+                                        coverAcc={work.nftAccount}
+                                    />
+                                    <Button className='mb-4' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
+                                </>
+                            ))}
+
+                        {loading && <p>Loading...</p>} {/* Display loading state */}
                     </div>
                 </TabsContent>
             </Tabs>
