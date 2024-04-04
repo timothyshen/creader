@@ -1,6 +1,7 @@
 import { client } from "@/provider/config";
 import { Bodhi__factory } from "@/contract-config/typechain";
 import { BodhiAddress } from "@/constant/contract";
+import { bigint } from "zod";
 
 // address: '0x5FC8d32690cc91D4c39d9d3abcBD16989F875707',
 
@@ -35,6 +36,17 @@ export async function getPrice(supply: bigint, amount: bigint) {
   });
   // console.log('price', price)
   return price;
+}
+
+export async function getAmount(id: BigInt) {
+  const amount = await client.readContract({
+    abi: Bodhi__factory.abi,
+    functionName: "totalSupply",
+    address: BodhiAddress as `0x${string}`,
+    args: [BigInt(Number(id))],
+  });
+  // console.log('amount', amount)
+  return amount;
 }
 
 export async function getBuyPrice(id: number, amount: number) {

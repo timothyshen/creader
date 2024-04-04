@@ -13,7 +13,7 @@ export const BuyButton = ({ id, amount, ethPrice }: BuyButtonProps) => {
     const {
         bodhiBuy,
         isPending,
-        isConfirming,
+        isConfirmed,
         error } = useBodhiBuy();
 
     const handleBuy = () => {
@@ -25,11 +25,13 @@ export const BuyButton = ({ id, amount, ethPrice }: BuyButtonProps) => {
             <Button
                 className='bg-blue-500 text-white p-2 rounded-md'
                 onClick={handleBuy}
-                disabled={isPending || isConfirming}
+                disabled={isPending}
             >
                 Buy
             </Button>
             {error && <p>{error.message}</p>}
+            {isPending && <p>Confirming...</p>}
+            {isConfirmed && <p>Confirmed!</p>}
         </>
     )
 }

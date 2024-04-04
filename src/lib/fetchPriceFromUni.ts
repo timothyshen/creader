@@ -18,7 +18,6 @@ const ABI = parseAbi([
 ]);
 
 export const fetchPriceFromUni = async (): Promise<number> => {
-  console.log("fetchPriceFromUni");
   try {
     const DAI = new Token(1, "0x6B175474E89094C44Da98b954EedeAC495271d0F", 18);
 

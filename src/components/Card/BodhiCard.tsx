@@ -9,8 +9,6 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { getPrice } from '@/lib/BodhiContract';
-import { BuyButton } from '@/components/PurchaseButton/BuyButton';
-import { SellButton } from '@/components/PurchaseButton/SellButton';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
 import { TradeModal } from '../PurchaseButton/TradeModal';
 

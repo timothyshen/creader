@@ -32,8 +32,8 @@ const ViewCoverView = ({ id }: { id: string | undefined }) => {
             return {
                 ...prevPrices,
                 [coverAcc]: {
-                    eth: existing.eth + ethPrice,
-                    usd: existing.usd + usdPrice,
+                    eth: (Number(existing.eth) + Number(ethPrice)),
+                    usd: (Number(existing.usd) + Number(usdPrice)),
                 },
             };
         });
@@ -43,9 +43,9 @@ const ViewCoverView = ({ id }: { id: string | undefined }) => {
         const init = async () => {
             setLoading(true);
             try {
-                console.log('id', id)
+                // console.log('id', id)
                 const work = await getCover(Number(id));
-                console.log('work', work)
+                // console.log('work', work)
                 setWorks(work);
             } catch (error) {
                 console.error("Failed to fetch works:", error);

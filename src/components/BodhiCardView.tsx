@@ -23,6 +23,7 @@ export const BodhiCardView = ({ nftAccount, isMintedBodhi, onPriceUpdate }: Bodh
             try {
                 const assets = await getAssetIdsByAddress(nftAccount);
                 const decodedAssets = await fetchAndDecodeAssets(Array.from(assets));
+                console.log('decodedAssets', decodedAssets)
                 setChapter([...decodedAssets])
             } catch (error) {
                 console.error("Failed to fetch assets:", error);
