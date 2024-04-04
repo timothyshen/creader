@@ -2,6 +2,7 @@ import {
     DialogContent,
     DialogDescription,
     DialogFooter,
+    DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ import getWebIrys from "@/provider/irys";
 import { useState } from "react";
 import { BodhiAddress } from '@/constant/contract'
 import MarkdownEditor from "@/components/MarkdownEditor"
+import { ArrowBigLeft } from "lucide-react";
 
 
 export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setIsMintedBodhi }) => {
@@ -87,17 +89,21 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
 
     return (
         <>
-            <DialogTitle>
-                <Button variant='link' onClick={() => setStep("select")}>
-                    Back
-                </Button>
-            </DialogTitle>
-            <DialogDescription>
-                Upload your book
-            </DialogDescription>
-            <DialogContent>
-                <MarkdownEditor />
-            </DialogContent>
+            <DialogHeader>
+                <DialogTitle>
+                    <Button className="p-0" variant='link' onClick={() => setStep("select")}>
+                        <ArrowBigLeft className="" />
+                        Back
+                    </Button>
+                    <p>Upload your chapter now!</p>
+                </DialogTitle>
+                <DialogDescription>
+                    Upload your book
+                </DialogDescription>
+            </DialogHeader>
+            <div className="w-full">
+                <MarkdownEditor setValue={setText} value={text} />
+            </div>
             <DialogFooter>
                 <div className="flex justify-between">
                     <Button variant='link' onClick={() => setStep("select")}>

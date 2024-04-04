@@ -31,9 +31,7 @@ const AddNew = ({ nftAcc, setIsMintedBodhi }: AddNewProps) => {
                 <Button variant='default' className='mb-2 w-full'>Add New</Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogHeader>
-                    {renderStep(nftAcc, setOpen)}
-                </DialogHeader>
+                {renderStep(nftAcc, setOpen)}
             </DialogContent>
         </Dialog>
     );

@@ -13,3 +13,4 @@ export const CreaderTokenAddress = CreaderToken.address
 export const CreaderTokenAbi = CreaderToken.abi
 
 export const BaseSepoliaChainId = 84532
+export const CREATER_FEES = 0.05

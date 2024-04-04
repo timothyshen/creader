@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button'
 import { BuyButton } from '@/components/PurchaseButton/BuyButton'
 import { SellButton } from '@/components/PurchaseButton/SellButton'
 import { useParams } from 'next/navigation'
+import { CREATER_FEES } from '@/constant/contract'
 
 type TradeModalProps = {
   context: string;
@@ -28,6 +29,7 @@ export const TradeModal = ({
 }: TradeModalProps) => {
   const [ethPrice, setEthPrice] = useState<string | undefined>("0")
   const [usdPrice, setUsdPrice] = useState<string | undefined>("0")
+  const [creatorFee, setCreatorFee] = useState<number>(0)
   const [amount, setAmount] = useState<number>(0)
 
 
@@ -44,6 +46,7 @@ export const TradeModal = ({
     setAmount(amount)
     setEthPrice((amount * Number(price.eth)).toFixed(5))
     setUsdPrice((amount * Number(price.usd)).toFixed(2))
+    setCreatorFee(Number((amount * Number(price.eth) * CREATER_FEES).toFixed(7)))
   }
 
 
@@ -72,11 +75,12 @@ export const TradeModal = ({
           <p className="font-bold text-lg text-gray-800">Checkout</p>
           <div className="space-y-2">
             <p className="text-gray-700">Amount: <span className="font-semibold">{amount}</span></p>
+            <p className="text-gray-700">Creator Fee: <span className="font-semibold">{creatorFee}</span></p>
             <p className="text-gray-700">Prices in ETH: <span className="font-semibold">{ethPrice}</span></p>
             <p className="text-gray-700">Prices in USD: <span className="font-semibold">{usdPrice}</span></p>
           </div>
         </div>
-        {isBuy && ethPrice ? <BuyButton id={chapterId} amount={amount} ethPrice={ethPrice} /> : <SellButton id={chapterId} amount={amount} />}
+        {isBuy && ethPrice ? <BuyButton id={chapterId} amount={amount} ethPrice={ethPrice + creatorFee} /> : <SellButton id={chapterId} amount={(amount - creatorFee)} />}
       </DialogContent>
     </Dialog>
   )

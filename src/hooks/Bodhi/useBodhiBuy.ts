@@ -10,13 +10,13 @@ export const useBodhiBuy = () => {
 
   const bodhiBuy = (id: number, amount: number, ethPrice: string) => {
     const amountBigInt = amount * 10 ** 18;
-
+    console.log("ethPrice", ethPrice);
     try {
       return writeContract({
         address: BodhiAddress as `0x${string}`,
         abi: Bodhi__factory.abi,
         functionName: "buy",
-        value: parseEther("0.1"),
+        value: parseEther(ethPrice),
         args: [BigInt(id), BigInt(amountBigInt)],
       });
     } catch (error) {
