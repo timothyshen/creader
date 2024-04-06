@@ -5,6 +5,7 @@ import { useBodhiSell } from '@/hooks/Bodhi/useBodhiSell';
 type SellButtonProp = {
     id: number,
     amount: number
+    
 }
 
 export const SellButton = ({ id, amount }: SellButtonProp) => {

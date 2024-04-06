@@ -11,14 +11,22 @@ import {
 import { Button } from '@/components/ui/button'
 import { BuyButton } from '@/components/PurchaseButton/BuyButton'
 import { SellButton } from '@/components/PurchaseButton/SellButton'
-import { useParams } from 'next/navigation'
 import { CREATER_FEES } from '@/constant/contract'
+import { getBuyPrice, getBuyPriceAfterFee } from '@/lib/BodhiContract'
 
 type TradeModalProps = {
   context: string;
-  chapterId: number;
-  price: { eth: string | undefined, usd: string | undefined };
+  chapterId: bigint;
+  price: { eth: string | undefined, usd: number };
   isBuy: boolean;
+}
+
+type pricing = {
+  chapterPriceEth: number
+  chapterPriceAfterFeeETH: number
+  chapterPriceUsd: number
+  chapterPriceAfterFeeUsd: number
+  creatorFee: number
 }
 
 export const TradeModal = ({
@@ -27,9 +35,7 @@ export const TradeModal = ({
   price,
   isBuy
 }: TradeModalProps) => {
-  const [ethPrice, setEthPrice] = useState<string | undefined>("0")
-  const [usdPrice, setUsdPrice] = useState<string | undefined>("0")
-  const [creatorFee, setCreatorFee] = useState<number>(0)
+  const [chapterPrice, setchapterPrice] = useState<pricing>({})
   const [amount, setAmount] = useState<number>(0)
 
 
@@ -38,17 +44,31 @@ export const TradeModal = ({
     { label: '0.1 Share', value: 0.1 },
     { label: '1 Share', value: 1 },
     { label: '10 Share', value: 10 },
-    { label: '100 Share', value: 20 },
-    { label: '1000 Share', value: 100 },
+    { label: '20 Share', value: 20 },
+    { label: '100 Share', value: 100 },
   ]
 
-  const onClick = (amount: number) => {
-    setAmount(amount)
-    setEthPrice((amount * Number(price.eth)).toFixed(5))
-    setUsdPrice((amount * Number(price.usd)).toFixed(2))
-    setCreatorFee(Number((amount * Number(price.eth) * CREATER_FEES).toFixed(7)))
-  }
+  //TODO: it is not static it is a bonding curve lol
+  const getPrice = async (amount: number) => {
 
+    setAmount(amount)
+    console.log("chapter", chapterId)
+    const buyPrice = await getBuyPrice(chapterId, amount)
+    const buyPriceUsd = buyPrice * price.usd
+    const buyPriceAfterFee = await getBuyPriceAfterFee(chapterId, amount)
+    console.log('usd', price.usd)
+    const buyPriceAfterFeeUsd = Number((buyPriceAfterFee * price.usd).toFixed(3))
+    console.log('buyPrice', buyPrice)
+    console.log('buyPriceAfterFee', buyPriceAfterFee)
+    const creatorFee = Number((chapterPrice.chapterPriceAfterFeeETH - chapterPrice.chapterPriceEth).toFixed(7))
+    setchapterPrice({
+      chapterPriceEth: buyPrice,
+      chapterPriceAfterFeeETH: buyPriceAfterFee,
+      chapterPriceUsd: buyPriceUsd,
+      chapterPriceAfterFeeUsd: buyPriceAfterFeeUsd,
+      creatorFee: creatorFee
+    })
+  }
 
   return (
     <Dialog>
@@ -66,7 +86,7 @@ export const TradeModal = ({
         </DialogDescription>
         <div className='flex flex-col space-y-2 border-b-2 pb-4'>
           {choise.filter(item => Number(price.eth) < 0.01 ? item.value >= 1 : item.value <= 1).map((item, index) => (
-            <Button key={index} onClick={() => onClick(item.value)} className=' text-white p-2 rounded-md'>
+            <Button key={index} onClick={() => getPrice(item.value)} className=' text-white p-2 rounded-md'>
               {item.label}
             </Button>
           ))}
@@ -75,13 +95,20 @@ export const TradeModal = ({
           <p className="font-bold text-lg text-gray-800">Checkout</p>
           <div className="space-y-2">
             <p className="text-gray-700">Amount: <span className="font-semibold">{amount}</span></p>
-            <p className="text-gray-700">Creator Fee: <span className="font-semibold">{creatorFee}</span></p>
-            <p className="text-gray-700">Prices in ETH: <span className="font-semibold">{ethPrice}</span></p>
-            <p className="text-gray-700">Prices in USD: <span className="font-semibold">{usdPrice}</span></p>
+            <p className="text-gray-700">Creator Fee: <span className="font-semibold">{chapterPrice.creatorFee}</span></p>
+            <p className="text-gray-700">Prices in ETH: <span className="font-semibold">{chapterPrice.chapterPriceAfterFeeETH}</span></p>
+            <p className="text-gray-700">Prices in USD: <span className="font-semibold">{chapterPrice.chapterPriceAfterFeeUsd}</span></p>
           </div>
         </div>
-        {isBuy && ethPrice ? <BuyButton id={chapterId} amount={amount} ethPrice={ethPrice + creatorFee} /> : <SellButton id={chapterId} amount={(amount - creatorFee)} />}
-      </DialogContent>
+        {isBuy && chapterPrice ? (
+          <BuyButton
+            id={chapterId}
+            amount={amount}
+            ethPrice={chapterPrice.chapterPriceAfterFeeETH?.toString() || '0'}
+          />
+        ) : (
+          <SellButton id={chapterId} amount={amount} />
+        )}      </DialogContent>
     </Dialog>
   )
 }

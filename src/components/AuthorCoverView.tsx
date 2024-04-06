@@ -31,7 +31,7 @@ const AuthorCoverView: React.FC<AuthorCoverViewProps> = ({ addr }) => {
                 };
             }
             const existing = prevPrices[coverAcc] || { eth: 0, usd: 0 };
-            console.log('existing', existing)
+            // console.log('existing', existing)
             return {
                 ...prevPrices,
                 [coverAcc]: {

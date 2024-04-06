@@ -28,7 +28,7 @@ const ViewCoverView = ({ id }: { id: string | undefined }) => {
                 };
             }
             const existing = prevPrices[coverAcc] || { eth: 0, usd: 0 };
-            console.log('existing', existing)
+            
             return {
                 ...prevPrices,
                 [coverAcc]: {

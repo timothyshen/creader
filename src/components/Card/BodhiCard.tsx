@@ -8,13 +8,14 @@ import {
     CardTitle
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { getPrice } from '@/lib/BodhiContract';
+import { getPrice, getBuyPrice } from '@/lib/BodhiContract';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
 import { TradeModal } from '../PurchaseButton/TradeModal';
 
 interface BodhiCardProps {
     order: number;
     id: string;
+    chapterId: bigint
     owner: `0x${string}` | undefined;
     content: string | undefined;
     supply: bigint | undefined;
@@ -23,7 +24,7 @@ interface BodhiCardProps {
 
 
 
-export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: BodhiCardProps) => {
+export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPriceUpdate }: BodhiCardProps) => {
     const [filePriceETH, setFilePriceETH] = useState<string>();
     const [filePriceUSD, setFilePriceUSD] = useState<string>();
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
@@ -44,15 +45,14 @@ export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: 
     const toggleContent = () => setIsExpanded(!isExpanded);
 
     const fetchPrices = async (supply: bigint, newPrice: number) => {
-        const weiAmount = BigInt(1 * 10 ** 18);
-        const getPriceFeedETH = await getPrice(supply, weiAmount);
-        const getPriceStr = Number(getPriceFeedETH) / 10 ** 18;
-
+        console.log(chapterId)
+        const getPriceFeedETH = await getBuyPrice(chapterId, 1);
+        console.log("eth", getPriceFeedETH)
         // const priceEth = await fetchEtherPrice();
         const priceEth = newPrice;
-        const priceUsd = (getPriceStr * priceEth).toFixed(2);
-        onPriceUpdate(owner, Number(getPriceStr), Number(priceUsd));
-        return { eth: getPriceStr.toString(), usd: priceUsd };
+        const priceUsd = (getPriceFeedETH * priceEth).toFixed(2);
+        onPriceUpdate(owner, Number(getPriceFeedETH), Number(priceUsd));
+        return { eth: getPriceFeedETH.toString(), usd: priceUsd };
     };
 
 
@@ -96,16 +96,16 @@ export const BodhiCard = ({ order, owner, id, content, supply, onPriceUpdate }: 
                     </div>
                 </div>
                 <div className='flex gap-x-2'>
-                    <TradeModal chapterId={order} context="Buy" price={
+                    <TradeModal chapterId={chapterId} context="Buy" price={
                         {
                             eth: filePriceETH,
-                            usd: filePriceUSD
+                            usd: newPrice
                         }
                     } isBuy />
-                    <TradeModal chapterId={order} context="Sell" price={
+                    <TradeModal chapterId={chapterId} context="Sell" price={
                         {
                             eth: filePriceETH,
-                            usd: filePriceUSD
+                            usd: newPrice
                         }
                     } isBuy={false} />
                 </div>

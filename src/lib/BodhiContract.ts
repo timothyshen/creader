@@ -49,48 +49,56 @@ export async function getAmount(id: BigInt) {
   return amount;
 }
 
-export async function getBuyPrice(id: number, amount: number) {
+export async function getBuyPrice(id: bigint, amount: number) {
+  amount = amount * 10 ** 18;
   const buyPrice = await client.readContract({
     abi: Bodhi__factory.abi,
     functionName: "getBuyPrice",
     address: BodhiAddress as `0x${string}`,
     args: [BigInt(id), BigInt(amount)],
   });
-  console.log("buyPrice", buyPrice);
-  return buyPrice;
+  const newPrice = Number(buyPrice) / 10 ** 18;
+  // console.log("buyPrice", newPrice);
+  return newPrice;
 }
 
-export async function getSellPrice(id: number, amount: number) {
+export async function getSellPrice(id: bigint, amount: number) {
+  amount = amount * 10 ** 18;
   const sellPrice = await client.readContract({
     abi: Bodhi__factory.abi,
     functionName: "getSellPrice",
     address: BodhiAddress as `0x${string}`,
     args: [BigInt(id), BigInt(amount)],
   });
-  console.log("sellPrice", sellPrice);
-  return sellPrice;
+  const newPrice = Number(sellPrice) / 10 ** 18;
+  // console.log("sellPrice", sellPrice);
+  return newPrice;
 }
 
-export async function getBuyPriceAfterFee(id: number, amount: number) {
+export async function getBuyPriceAfterFee(id: bigint, amount: number) {
+  amount = amount * 10 ** 18;
   const buyPriceAfterFee = await client.readContract({
     abi: Bodhi__factory.abi,
     functionName: "getBuyPriceAfterFee",
     address: BodhiAddress as `0x${string}`,
     args: [BigInt(id), BigInt(amount)],
   });
-  console.log("buyPriceAfterFee", buyPriceAfterFee);
-  return buyPriceAfterFee;
+  const newPrice = Number(buyPriceAfterFee) / 10 ** 18;
+  // console.log("buyPriceAfterFee", buyPriceAfterFee);
+  return newPrice;
 }
 
-export async function getSellPriceAfterFee(id: number, amount: number) {
+export async function getSellPriceAfterFee(id: bigint, amount: number) {
+  amount = amount * 10 ** 18;
   const sellPriceAfterFee = await client.readContract({
     abi: Bodhi__factory.abi,
     functionName: "getSellPriceAfterFee",
     address: BodhiAddress as `0x${string}`,
     args: [BigInt(id), BigInt(amount)],
   });
-  console.log("sellPriceAfterFee", sellPriceAfterFee);
-  return sellPriceAfterFee;
+  const newPrice = Number(sellPriceAfterFee) / 10 ** 18;
+  // console.log("sellPriceAfterFee", sellPriceAfterFee);
+  return newPrice;
 }
 
 export async function getAssetsSupply(id: bigint) {
