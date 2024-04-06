@@ -8,9 +8,10 @@ import {
     CardTitle
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { getPrice, getBuyPrice } from '@/lib/BodhiContract';
+import { getBuyPrice } from '@/lib/BodhiContract';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
-import { TradeModal } from '../PurchaseButton/TradeModal';
+import { TradeModalBuy } from '@/components/PurchaseButton/TradeModalBuy';
+import { TradeModalSell } from '@/components/PurchaseButton/TradeModalSell'
 
 interface BodhiCardProps {
     order: number;
@@ -96,18 +97,18 @@ export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPric
                     </div>
                 </div>
                 <div className='flex gap-x-2'>
-                    <TradeModal chapterId={chapterId} context="Buy" price={
+                    <TradeModalBuy chapterId={chapterId} price={
                         {
                             eth: filePriceETH,
                             usd: newPrice
                         }
-                    } isBuy />
-                    <TradeModal chapterId={chapterId} context="Sell" price={
+                    } />
+                    <TradeModalSell chapterId={chapterId} price={
                         {
                             eth: filePriceETH,
                             usd: newPrice
                         }
-                    } isBuy={false} />
+                    } />
                 </div>
             </CardFooter>
         </Card >

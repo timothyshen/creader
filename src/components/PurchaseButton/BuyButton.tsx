@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useBodhiBuy } from '@/hooks/Bodhi/useBodhiBuy';
 
 type BuyButtonProps = {
-    id: number,
+    id: bigint,
     amount: number,
     ethPrice: string,
 }

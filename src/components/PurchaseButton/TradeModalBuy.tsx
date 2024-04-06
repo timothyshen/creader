@@ -10,15 +10,11 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button'
 import { BuyButton } from '@/components/PurchaseButton/BuyButton'
-import { SellButton } from '@/components/PurchaseButton/SellButton'
-import { CREATER_FEES } from '@/constant/contract'
 import { getBuyPrice, getBuyPriceAfterFee } from '@/lib/BodhiContract'
 
 type TradeModalProps = {
-  context: string;
   chapterId: bigint;
   price: { eth: string | undefined, usd: number };
-  isBuy: boolean;
 }
 
 type pricing = {
@@ -29,13 +25,17 @@ type pricing = {
   creatorFee: number
 }
 
-export const TradeModal = ({
-  context,
+export const TradeModalBuy = ({
   chapterId,
   price,
-  isBuy
 }: TradeModalProps) => {
-  const [chapterPrice, setchapterPrice] = useState<pricing>({})
+  const [chapterPrice, setchapterPrice] = useState<pricing>({
+    chapterPriceEth: 0,
+    chapterPriceAfterFeeETH: 0,
+    chapterPriceUsd: 0,
+    chapterPriceAfterFeeUsd: 0,
+    creatorFee: 0
+  })
   const [amount, setAmount] = useState<number>(0)
 
 
@@ -56,10 +56,7 @@ export const TradeModal = ({
     const buyPrice = await getBuyPrice(chapterId, amount)
     const buyPriceUsd = buyPrice * price.usd
     const buyPriceAfterFee = await getBuyPriceAfterFee(chapterId, amount)
-    console.log('usd', price.usd)
     const buyPriceAfterFeeUsd = Number((buyPriceAfterFee * price.usd).toFixed(3))
-    console.log('buyPrice', buyPrice)
-    console.log('buyPriceAfterFee', buyPriceAfterFee)
     const creatorFee = Number((chapterPrice.chapterPriceAfterFeeETH - chapterPrice.chapterPriceEth).toFixed(7))
     setchapterPrice({
       chapterPriceEth: buyPrice,
@@ -74,7 +71,7 @@ export const TradeModal = ({
     <Dialog>
       <DialogTrigger asChild>
         <Button className='text-lg text-white'>
-          {context}
+          Buy
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -100,15 +97,14 @@ export const TradeModal = ({
             <p className="text-gray-700">Prices in USD: <span className="font-semibold">{chapterPrice.chapterPriceAfterFeeUsd}</span></p>
           </div>
         </div>
-        {isBuy && chapterPrice ? (
+        {chapterPrice && (
           <BuyButton
             id={chapterId}
             amount={amount}
             ethPrice={chapterPrice.chapterPriceAfterFeeETH?.toString() || '0'}
           />
-        ) : (
-          <SellButton id={chapterId} amount={amount} />
-        )}      </DialogContent>
+        )}
+      </DialogContent>
     </Dialog>
   )
 }

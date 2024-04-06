@@ -3,9 +3,9 @@ import { Button } from '@/components/ui/button';
 import { useBodhiSell } from '@/hooks/Bodhi/useBodhiSell';
 
 type SellButtonProp = {
-    id: number,
+    id: bigint,
     amount: number
-    
+
 }
 
 export const SellButton = ({ id, amount }: SellButtonProp) => {

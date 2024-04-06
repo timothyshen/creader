@@ -16,6 +16,17 @@ export async function getAssetIdsByAddress(address: `0x${string}`) {
   return getAssetsId;
 }
 
+export async function getBalanceOf(address: `0x${string}`, assetId: bigint) {
+  const getBalanceOf = await client.readContract({
+    abi: Bodhi__factory.abi,
+    functionName: "balanceOf",
+    address: BodhiAddress as `0x${string}`,
+    args: [address, BigInt(assetId)],
+  });
+  //   console.log("getAssetsId", getAssetsId);
+  return getBalanceOf;
+}
+
 export async function getAssetsById(id: bigint) {
   const getAssets = await client.readContract({
     abi: Bodhi__factory.abi,
