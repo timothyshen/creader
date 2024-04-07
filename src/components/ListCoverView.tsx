@@ -82,7 +82,7 @@ export const ListCoverView = () => {
                                             title={work.title}
                                             coverAcc={work.nftAccount}
                                         />
-                                        <Button className='mb-4' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
+                                        <Button className='mb-4 w-full' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
                                     </div>
                                 ))
                         )}
@@ -109,7 +109,7 @@ export const ListCoverView = () => {
                                             title={work.title}
                                             coverAcc={work.nftAccount}
                                         />
-                                        <Button className='mb-4' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
+                                        <Button className='mb-4 w-full' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
                                     </div>
                                 ))
                         )}
