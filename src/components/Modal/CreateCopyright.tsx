@@ -102,8 +102,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
     useEffect(() => {
         if (isConfirmed) {
             toast.success("Transaction confirmed")
-            // @ts-ignore
-            setIsMinted(true)
+            if (setIsMinted) setIsMinted(isConfirmed)
         }
     }, [isConfirmed, setIsMinted, setOpen]);
 
@@ -166,7 +165,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                         {isConfirmed && <div>Transaction confirmed.</div>}
                         {hash &&
                             <div>Transaction Hash:
-                                <a className=" underline font-bold" href={`https://sepolia.etherscan.io/${hash}`}>
+                                <a className=" underline font-bold" href={`https://base-sepolia.etherscan.io/${hash}`}>
                                     Here
                                 </a>
                             </div>}

@@ -57,7 +57,6 @@ export const fetchPriceFromUni = async (): Promise<number> => {
     );
     const route = new Route([pair], ETH, DAI);
     const price = parseFloat(route.midPrice.toSignificant(6));
-    console.log("price", price);
     return price;
   } catch (error) {
     console.error(

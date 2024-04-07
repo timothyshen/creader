@@ -18,8 +18,8 @@ const MarkdownEditor = ({ setValue, value }: MarkdownEditorProps) => {
     }, []);
 
     return (
-        <main className="w-[450px]mx-auto">
-            <MDEditor style={{ width: '100%' }} value={value} onChange={onChange} />
+        <main className="w-full h-full mx-auto">
+            <MDEditor style={{ width: '100%', minHeight: '700px' }} value={value} onChange={onChange} height={700} />
         </main>
     );
 }

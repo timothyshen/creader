@@ -30,7 +30,7 @@ const AddNew = ({ nftAcc, setIsMintedBodhi }: AddNewProps) => {
             <DialogTrigger asChild>
                 <Button variant='default' className='mb-2 w-full'>Add New</Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className={step === 'upload' ? "min-w-full h-screen" : undefined}>
                 {renderStep(nftAcc, setOpen)}
             </DialogContent>
         </Dialog>

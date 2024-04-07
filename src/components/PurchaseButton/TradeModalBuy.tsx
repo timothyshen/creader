@@ -52,7 +52,6 @@ export const TradeModalBuy = ({
   const getPrice = async (amount: number) => {
 
     setAmount(amount)
-    console.log("chapter", chapterId)
     const buyPrice = await getBuyPrice(chapterId, amount)
     const buyPriceUsd = buyPrice * price.usd
     const buyPriceAfterFee = await getBuyPriceAfterFee(chapterId, amount)

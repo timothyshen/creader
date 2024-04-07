@@ -4,7 +4,6 @@ import { Asset } from '@/types/contentTypes'
 import { fetchAndDecodeAssets } from '@/contract/assetService'
 import { Divider } from '@/components/ui/Divider'
 import { BodhiCard } from '@/components/Card/BodhiCard'
-import { useAccount } from 'wagmi'
 
 type BodhiCardViewProps = {
     nftAccount: `0x${string}`
@@ -23,7 +22,7 @@ export const BodhiCardView = ({ nftAccount, isMintedBodhi, onPriceUpdate }: Bodh
             try {
                 const assets = await getAssetIdsByAddress(nftAccount);
                 const decodedAssets = await fetchAndDecodeAssets(Array.from(assets));
-                console.log('decodedAssets', decodedAssets)
+                // console.log('decodedAssets', decodedAssets)
                 setChapter([...decodedAssets])
             } catch (error) {
                 console.error("Failed to fetch assets:", error);
@@ -43,7 +42,7 @@ export const BodhiCardView = ({ nftAccount, isMintedBodhi, onPriceUpdate }: Bodh
                     owner={nftAccount}
                     chapterId={chapter.id}
                     id={chapter.arTxId}
-                    content={chapter.content}
+                    content={chapter.content ?? ''}
                     supply={chapter.supply as bigint | undefined}
                     onPriceUpdate={onPriceUpdate}
                 />)

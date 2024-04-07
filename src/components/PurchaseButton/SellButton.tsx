@@ -33,9 +33,15 @@ export const SellButton = ({ id, amount }: SellButtonProp) => {
             >
                 Sell
             </Button>
-            {error && <p>{error.message}</p>}
-            {isConfirming && <p>Confirming...</p>}
-            {isConfirmed && <p>Confirmed!</p>}
+            <div className='mt-2'>
+                {error && (
+                    <div className='p-2 bg-red-100 border border-red-400 text-red-700 rounded-md max-w-md mx-auto overflow-hidden'>
+                        <p>{error.message}</p>
+                    </div>
+                )}
+                {isConfirming && <p>Confirming...</p>}
+                {isConfirmed && <p>Confirmed!</p>}
+            </div>
         </>
 
     )

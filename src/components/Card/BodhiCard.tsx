@@ -11,14 +11,16 @@ import { Button } from '@/components/ui/button';
 import { getBuyPrice } from '@/lib/BodhiContract';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
 import { TradeModalBuy } from '@/components/PurchaseButton/TradeModalBuy';
-import { TradeModalSell } from '@/components/PurchaseButton/TradeModalSell'
+import { TradeModalSell } from '@/components/PurchaseButton/TradeModalSell';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
+
 
 interface BodhiCardProps {
     order: number;
     id: string;
     chapterId: bigint
     owner: `0x${string}` | undefined;
-    content: string | undefined;
+    content: string;
     supply: bigint | undefined;
     onPriceUpdate: (owner: `0x${string}` | undefined, eth: number, usd: number) => void;
 }
@@ -46,10 +48,7 @@ export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPric
     const toggleContent = () => setIsExpanded(!isExpanded);
 
     const fetchPrices = async (supply: bigint, newPrice: number) => {
-        console.log(chapterId)
         const getPriceFeedETH = await getBuyPrice(chapterId, 1);
-        console.log("eth", getPriceFeedETH)
-        // const priceEth = await fetchEtherPrice();
         const priceEth = newPrice;
         const priceUsd = (getPriceFeedETH * priceEth).toFixed(2);
         onPriceUpdate(owner, Number(getPriceFeedETH), Number(priceUsd));
@@ -76,7 +75,7 @@ export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPric
             </CardHeader>
             <CardContent>
                 <div className={`my-2 overflow-hidden relative ${isExpanded ? 'max-h-full' : 'max-h-48'} w-96`}>
-                    {content}
+                    <MarkdownRenderer content={content} />
                 </div>
                 <Button
                     onClick={toggleContent}

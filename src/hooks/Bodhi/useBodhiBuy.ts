@@ -10,7 +10,6 @@ export const useBodhiBuy = () => {
 
   const bodhiBuy = (id: bigint, amount: number, ethPrice: string) => {
     const amountBigInt = amount * 10 ** 18;
-    console.log("ethPrice", ethPrice);
     try {
       return writeContract({
         address: BodhiAddress as `0x${string}`,

@@ -19,6 +19,7 @@ import { SetStateAction, useState } from "react";
 import { BodhiAddress } from '@/constant/contract'
 import MarkdownEditor from "@/components/MarkdownEditor"
 import { ArrowBigLeft } from "lucide-react";
+import { sliceAddress } from "@/lib/supportFunction";
 
 
 export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setIsMintedBodhi }) => {
@@ -38,14 +39,13 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
         if (text === undefined || nftAcc === undefined) return;
         const webIrys = await getWebIrys();
         try {
-            console.log('uploading');
+            // console.log('uploading');
             const receipt = await webIrys.upload(text);
-            console.log('receipt', receipt);
-            console.log(`Data uploaded ==> https://gateway.irys.xyz/${receipt.id}`);
+            // console.log('receipt', receipt);
+            // console.log(`Data uploaded ==> https://gateway.irys.xyz/${receipt.id}`);
 
             // Use the receipt.id directly here
             const receiptIdLocal = receipt.id;
-            console.log('receiptIdLocal', receiptIdLocal);
             const data = encodeFunctionData({
                 abi: Bodhi__factory.abi,
                 functionName: 'create',
@@ -80,7 +80,6 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
         })
 
     if (isConfirmed === true) {
-        console.log('confirmed')
         if (setOpen) {
             setOpen(false);
             setIsMintedBodhi(true);
@@ -103,8 +102,8 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
                 </DialogDescription>
             </DialogHeader>
             <div className="w-full">
-                {/* <MarkdownEditor setValue={setText} value={text} /> */}
-                <Textarea onChange={(e: { target: { value: SetStateAction<string | undefined>; }; }) => setText(e.target.value)} placeholder="Type your message here." />
+                <MarkdownEditor setValue={setText} value={text} />
+                {/* <Textarea onChange={(e: { target: { value: SetStateAction<string | undefined>; }; }) => setText(e.target.value)} placeholder="Type your message here." /> */}
 
             </div>
             <DialogFooter>
@@ -116,9 +115,17 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
                         {isConfirming ? "loading" : "Upload"}
                     </Button>
                 </div>
-                {error && <div>Error: {error.message}</div>}
-                {hash && <div>Transaction Hash: {hash}</div>}
             </DialogFooter>
+            <div className='mt-2'>
+                {error && (
+                    <div className='p-2 bg-red-100 border border-red-400 text-red-700 rounded-md max-w-md mx-auto overflow-hidden'>
+                        <p>{error.message}</p>
+                    </div>
+                )}
+                {isConfirming && <p>Confirming...</p>}
+                {isConfirmed && <p>Confirmed!</p>}
+                {hash && <div>Transaction Hash: {sliceAddress(hash)}</div>}
+            </div>
         </>
     );
 }

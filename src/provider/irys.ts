@@ -8,13 +8,11 @@ const getWebIrys = async () => {
   const rpcUrl = "https://base-sepolia.blockpi.network/v1/rpc/public";
   const walletClient = ConnectWalletClient();
 
-  console.log("client=", walletClient);
   //@ts-expect-error injected
   walletClient.getSigner = () => walletClient;
   //@ts-expect-error injected
   walletClient.getAddress = async () =>
     walletClient.getAddresses().then((a) => a[0]);
-  console.log("client=", walletClient);
 
   const wallet = { name: "viem", provider: walletClient };
   const webIrys = new WebIrys({ url, token, wallet });
@@ -40,7 +38,7 @@ const getWebIrys = async () => {
 
   //@ts-expect-error injected
   walletClient._signTypedData = async (domain, types, message) => {
-    console.log("client._signTypedData", domain, types, message);
+    // console.log("client._signTypedData", domain, types, message);
     message["Transaction hash"] =
       "0x" + Buffer.from(message["Transaction hash"]).toString("hex");
     //@ts-ignore
@@ -52,7 +50,7 @@ const getWebIrys = async () => {
       primaryType: "Bundlr",
     });
   };
-  console.log(`Conected to webIrys from ${webIrys.address}`);
+  // console.log(`Conected to webIrys from ${webIrys.address}`);
   return webIrys;
 };
 
