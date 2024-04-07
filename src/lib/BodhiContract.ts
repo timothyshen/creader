@@ -24,7 +24,7 @@ export async function getBalanceOf(address: `0x${string}`, assetId: bigint) {
     args: [address, BigInt(assetId)],
   });
   //   console.log("getAssetsId", getAssetsId);
-  const getNum = Number(getBalanceOf)
+  const getNum = Number(getBalanceOf) / 10 ** 18;
   return getNum;
 }
 

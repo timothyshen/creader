@@ -34,6 +34,8 @@ export const SellButton = ({ id, amount }: SellButtonProp) => {
                 Sell
             </Button>
             {error && <p>{error.message}</p>}
+            {isConfirming && <p>Confirming...</p>}
+            {isConfirmed && <p>Confirmed!</p>}
         </>
 
     )

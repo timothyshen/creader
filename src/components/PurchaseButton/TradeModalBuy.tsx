@@ -79,7 +79,7 @@ export const TradeModalBuy = ({
           <DialogTitle>Trade</DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          <p>Select how much you want to {context}</p>
+          <p>Select how much you want to Buy</p>
         </DialogDescription>
         <div className='flex flex-col space-y-2 border-b-2 pb-4'>
           {choise.filter(item => Number(price.eth) < 0.01 ? item.value >= 1 : item.value <= 1).map((item, index) => (

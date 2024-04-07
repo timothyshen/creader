@@ -6,6 +6,7 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { StepProps } from "@/types/steptypes"
 import { AccountERC6551__factory, Bodhi__factory } from "@/contract-config/typechain";
 import {
@@ -14,7 +15,7 @@ import {
 } from "wagmi";
 import { encodeFunctionData, parseEther } from "viem";
 import getWebIrys from "@/provider/irys";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { BodhiAddress } from '@/constant/contract'
 import MarkdownEditor from "@/components/MarkdownEditor"
 import { ArrowBigLeft } from "lucide-react";
@@ -102,7 +103,9 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
                 </DialogDescription>
             </DialogHeader>
             <div className="w-full">
-                <MarkdownEditor setValue={setText} value={text} />
+                {/* <MarkdownEditor setValue={setText} value={text} /> */}
+                <Textarea onChange={(e: { target: { value: SetStateAction<string | undefined>; }; }) => setText(e.target.value)} placeholder="Type your message here." />
+
             </div>
             <DialogFooter>
                 <div className="flex justify-between">
