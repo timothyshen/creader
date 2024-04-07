@@ -17,16 +17,7 @@ export const metadata: Metadata = {
     description: "Creating world with the community",
     type: "website",
     locale: "en_US",
-    url: "https://creader.io",
-    images: [
-      {
-        url: "https://creader.io/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Creader | Next generation Content",
-      },
-    ],
-
+    url: "https://bodhi-6551.vercel.app/",
   },
 };
 
