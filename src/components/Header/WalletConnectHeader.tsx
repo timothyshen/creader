@@ -25,7 +25,7 @@ const WalletConnectComponentHeader = () => {
                 (<>
                     <Dialog>
                         <DialogTrigger asChild>
-                            <Button variant="link" className='text-xl text-white'>
+                            <Button variant="link" className='text-xl text-black'>
                                 Connect
                             </Button>
                         </DialogTrigger>

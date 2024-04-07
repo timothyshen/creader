@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Footer = () => {
     return (
-        <footer className='p-5 bg-gradient-to-r from-blue-500 to-cyan-500 text-center text-white text-sm'>
+        <footer className='p-5 bg-[#F5F5DC] text-center text-black text-sm'>
             <p>© 2024 Creader.io. All rights reserved.</p>
         </footer>
     )
