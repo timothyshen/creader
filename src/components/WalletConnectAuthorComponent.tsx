@@ -3,14 +3,15 @@ import { Account } from "@/components/AccountDisplay";
 import WalletOptions from "@/components/WalletOption";
 import { useAccount } from "wagmi";
 import ViewCoverView from "./ViewCoverView";
+import AuthorCoverView from '@/components/AuthorCoverView';
 
 
 type WalletConnectComponentProps = {
-    id?: string;
+    addr: `0x${string}`;
 };
 
 
-const WalletConnectComponent = ({ id }: WalletConnectComponentProps) => {
+const WalletConnectAuthorComponent = ({ addr }: WalletConnectComponentProps) => {
     const { isConnected } = useAccount()
 
     return (
@@ -18,7 +19,7 @@ const WalletConnectComponent = ({ id }: WalletConnectComponentProps) => {
             {isConnected ?
                 (<>
                     <Account />
-                    <ViewCoverView id={id} />
+                    <AuthorCoverView addr={addr} />
                 </>) :
                 (<>
                     <div className="text-2xl font-bold mb-4 mx-auto">Connect to a wallet</div>
@@ -28,4 +29,4 @@ const WalletConnectComponent = ({ id }: WalletConnectComponentProps) => {
     )
 }
 
-export default WalletConnectComponent;
+export default WalletConnectAuthorComponent;

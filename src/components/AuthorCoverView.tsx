@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getAllCopyright } from '@/lib/CopyrightContract';
 import { CopyrightCard } from './Card/CopyrightCard';
 import { CreateCopyright } from './Modal/CreateCopyright';
@@ -7,18 +7,28 @@ import { useAccount } from 'wagmi';
 import { BodhiCardView } from '@/components/BodhiCardView';
 import { PriceData, } from '@/types/steptypes';
 
-type AuthorCoverViewProps = {
+interface AuthorCoverViewProps {
     addr: `0x${string}`;
 };
 
+
+interface Work {
+    id: bigint;
+    owner: `0x${string}`;
+    description: string;
+    title: string;
+    nftAccount: `0x${string}`;
+    timestamp: bigint;
+}
+
 const AuthorCoverView: React.FC<AuthorCoverViewProps> = ({ addr }) => {
     const [loading, setLoading] = useState<boolean>(false);
-    const [works, setWorks] = useState<any[]>([]);
+    const [works, setWorks] = useState<Work[]>([]);
     const [isMintedCopyright, setIsMintedCopyright] = useState<boolean>(false)
     const [isMintedBodhi, setIsMintedBodhi] = useState<boolean>(false)
     const [prices, setPrices] = useState<PriceData>();
 
-    const account = useAccount();
+    const { address } = useAccount();
 
     const handlePriceUpdate = (coverAcc: any, ethPrice: any, usdPrice: any) => {
         setPrices(prevPrices => {
@@ -51,8 +61,10 @@ const AuthorCoverView: React.FC<AuthorCoverViewProps> = ({ addr }) => {
                 setWorks([...work]);
             } catch (error) {
                 console.error("Failed to fetch works:", error);
+            } finally {
+                setLoading(false); // Correctly set loading to false after the operation
+
             }
-            setLoading(false); // Correctly set loading to false after the operation
         };
         init();
     }, [isMintedCopyright]);
@@ -61,16 +73,29 @@ const AuthorCoverView: React.FC<AuthorCoverViewProps> = ({ addr }) => {
     // TODO: fix onPriceUpdate
     return (
         <div className='flex flex-col w-[450px]'>
-            <CreateCopyright setIsMinted={setIsMintedCopyright} />
+
             <p className='my-2 py-2 text-lg font-bold'>Book: </p>
-            {works && works.filter(item => item.owner == account.address).map((work: any, index: number) => (
-                // Notice the return statement here and the key prop
+
+            {works.length !== 0 && <CreateCopyright setIsMinted={setIsMintedCopyright} />}
+
+            {loading ? (
+                <p className='text-xl font-bold mx-auto mt-20'>Loading...</p> // Display loading state
+            ) : works.length === 0 ? (
                 <>
+                    <p className='text-xl font-bold mx-auto mt-20 mb-20'>
+                        You dont have any book yet
+                    </p>
+                    <CreateCopyright setIsMinted={setIsMintedCopyright} />
+                </>
+            ) : (works.filter(item => item.owner == address).map((work: any, index: number) => (
+                // Notice the return statement here and the key prop
+                <React.Fragment key={work.id}>
+
                     <CopyrightCard
                         key={work.id} // Assuming `work.id` is unique
                         id={Number(work.id)}
                         address={(work.owner).slice(0, 6) + '...' + (work.owner).slice(-4)}
-                        owner={account.address == work.owner}
+                        owner={address == work.owner}
                         content={work.description}
                         title={work.title}
                         coverAcc={work.nftAccount}
@@ -78,10 +103,8 @@ const AuthorCoverView: React.FC<AuthorCoverViewProps> = ({ addr }) => {
                         aggregatePrice={prices}
                     />
                     <BodhiCardView nftAccount={work.nftAccount as `0x${string}`} onPriceUpdate={handlePriceUpdate} isMintedBodhi={isMintedBodhi} /> {/* Update the type of `nftAccount` prop */}
-                </>
-            ))}
-
-            {loading && <p>Loading...</p>} {/* Display loading state */}
+                </React.Fragment>
+            )))}
         </div>
     );
 };

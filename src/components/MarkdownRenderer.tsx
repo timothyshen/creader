@@ -18,7 +18,6 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
                 h4: ({ node, ...props }) => <h4 className='text-base font-bold' {...props} />,
                 p: ({ node, ...props }) => <p className='text-base' {...props} />,
                 a: ({ node, ...props }) => <a className='text-blue-400 underline' {...props} />,
-                img: ({ node, ...props }) => <img className='w-full' {...props} />,
                 ul: ({ node, ...props }) => <ul className='list-disc list-inside' {...props} />,
                 ol: ({ node, ...props }) => <ol className='list-decimal list-inside' {...props} />,
                 li: ({ node, ...props }) => <li className='text-base' {...props} />,

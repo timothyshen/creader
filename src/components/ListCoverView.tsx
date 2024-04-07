@@ -43,16 +43,18 @@ export const ListCoverView = () => {
         init();
     }, []);
 
+    // TODO: Add a search bar to filter the list of works
+
     return (
         <div>
-            <div className='mb-4'>
+            {/* <div className='mb-4'>
                 <Search className=" absolute h-4 w-4 m-3 text-muted-foreground" />
                 <Input
                     type="search"
                     placeholder="Search..."
                     className="w-full rounded-lg bg-background pl-8"
                 />
-            </div>
+            </div> */}
             <Tabs defaultValue="listAll">
                 <TabsList className="grid w-full grid-cols-2 mb-4">
                     <TabsTrigger value="listAll">
@@ -62,49 +64,57 @@ export const ListCoverView = () => {
                 </TabsList>
                 <TabsContent value="listAll">
                     <div className="max-h-52 flex flex-col w-[450px]">
-                        {works && works
-                            .sort((a, b) => Number(a.id) - Number(b.id))
-                            .map((work: any, index: number) => (
-                                // Notice the return statement here and the key prop
-                                <>
-                                    <CopyrightCard
-                                        key={work.id} // Assuming `work.id` is unique
-                                        id={Number(work.id)}
-                                        address={(work.owner).slice(0, 6) + '...' + (work.owner).slice(-4)}
-                                        owner={account.address == work.owner}
-                                        content={work.description}
-                                        title={work.title}
-                                        coverAcc={work.nftAccount}
-                                    />
-                                    <Button className='mb-4' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
-                                </>
-                            ))}
-
-                        {loading && <p>Loading...</p>} {/* Display loading state */}
+                        {loading ? (
+                            <p className='text-xl font-bold mx-auto mt-20'>Loading...</p> // Display loading state
+                        ) : works.length === 0 ? (
+                            <p className='text-xl font-bold mx-auto mt-20'>Book not found</p> // Show when no works found
+                        ) : (
+                            works
+                                .sort((a, b) => Number(a.id) - Number(b.id))
+                                .map((work, index) => (
+                                    // Wrap each pair in a div to use the key prop
+                                    <div key={work.id}>
+                                        <CopyrightCard
+                                            id={Number(work.id)}
+                                            address={`${work.owner.slice(0, 6)}...${work.owner.slice(-4)}`}
+                                            owner={account.address === work.owner}
+                                            content={work.description}
+                                            title={work.title}
+                                            coverAcc={work.nftAccount}
+                                        />
+                                        <Button className='mb-4' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
+                                    </div>
+                                ))
+                        )}
                     </div>
+
                 </TabsContent>
                 <TabsContent value="recent">
                     <div className="max-h-52 flex flex-col w-[450px]">
-                        {works && works
-                            .sort((a, b) => Number(b.id) - Number(a.id))
-                            .map((work: any, index: number) => (
-                                // Notice the return statement here and the key prop
-                                <>
-                                    <CopyrightCard
-                                        key={work.id} // Assuming `work.id` is unique
-                                        id={Number(work.id)}
-                                        address={(work.owner).slice(0, 6) + '...' + (work.owner).slice(-4)}
-                                        owner={account.address == work.owner}
-                                        content={work.description}
-                                        title={work.title}
-                                        coverAcc={work.nftAccount}
-                                    />
-                                    <Button className='mb-4' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
-                                </>
-                            ))}
-
-                        {loading && <p>Loading...</p>} {/* Display loading state */}
+                        {loading ? (
+                            <p className='text-xl font-bold mx-auto mt-20'>Loading...</p> // Display loading state
+                        ) : works.length === 0 ? (
+                            <p className='text-xl font-bold mx-auto mt-20'>Book not found</p> // Show when no works found
+                        ) : (
+                            works
+                                .sort((a, b) => Number(b.id) - Number(a.id))
+                                .map((work, index) => (
+                                    // Wrap each pair in a div to use the key prop
+                                    <div key={work.id}>
+                                        <CopyrightCard
+                                            id={Number(work.id)}
+                                            address={`${work.owner.slice(0, 6)}...${work.owner.slice(-4)}`}
+                                            owner={account.address === work.owner}
+                                            content={work.description}
+                                            title={work.title}
+                                            coverAcc={work.nftAccount}
+                                        />
+                                        <Button className='mb-4' onClick={() => handleToBookDetail(work.id)}>Read More</Button>
+                                    </div>
+                                ))
+                        )}
                     </div>
+
                 </TabsContent>
             </Tabs>
         </div>

@@ -1,6 +1,5 @@
 import React from 'react'
-import AuthorCoverView from '@/components/AuthorCoverView';
-
+import WalletConnectAuthorComponent from '@/components/WalletConnectAuthorComponent'
 
 export default function Page({ params }: { params: { addr: `0x${string}` } }) {
 
@@ -8,7 +7,7 @@ export default function Page({ params }: { params: { addr: `0x${string}` } }) {
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <AuthorCoverView addr={addr} />
+            <WalletConnectAuthorComponent addr={addr} />
         </main>
     )
 }
