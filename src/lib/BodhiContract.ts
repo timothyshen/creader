@@ -24,7 +24,8 @@ export async function getBalanceOf(address: `0x${string}`, assetId: bigint) {
     args: [address, BigInt(assetId)],
   });
   //   console.log("getAssetsId", getAssetsId);
-  return getBalanceOf;
+  const getNum = Number(getBalanceOf)
+  return getNum;
 }
 
 export async function getAssetsById(id: bigint) {

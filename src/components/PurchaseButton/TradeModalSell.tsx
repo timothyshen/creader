@@ -11,8 +11,8 @@ import {
 import { Button } from '@/components/ui/button'
 import { BuyButton } from '@/components/PurchaseButton/BuyButton'
 import { SellButton } from '@/components/PurchaseButton/SellButton'
-import { CREATER_FEES } from '@/constant/contract'
-import { getBuyPrice, getBuyPriceAfterFee, getAssetIdsByAddress } from '@/lib/BodhiContract'
+import { getSellPrice, getSellPriceAfterFee, getBalanceOf } from '@/lib/BodhiContract'
+import { useAccount } from 'wagmi'
 
 type TradeModalProps = {
   context: string;
@@ -40,10 +40,10 @@ export const TradeModalSell = ({
     chapterPriceAfterFeeETH: 0,
     chapterPriceUsd: 0,
     chapterPriceAfterFeeUsd: 0,
-    creatorFee: 0
+    amountHolding: 0
   })
   const [amount, setAmount] = useState<number>(0)
-
+  const { address } = useAccount()
 
   const choise = [
     { label: '0.01 Share', value: 0.01 },
@@ -57,19 +57,20 @@ export const TradeModalSell = ({
   //TODO: it is not static it is a bonding curve lol
   const getPrice = async (amount: number) => {
 
+    if (address === undefined) return null
     setAmount(amount)
     console.log("chapter", chapterId)
-    const buyPrice = await getBuyPrice(chapterId, amount)
+    const buyPrice = await getSellPrice(chapterId, amount)
     const buyPriceUsd = buyPrice * price.usd
-    const buyPriceAfterFee = await getBuyPriceAfterFee(chapterId, amount)
+    const buyPriceAfterFee = await getSellPriceAfterFee(chapterId, amount)
     const buyPriceAfterFeeUsd = Number((buyPriceAfterFee * price.usd).toFixed(3))
-    const creatorFee = Number((chapterPrice.chapterPriceAfterFeeETH - chapterPrice.chapterPriceEth).toFixed(7))
+    const amountHolding = await getBalanceOf(address, chapterId)
     setchapterPrice({
       chapterPriceEth: buyPrice,
       chapterPriceAfterFeeETH: buyPriceAfterFee,
       chapterPriceUsd: buyPriceUsd,
       chapterPriceAfterFeeUsd: buyPriceAfterFeeUsd,
-      creatorFee: creatorFee
+      amountHolding: amountHolding
     })
   }
 
@@ -98,7 +99,7 @@ export const TradeModalSell = ({
           <p className="font-bold text-lg text-gray-800">Checkout</p>
           <div className="space-y-2">
             <p className="text-gray-700">Amount: <span className="font-semibold">{amount}</span></p>
-            <p className="text-gray-700">Creator Fee: <span className="font-semibold">{chapterPrice.creatorFee}</span></p>
+            <p className="text-gray-700">Creator Fee: <span className="font-semibold">{chapterPrice.amountHolding}</span></p>
             <p className="text-gray-700">Prices in ETH: <span className="font-semibold">{chapterPrice.chapterPriceAfterFeeETH}</span></p>
             <p className="text-gray-700">Prices in USD: <span className="font-semibold">{chapterPrice.chapterPriceAfterFeeUsd}</span></p>
           </div>
