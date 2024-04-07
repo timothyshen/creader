@@ -12,6 +12,13 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Creader | Next generation Content",
   description: "Creader | Next generation Content",
+  openGraph: {
+    title: "Creader | Next generation Content",
+    description: "Creating world with the community",
+    type: "website",
+    locale: "en_US",
+    url: "https://bodhi-6551.vercel.app/",
+  },
 };
 
 
