@@ -3,6 +3,8 @@ import { Account } from "@/components/AccountDisplay";
 import WalletOptions from "@/components/WalletOption";
 import { useAccount } from "wagmi";
 import ViewCoverView from "./ViewCoverView";
+import { useGlobalState } from "@/stores/useGlobalState";
+import { ConnectWalletClient } from "@/provider/config";
 
 
 type WalletConnectComponentProps = {
@@ -12,6 +14,13 @@ type WalletConnectComponentProps = {
 
 const WalletConnectComponent = ({ id }: WalletConnectComponentProps) => {
     const { isConnected } = useAccount()
+    const { currentChain } = useGlobalState();
+
+    if (isConnected) {
+        console.log('currentChain', currentChain);
+        const walletClient = ConnectWalletClient();
+        walletClient.switchChain(currentChain);
+    }
 
     return (
         <div className="flex flex-col w-[450px]">
