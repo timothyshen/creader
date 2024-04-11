@@ -8,6 +8,8 @@ import {
   custom,
 } from "viem";
 
+import degenChain from "./degenChain";
+
 const localhost = defineChain({
   id: 1,
   name: "Localhost",
@@ -22,7 +24,7 @@ const localhost = defineChain({
 });
 
 export const config = createConfig({
-  chains: [baseSepolia],
+  chains: [baseSepolia, degenChain],
   client({ chain }) {
     return createClient({ chain, transport: http() });
   },
