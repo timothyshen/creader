@@ -7,7 +7,8 @@ import {
     CardHeader,
     CardTitle
 } from '@/components/ui/card'
-import AddNew from '../Modal/ChapterModal/AddNew'
+import AddNew from '@/components/Modal/ChapterModal/AddNew'
+import TippingModal from '@/components/Tipping/TippingModal'
 
 interface CopyrightCardProps {
     id: Number,
@@ -62,6 +63,7 @@ export const CopyrightCard = ({
 
             </CardContent>
             <CardFooter className='justify-center'>
+                <TippingModal />
                 {owner && setIsMintedBodhi && (
                     <AddNew nftAcc={coverAcc} setIsMintedBodhi={setIsMintedBodhi} />
                 )}
