@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { sliceAddress } from '@/lib/supportFunction'
 import { CreateCopyright } from '@/components/Modal/CreateCopyright'
 import { useRouter } from 'next/navigation'
+import { NetworkState } from "./NetworkState";
 
 export function AccountDisplayHeader() {
     const { address } = useAccount()
@@ -20,6 +21,7 @@ export function AccountDisplayHeader() {
 
     return (
         <div className='flex items-center gap-3'>
+            <NetworkState />
             {/* // eslint-disable-next-line @next/next/no-img-element */}
             <CreateCopyright />
             {address &&
