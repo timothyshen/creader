@@ -92,7 +92,7 @@ export const ListCoverView = () => {
                     <PagenationComponent />
                 </TabsContent>
                 <TabsContent value="recent">
-                    <div className="max-h-52 flex flex-col w-[450px]">
+                    <div className="flex flex-col w-[450px]">
                         {loading ? (
                             <p className='text-xl font-bold mx-auto mt-20'>Loading...</p> // Display loading state
                         ) : works.length === 0 ? (
