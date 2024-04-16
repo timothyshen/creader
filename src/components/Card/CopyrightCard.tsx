@@ -63,7 +63,7 @@ export const CopyrightCard = ({
 
             </CardContent>
             <CardFooter className='justify-center'>
-                <TippingModal coverAcc={coverAcc} />
+                {/* <TippingModal coverAcc={coverAcc} /> */}
                 {owner && setIsMintedBodhi && (
                     <AddNew nftAcc={coverAcc} setIsMintedBodhi={setIsMintedBodhi} />
                 )}

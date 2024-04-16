@@ -21,7 +21,7 @@ export function AccountDisplayHeader() {
 
     return (
         <div className='flex items-center gap-3'>
-            <NetworkState />
+            {/* <NetworkState /> */}
             {/* // eslint-disable-next-line @next/next/no-img-element */}
             <CreateCopyright />
             {address &&
