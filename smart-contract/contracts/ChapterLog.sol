@@ -9,6 +9,7 @@ contract ChapterLog {
     struct Tipping {
         address from;
         uint amount;
+        uint tippingTimes;
     }
 
     struct Chapter {
@@ -57,8 +58,7 @@ contract ChapterLog {
     function tipAuthor(uint256 chapterId) external payable {
         require(chapterId < chapters.length, "Chapter does not exist");
         require(msg.value > 0, "Send ether to tip the author");
-
-        chapterTips[chapterId].push(Tipping(msg.sender, msg.value));
+        chapterTips[chapterId].push(Tipping(msg.sender, msg.value, block.timestamp));
         payable(chapters[chapterId].author).transfer(msg.value);
 
         emit AuthorTipped(chapterId, msg.sender, msg.value);

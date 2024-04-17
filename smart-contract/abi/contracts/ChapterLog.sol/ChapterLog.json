@@ -268,6 +268,11 @@
             "internalType": "uint256",
             "name": "amount",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tippingTimes",
+            "type": "uint256"
           }
         ],
         "internalType": "struct ChapterLog.Tipping[]",
@@ -347,6 +352,11 @@
           {
             "internalType": "uint256",
             "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tippingTimes",
             "type": "uint256"
           }
         ],
