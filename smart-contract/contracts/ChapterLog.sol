@@ -84,21 +84,14 @@ contract ChapterLog {
         return chapterTips[0];
     }
 
-    function getChapterRemixes(uint256 chapterId) public view returns (Chapter[] memory) {
-    require(chapterId < chapters.length, "Chapter does not exist");
-    Chapter storage original = chapters[chapterId];
-    Chapter[] memory remixes = new Chapter[](original.remixesList.length);
-
-    for (uint i = 0; i < original.remixesList.length; i++) {
-        remixes[i] = chapters[original.remixesList[i]];
+    function getRemixes(uint256 chapterId) public view returns (uint256[] memory) {
+        require(chapterId < chapters.length, "Chapter does not exist");
+        return remixesList[chapterId];
     }
-    
-    return remixes;
-}
 
     function getChapterTips(uint256 chapterId) public view returns (Tipping[] memory) {
         require(chapterId < chapters.length, "Chapter does not exist");
-        return chapters[chapterId].tips;
+        return chapterTips[chapterId];
     }
 
 }
