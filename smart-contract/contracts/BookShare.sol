@@ -1,68 +1,38 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import {ERC1155} from 'solmate/src/tokens/ERC1155.sol';
+import "./IBookShare.sol";
 //6909 need to check
-import 'hardhat/console.sol';
 error Unauthorized();
 
-contract Bodhi is ERC1155 {
-    event Create(uint256 indexed assetId, address indexed sender, address tbaAccount);
-    event Remove(uint256 indexed assetId, address indexed sender);
-    event Trade(
-        TradeType indexed tradeType,
-        uint256 indexed assetId,
-        address indexed sender,
-        uint256 tokenAmount,
-        uint256 ethAmount,
-        uint256 creatorFee
-    );
-
-    struct Asset {
-        uint256 id;
-        address tbaAccount;
-        address creator;
-    }
-
+contract BookShare is ERC1155, IBookShare {
+    
     uint256 public assetIndex;
     mapping(uint256 => Asset) public assets;
     mapping(address => uint256[]) public userAssets;
-    mapping(bytes32 => uint256) public txToAssetId;
+    mapping(string => uint256) public txToAssetId;
     mapping(uint256 => uint256) public totalSupply;
     mapping(uint256 => uint256) public pool;
+
     uint256 public constant CREATOR_PREMINT = 1 ether; // 1e18
     uint256 public constant CREATOR_FEE_PERCENT = 0.05 ether; // 5%
 
-    enum TradeType {
-        Mint,
-        Buy,
-        Sell
-    } // = 0, 1, 2
-
-    function create(string calldata tbaAccount) public {
-        require(txToAssetId[tbaAccount] == 0, 'Asset already exists');
+    function create(string calldata _title, string calldata arTxId) public {
+        require(txToAssetId[arTxId] == 0, 'Asset already exists');
         uint256 newAssetId = assetIndex;
-        assets[newAssetId] = Asset(newAssetId, tbaAccount, msg.sender);
+        assets[newAssetId] = Asset(newAssetId, _title, arTxId, msg.sender);
         userAssets[msg.sender].push(newAssetId);
-        txToAssetId[tbaAccount] = newAssetId;
+        txToAssetId[arTxId] = newAssetId;
         totalSupply[newAssetId] += CREATOR_PREMINT;
         assetIndex = newAssetId + 1;
         _mint(msg.sender, newAssetId, CREATOR_PREMINT, '');
-        emit Create(newAssetId, msg.sender, tbaAccount);
+        emit Create(newAssetId, msg.sender, arTxId);
         emit Trade(TradeType.Mint, newAssetId, msg.sender, CREATOR_PREMINT, 0, 0);
     }
 
-    function remove(uint256 assetId) public {
-        Asset memory asset = assets[assetId];
-        if (asset.creator != msg.sender) {
-            revert Unauthorized();
-        }
-        delete txToAssetId[keccak256(abi.encodePacked(asset.arTxId))];
-        delete assets[assetId];
-        emit Remove(assetId, msg.sender);
-    }
 
-    function getAssetIdsByAddress(address addr) public view returns (uint256[] memory) {
-        return userAssets[addr];
+    function checkUserShareIsLagerThanOne(uint256 assetId) public view returns (bool) {
+        return balanceOf[msg.sender][assetId] > 1;
     }
 
     function _curve(uint256 x) private pure returns (uint256) {
