@@ -47,6 +47,9 @@ dependencies:
   '@wagmi/core':
     specifier: ^2.6.10
     version: 2.6.10(@types/react@18.2.67)(react@18.2.0)(typescript@5.4.2)(viem@2.8.12)(zod@3.22.4)
+  axios:
+    specifier: ^1.6.8
+    version: 1.6.8
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
