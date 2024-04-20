@@ -2,7 +2,7 @@ import { client } from "@/provider/config";
 import { BookShare__factory } from "@/contract-config/typechain";
 import { BOOKSHARE_ADDRESS } from "@/constant/contract";
 
-export async function getBalanceOf(address: `0x${string}`, assetId: bigint) {
+export async function getBalanceOf(address: `0x${string}`, assetId: number) {
   const getBalanceOf = await client.readContract({
     abi: BookShare__factory.abi,
     functionName: "balanceOf",

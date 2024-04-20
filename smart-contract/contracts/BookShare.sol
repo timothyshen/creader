@@ -6,6 +6,8 @@ import "./IBookShare.sol";
 error Unauthorized();
 
 contract BookShare is ERC1155, IBookShare {
+
+    address constant public admin = 0xD74554760Adc11bB290E28BA7fc07C33923693ef;
     
     uint256 public assetIndex;
     mapping(uint256 => Asset) public assets;
@@ -17,7 +19,15 @@ contract BookShare is ERC1155, IBookShare {
     uint256 public constant CREATOR_PREMINT = 1 ether; // 1e18
     uint256 public constant CREATOR_FEE_PERCENT = 0.05 ether; // 5%
 
-    function create(string calldata _title, string calldata arTxId) public {
+
+
+    modifier onlyAdmin() {
+        if (msg.sender != admin) revert Unauthorized();
+        _;
+        
+    }
+
+    function create(string calldata _title, string calldata arTxId) public onlyAdmin {
         require(txToAssetId[arTxId] == 0, 'Asset already exists');
         uint256 newAssetId = assetIndex;
         assets[newAssetId] = Asset(newAssetId, _title, arTxId, msg.sender);

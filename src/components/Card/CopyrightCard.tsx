@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useState, useEffect } from 'react'
 import {
     Card,
     CardContent,
@@ -9,6 +10,10 @@ import {
 } from '@/components/ui/card'
 import AddNew from '@/components/Modal/ChapterModal/AddNew'
 import TippingModal from '@/components/Tipping/TippingModal'
+import { getBalanceOf } from '@/lib/BookShareContract'
+import { use } from 'chai'
+import { bigint } from 'zod'
+
 
 interface CopyrightCardProps {
     id: Number,
@@ -32,9 +37,22 @@ export const CopyrightCard = ({
     aggregatePrice
 }: CopyrightCardProps) => {
 
+    const [userHoldings, setUserHoldings] = useState<number>(0)
+
+    useEffect(() => {
+        async function fetchData() {
+            if (address === undefined) return null;
+            const holding = await getBalanceOf(address as `0x${string}`, 0);
+            setUserHoldings(holding)
+        }
+        fetchData()
+    }, [])
+
     const sliceAddress = (address: string) => {
         return address.slice(0, 6) + '...' + address.slice(-4);
     }
+
+
 
     return (
         <Card className='mb-2 px-2 w-full'>
@@ -64,8 +82,10 @@ export const CopyrightCard = ({
             </CardContent>
             <CardFooter className='justify-center'>
                 {/* <TippingModal coverAcc={coverAcc} /> */}
-                {owner && setIsMintedBodhi && (
-                    <AddNew nftAcc={coverAcc} setIsMintedBodhi={setIsMintedBodhi} />
+                {userHoldings >= 1 ? (
+                    <AddNew nftAcc={coverAcc} />
+                ) : (
+                    <p className='text-red-500'>You need at least 1 share to create a new chapter</p>
                 )}
             </CardFooter>
         </Card>

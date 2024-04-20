@@ -32,6 +32,7 @@ export interface BookShareInterface extends utils.Interface {
   functions: {
     "CREATOR_FEE_PERCENT()": FunctionFragment;
     "CREATOR_PREMINT()": FunctionFragment;
+    "admin()": FunctionFragment;
     "assetIndex()": FunctionFragment;
     "assets(uint256)": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
@@ -63,6 +64,8 @@ export interface BookShareInterface extends utils.Interface {
       | "CREATOR_FEE_PERCENT()"
       | "CREATOR_PREMINT"
       | "CREATOR_PREMINT()"
+      | "admin"
+      | "admin()"
       | "assetIndex"
       | "assetIndex()"
       | "assets"
@@ -127,6 +130,8 @@ export interface BookShareInterface extends utils.Interface {
     functionFragment: "CREATOR_PREMINT()",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "admin", values?: undefined): string;
+  encodeFunctionData(functionFragment: "admin()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "assetIndex",
     values?: undefined
@@ -352,6 +357,8 @@ export interface BookShareInterface extends utils.Interface {
     functionFragment: "CREATOR_PREMINT()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "admin", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "admin()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "assetIndex", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "assetIndex()",
@@ -661,6 +668,10 @@ export interface BookShare extends BaseContract {
 
     "CREATOR_PREMINT()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    admin(overrides?: CallOverrides): Promise<[string]>;
+
+    "admin()"(overrides?: CallOverrides): Promise<[string]>;
+
     assetIndex(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "assetIndex()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -950,6 +961,10 @@ export interface BookShare extends BaseContract {
 
   "CREATOR_PREMINT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  admin(overrides?: CallOverrides): Promise<string>;
+
+  "admin()"(overrides?: CallOverrides): Promise<string>;
+
   assetIndex(overrides?: CallOverrides): Promise<BigNumber>;
 
   "assetIndex()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1238,6 +1253,10 @@ export interface BookShare extends BaseContract {
     CREATOR_PREMINT(overrides?: CallOverrides): Promise<BigNumber>;
 
     "CREATOR_PREMINT()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    admin(overrides?: CallOverrides): Promise<string>;
+
+    "admin()"(overrides?: CallOverrides): Promise<string>;
 
     assetIndex(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1615,6 +1634,10 @@ export interface BookShare extends BaseContract {
 
     "CREATOR_PREMINT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    admin(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "admin()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     assetIndex(overrides?: CallOverrides): Promise<BigNumber>;
 
     "assetIndex()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1896,6 +1919,10 @@ export interface BookShare extends BaseContract {
     "CREATOR_PREMINT()"(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    admin(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "admin()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     assetIndex(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

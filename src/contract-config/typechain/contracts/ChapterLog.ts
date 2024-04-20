@@ -74,7 +74,6 @@ export interface ChapterLogInterface extends utils.Interface {
     "getChapterLog()": FunctionFragment;
     "getChapterTips(uint256)": FunctionFragment;
     "getRemixes(uint256)": FunctionFragment;
-    "getTippingLog(uint256)": FunctionFragment;
     "remixChapter(uint256,string,string)": FunctionFragment;
     "tipAuthor(uint256)": FunctionFragment;
   };
@@ -97,8 +96,6 @@ export interface ChapterLogInterface extends utils.Interface {
       | "getChapterTips(uint256)"
       | "getRemixes"
       | "getRemixes(uint256)"
-      | "getTippingLog"
-      | "getTippingLog(uint256)"
       | "remixChapter"
       | "remixChapter(uint256,string,string)"
       | "tipAuthor"
@@ -175,14 +172,6 @@ export interface ChapterLogInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getRemixes(uint256)",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTippingLog",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTippingLog(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -263,14 +252,6 @@ export interface ChapterLogInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "getRemixes", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getRemixes(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getTippingLog",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getTippingLog(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -454,16 +435,6 @@ export interface ChapterLog extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
-    getTippingLog(
-      chapterId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[ChapterLog.TippingStructOutput[]]>;
-
-    "getTippingLog(uint256)"(
-      chapterId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[ChapterLog.TippingStructOutput[]]>;
-
     remixChapter(
       chapterId: PromiseOrValue<BigNumberish>,
       _title: PromiseOrValue<string>,
@@ -575,16 +546,6 @@ export interface ChapterLog extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
-  getTippingLog(
-    chapterId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<ChapterLog.TippingStructOutput[]>;
-
-  "getTippingLog(uint256)"(
-    chapterId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<ChapterLog.TippingStructOutput[]>;
-
   remixChapter(
     chapterId: PromiseOrValue<BigNumberish>,
     _title: PromiseOrValue<string>,
@@ -695,16 +656,6 @@ export interface ChapterLog extends BaseContract {
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
-
-    getTippingLog(
-      chapterId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<ChapterLog.TippingStructOutput[]>;
-
-    "getTippingLog(uint256)"(
-      chapterId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<ChapterLog.TippingStructOutput[]>;
 
     remixChapter(
       chapterId: PromiseOrValue<BigNumberish>,
@@ -826,16 +777,6 @@ export interface ChapterLog extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getTippingLog(
-      chapterId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "getTippingLog(uint256)"(
-      chapterId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     remixChapter(
       chapterId: PromiseOrValue<BigNumberish>,
       _title: PromiseOrValue<string>,
@@ -926,16 +867,6 @@ export interface ChapterLog extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "getRemixes(uint256)"(
-      chapterId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getTippingLog(
-      chapterId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "getTippingLog(uint256)"(
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

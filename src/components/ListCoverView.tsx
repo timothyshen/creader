@@ -57,6 +57,7 @@ export const ListCoverView = () => {
                     className="w-full rounded-lg bg-background pl-8"
                 />
             </div> */}
+
             <Tabs defaultValue="listAll">
                 <TabsList className="grid w-full grid-cols-2 mb-4">
                     <TabsTrigger value="listAll">
@@ -65,17 +66,17 @@ export const ListCoverView = () => {
                     <TabsTrigger value="recent">Most Recent</TabsTrigger>
                 </TabsList>
                 <TabsContent value="listAll">
-                    <div className=" flex flex-col w-[450px]">
+                    <div className="">
                         {loading ? (
-                            <p className='text-xl font-bold mx-auto mt-20'>Loading...</p> // Display loading state
+                            <p className='text-xl text-center font-bold mx-auto mt-20'>Loading...</p> // Display loading state
                         ) : works.length === 0 ? (
-                            <p className='text-xl font-bold mx-auto mt-20'>Book not found</p> // Show when no works found
+                            <p className='text-xl w-full text-center font-bold mx-auto mt-20'>Book not found</p> // Show when no works found
                         ) : (
                             works
                                 .sort((a, b) => Number(a.id) - Number(b.id))
                                 .map((work, index) => (
                                     // Wrap each pair in a div to use the key prop
-                                    <div key={work.id}>
+                                    <div key={work.id} className='w-[450px]'>
                                         <CopyrightCard
                                             id={Number(work.id)}
                                             address={`${work.owner.slice(0, 6)}...${work.owner.slice(-4)}`}

@@ -5,6 +5,7 @@ import { sliceAddress } from '@/lib/supportFunction'
 import { CreateCopyright } from '@/components/Modal/CreateCopyright'
 import { useRouter } from 'next/navigation'
 import { NetworkState } from "./NetworkState";
+import { OWNER_ADDRESS } from '@/constant/contract'
 
 export function AccountDisplayHeader() {
     const { address } = useAccount()
@@ -23,7 +24,7 @@ export function AccountDisplayHeader() {
         <div className='flex items-center gap-3'>
             {/* <NetworkState /> */}
             {/* // eslint-disable-next-line @next/next/no-img-element */}
-            <CreateCopyright />
+            {address === OWNER_ADDRESS && <CreateCopyright />}
             {address &&
                 <div className='w-max py-2 px-4 rounded-md bg-primary text-primary-foreground hover:cursor-pointer hover:bg-primary/90' onClick={handleClick}>
                     {sliceAddress(address)}
