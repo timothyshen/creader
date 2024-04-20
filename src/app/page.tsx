@@ -1,4 +1,5 @@
-import { ListCoverView } from '@/components/ListCoverView'
+// import { ListCoverView } from '@/components/ListCoverView'
+import ViewCoverViewDegen from '@/components/ViewCoverViewDegen'
 
 
 export default function Home() {
@@ -12,7 +13,7 @@ export default function Home() {
                     explore the different types of NFTs that are available.
                 </p>
             </div>
-            <ListCoverView />
+            <ViewCoverViewDegen />
         </main>
     )
 }
