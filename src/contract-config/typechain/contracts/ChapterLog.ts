@@ -67,24 +67,22 @@ export declare namespace ChapterLog {
 export interface ChapterLogInterface extends utils.Interface {
   functions: {
     "MAX_REMIXES()": FunctionFragment;
-    "chapterLog()": FunctionFragment;
     "chapters(uint256)": FunctionFragment;
     "createChapter(string,string,uint256)": FunctionFragment;
     "getChapter(uint256)": FunctionFragment;
     "getChapterCount()": FunctionFragment;
+    "getChapterLog()": FunctionFragment;
     "getChapterTips(uint256)": FunctionFragment;
     "getRemixes(uint256)": FunctionFragment;
+    "getTippingLog(uint256)": FunctionFragment;
     "remixChapter(uint256,string,string)": FunctionFragment;
     "tipAuthor(uint256)": FunctionFragment;
-    "tippingLog()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "MAX_REMIXES"
       | "MAX_REMIXES()"
-      | "chapterLog"
-      | "chapterLog()"
       | "chapters"
       | "chapters(uint256)"
       | "createChapter"
@@ -93,16 +91,18 @@ export interface ChapterLogInterface extends utils.Interface {
       | "getChapter(uint256)"
       | "getChapterCount"
       | "getChapterCount()"
+      | "getChapterLog"
+      | "getChapterLog()"
       | "getChapterTips"
       | "getChapterTips(uint256)"
       | "getRemixes"
       | "getRemixes(uint256)"
+      | "getTippingLog"
+      | "getTippingLog(uint256)"
       | "remixChapter"
       | "remixChapter(uint256,string,string)"
       | "tipAuthor"
       | "tipAuthor(uint256)"
-      | "tippingLog"
-      | "tippingLog()"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -111,14 +111,6 @@ export interface ChapterLogInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "MAX_REMIXES()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "chapterLog",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "chapterLog()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -162,6 +154,14 @@ export interface ChapterLogInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "getChapterLog",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getChapterLog()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "getChapterTips",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -175,6 +175,14 @@ export interface ChapterLogInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getRemixes(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTippingLog",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTippingLog(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
@@ -201,14 +209,6 @@ export interface ChapterLogInterface extends utils.Interface {
     functionFragment: "tipAuthor(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "tippingLog",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tippingLog()",
-    values?: undefined
-  ): string;
 
   decodeFunctionResult(
     functionFragment: "MAX_REMIXES",
@@ -216,11 +216,6 @@ export interface ChapterLogInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "MAX_REMIXES()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "chapterLog", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "chapterLog()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "chapters", data: BytesLike): Result;
@@ -250,6 +245,14 @@ export interface ChapterLogInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "getChapterLog",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getChapterLog()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getChapterTips",
     data: BytesLike
   ): Result;
@@ -263,6 +266,14 @@ export interface ChapterLogInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "getTippingLog",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getTippingLog(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "remixChapter",
     data: BytesLike
   ): Result;
@@ -273,11 +284,6 @@ export interface ChapterLogInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "tipAuthor", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "tipAuthor(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "tippingLog", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "tippingLog()",
     data: BytesLike
   ): Result;
 
@@ -366,14 +372,6 @@ export interface ChapterLog extends BaseContract {
 
     "MAX_REMIXES()"(overrides?: CallOverrides): Promise<[number]>;
 
-    chapterLog(
-      overrides?: CallOverrides
-    ): Promise<[ChapterLog.ChapterStructOutput[]]>;
-
-    "chapterLog()"(
-      overrides?: CallOverrides
-    ): Promise<[ChapterLog.ChapterStructOutput[]]>;
-
     chapters(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -428,6 +426,14 @@ export interface ChapterLog extends BaseContract {
 
     "getChapterCount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    getChapterLog(
+      overrides?: CallOverrides
+    ): Promise<[ChapterLog.ChapterStructOutput[]]>;
+
+    "getChapterLog()"(
+      overrides?: CallOverrides
+    ): Promise<[ChapterLog.ChapterStructOutput[]]>;
+
     getChapterTips(
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -447,6 +453,16 @@ export interface ChapterLog extends BaseContract {
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
+
+    getTippingLog(
+      chapterId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[ChapterLog.TippingStructOutput[]]>;
+
+    "getTippingLog(uint256)"(
+      chapterId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[ChapterLog.TippingStructOutput[]]>;
 
     remixChapter(
       chapterId: PromiseOrValue<BigNumberish>,
@@ -471,27 +487,11 @@ export interface ChapterLog extends BaseContract {
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    tippingLog(
-      overrides?: CallOverrides
-    ): Promise<[ChapterLog.TippingStructOutput[]]>;
-
-    "tippingLog()"(
-      overrides?: CallOverrides
-    ): Promise<[ChapterLog.TippingStructOutput[]]>;
   };
 
   MAX_REMIXES(overrides?: CallOverrides): Promise<number>;
 
   "MAX_REMIXES()"(overrides?: CallOverrides): Promise<number>;
-
-  chapterLog(
-    overrides?: CallOverrides
-  ): Promise<ChapterLog.ChapterStructOutput[]>;
-
-  "chapterLog()"(
-    overrides?: CallOverrides
-  ): Promise<ChapterLog.ChapterStructOutput[]>;
 
   chapters(
     arg0: PromiseOrValue<BigNumberish>,
@@ -547,6 +547,14 @@ export interface ChapterLog extends BaseContract {
 
   "getChapterCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  getChapterLog(
+    overrides?: CallOverrides
+  ): Promise<ChapterLog.ChapterStructOutput[]>;
+
+  "getChapterLog()"(
+    overrides?: CallOverrides
+  ): Promise<ChapterLog.ChapterStructOutput[]>;
+
   getChapterTips(
     chapterId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -566,6 +574,16 @@ export interface ChapterLog extends BaseContract {
     chapterId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
+
+  getTippingLog(
+    chapterId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<ChapterLog.TippingStructOutput[]>;
+
+  "getTippingLog(uint256)"(
+    chapterId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<ChapterLog.TippingStructOutput[]>;
 
   remixChapter(
     chapterId: PromiseOrValue<BigNumberish>,
@@ -591,26 +609,10 @@ export interface ChapterLog extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  tippingLog(
-    overrides?: CallOverrides
-  ): Promise<ChapterLog.TippingStructOutput[]>;
-
-  "tippingLog()"(
-    overrides?: CallOverrides
-  ): Promise<ChapterLog.TippingStructOutput[]>;
-
   callStatic: {
     MAX_REMIXES(overrides?: CallOverrides): Promise<number>;
 
     "MAX_REMIXES()"(overrides?: CallOverrides): Promise<number>;
-
-    chapterLog(
-      overrides?: CallOverrides
-    ): Promise<ChapterLog.ChapterStructOutput[]>;
-
-    "chapterLog()"(
-      overrides?: CallOverrides
-    ): Promise<ChapterLog.ChapterStructOutput[]>;
 
     chapters(
       arg0: PromiseOrValue<BigNumberish>,
@@ -666,6 +668,14 @@ export interface ChapterLog extends BaseContract {
 
     "getChapterCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getChapterLog(
+      overrides?: CallOverrides
+    ): Promise<ChapterLog.ChapterStructOutput[]>;
+
+    "getChapterLog()"(
+      overrides?: CallOverrides
+    ): Promise<ChapterLog.ChapterStructOutput[]>;
+
     getChapterTips(
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -685,6 +695,16 @@ export interface ChapterLog extends BaseContract {
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
+
+    getTippingLog(
+      chapterId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<ChapterLog.TippingStructOutput[]>;
+
+    "getTippingLog(uint256)"(
+      chapterId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<ChapterLog.TippingStructOutput[]>;
 
     remixChapter(
       chapterId: PromiseOrValue<BigNumberish>,
@@ -709,14 +729,6 @@ export interface ChapterLog extends BaseContract {
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    tippingLog(
-      overrides?: CallOverrides
-    ): Promise<ChapterLog.TippingStructOutput[]>;
-
-    "tippingLog()"(
-      overrides?: CallOverrides
-    ): Promise<ChapterLog.TippingStructOutput[]>;
   };
 
   filters: {
@@ -752,10 +764,6 @@ export interface ChapterLog extends BaseContract {
 
     "MAX_REMIXES()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    chapterLog(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "chapterLog()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     chapters(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -794,6 +802,10 @@ export interface ChapterLog extends BaseContract {
 
     "getChapterCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getChapterLog(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "getChapterLog()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     getChapterTips(
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -810,6 +822,16 @@ export interface ChapterLog extends BaseContract {
     ): Promise<BigNumber>;
 
     "getRemixes(uint256)"(
+      chapterId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getTippingLog(
+      chapterId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getTippingLog(uint256)"(
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -837,20 +859,12 @@ export interface ChapterLog extends BaseContract {
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    tippingLog(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "tippingLog()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
     MAX_REMIXES(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "MAX_REMIXES()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    chapterLog(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "chapterLog()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     chapters(
       arg0: PromiseOrValue<BigNumberish>,
@@ -892,6 +906,10 @@ export interface ChapterLog extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    getChapterLog(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "getChapterLog()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     getChapterTips(
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -908,6 +926,16 @@ export interface ChapterLog extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     "getRemixes(uint256)"(
+      chapterId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getTippingLog(
+      chapterId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getTippingLog(uint256)"(
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -935,9 +963,5 @@ export interface ChapterLog extends BaseContract {
       chapterId: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
-
-    tippingLog(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "tippingLog()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

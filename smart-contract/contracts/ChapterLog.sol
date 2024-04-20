@@ -76,12 +76,8 @@ contract ChapterLog {
         return chapters.length;
     }
 
-    function chapterLog() public view returns (Chapter[] memory) {
+    function getChapterLog() public view returns (Chapter[] memory) {
         return chapters;
-    }
-
-    function tippingLog() public view returns (Tipping[] memory) {
-        return chapterTips[0];
     }
 
     function getRemixes(uint256 chapterId) public view returns (uint256[] memory) {
