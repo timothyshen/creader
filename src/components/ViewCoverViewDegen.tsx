@@ -1,10 +1,9 @@
 "use client"
 import { useEffect, useState } from 'react';
-import { getCover } from '@/lib/CopyrightContract';
-import { CopyrightCard } from './Card/CopyrightCard';
+import { CopyrightCardDegen } from '@/components/Card/CopyrightCardDegen';
+import { getAssetsById } from '@/lib/BookShareContract';
 import { useAccount } from 'wagmi';
 import { BodhiCardView } from '@/components/BodhiCardView';
-import { PriceData } from '@/types/steptypes';
 import { useRouter } from 'next/navigation';
 
 
@@ -13,39 +12,15 @@ const ViewCoverViewDegen = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [works, setWorks] = useState<any>([]);
     const [isMintedBodhi, setIsMintedBodhi] = useState<boolean>(false)
-    const [prices, setPrices] = useState<PriceData>();
-    const router = useRouter();
 
     const account = useAccount();
 
-    const handlePriceUpdate = (coverAcc: any, ethPrice: any, usdPrice: any) => {
-        setPrices(prevPrices => {
-            if (!prevPrices) {
-                return {
-                    [coverAcc]: {
-                        eth: ethPrice,
-                        usd: usdPrice,
-                    },
-                };
-            }
-            const existing = prevPrices[coverAcc] || { eth: 0, usd: 0 };
-
-            return {
-                ...prevPrices,
-                [coverAcc]: {
-                    eth: (Number(existing.eth) + Number(ethPrice)),
-                    usd: (Number(existing.usd) + Number(usdPrice)),
-                },
-            };
-        });
-    };
 
     useEffect(() => {
         const init = async () => {
             setLoading(true);
             try {
-                // console.log('id', id)
-                // const work = await getCover(0);
+                const book = await getAssetsById(BigInt(0));
                 const work = {
                     id: 0,
                     owner: '0x',
@@ -74,7 +49,7 @@ const ViewCoverViewDegen = () => {
             ) : (
                 // Notice the return statement here and the key prop
                 <>
-                    <CopyrightCard
+                    <CopyrightCardDegen
                         key={works.id} // Assuming `work.id` is unique
                         id={Number(works.id)}
                         address={(works.owner).slice(0, 6) + '...' + (works.owner).slice(-4)}

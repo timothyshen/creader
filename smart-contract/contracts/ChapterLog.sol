@@ -21,12 +21,14 @@ contract ChapterLog {
     }
 
     Chapter[] public chapters;
+    mapping(uint256 => Chapter) public chapterMap;
     mapping(uint256 => uint256[]) private remixesList;
     mapping(uint256 => Tipping[]) private chapterTips;
 
     IBookShare bookShare;
 
     event ChapterCreated(uint256 chapterId, address author);
+    event ChapterRemixed(uint256 originalChapterId, uint256 newChapterId, address author);
     event ChapterRemixed(uint256 originalChapterId, uint256 newChapterId);
     event AuthorTipped(uint256 chapterId, address from, uint amount);
 

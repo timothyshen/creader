@@ -28,6 +28,22 @@ import type {
   PromiseOrValue,
 } from "../common";
 
+export declare namespace IBookShare {
+  export type AssetStruct = {
+    id: PromiseOrValue<BigNumberish>;
+    title: PromiseOrValue<string>;
+    arTxId: PromiseOrValue<string>;
+    creator: PromiseOrValue<string>;
+  };
+
+  export type AssetStructOutput = [BigNumber, string, string, string] & {
+    id: BigNumber;
+    title: string;
+    arTxId: string;
+    creator: string;
+  };
+}
+
 export interface BookShareInterface extends utils.Interface {
   functions: {
     "CREATOR_FEE_PERCENT()": FunctionFragment;
@@ -40,6 +56,7 @@ export interface BookShareInterface extends utils.Interface {
     "buy(uint256,uint256)": FunctionFragment;
     "checkUserShareIsLagerThanOne(uint256)": FunctionFragment;
     "create(string,string)": FunctionFragment;
+    "getAssetsById(uint256)": FunctionFragment;
     "getBuyPrice(uint256,uint256)": FunctionFragment;
     "getBuyPriceAfterFee(uint256,uint256)": FunctionFragment;
     "getPrice(uint256,uint256)": FunctionFragment;
@@ -80,6 +97,8 @@ export interface BookShareInterface extends utils.Interface {
       | "checkUserShareIsLagerThanOne(uint256)"
       | "create"
       | "create(string,string)"
+      | "getAssetsById"
+      | "getAssetsById(uint256)"
       | "getBuyPrice"
       | "getBuyPrice(uint256,uint256)"
       | "getBuyPriceAfterFee"
@@ -187,6 +206,14 @@ export interface BookShareInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "create(string,string)",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAssetsById",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAssetsById(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getBuyPrice",
@@ -398,6 +425,14 @@ export interface BookShareInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "create", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "create(string,string)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAssetsById",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAssetsById(uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -758,6 +793,16 @@ export interface BookShare extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    getAssetsById(
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[IBookShare.AssetStructOutput]>;
+
+    "getAssetsById(uint256)"(
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[IBookShare.AssetStructOutput]>;
+
     getBuyPrice(
       assetId: PromiseOrValue<BigNumberish>,
       amount: PromiseOrValue<BigNumberish>,
@@ -1051,6 +1096,16 @@ export interface BookShare extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  getAssetsById(
+    assetId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<IBookShare.AssetStructOutput>;
+
+  "getAssetsById(uint256)"(
+    assetId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<IBookShare.AssetStructOutput>;
+
   getBuyPrice(
     assetId: PromiseOrValue<BigNumberish>,
     amount: PromiseOrValue<BigNumberish>,
@@ -1343,6 +1398,16 @@ export interface BookShare extends BaseContract {
       arTxId: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    getAssetsById(
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<IBookShare.AssetStructOutput>;
+
+    "getAssetsById(uint256)"(
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<IBookShare.AssetStructOutput>;
 
     getBuyPrice(
       assetId: PromiseOrValue<BigNumberish>,
@@ -1710,6 +1775,16 @@ export interface BookShare extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    getAssetsById(
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getAssetsById(uint256)"(
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getBuyPrice(
       assetId: PromiseOrValue<BigNumberish>,
       amount: PromiseOrValue<BigNumberish>,
@@ -1994,6 +2069,16 @@ export interface BookShare extends BaseContract {
       _title: PromiseOrValue<string>,
       arTxId: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getAssetsById(
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getAssetsById(uint256)"(
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getBuyPrice(

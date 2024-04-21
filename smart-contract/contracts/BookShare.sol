@@ -45,6 +45,10 @@ contract BookShare is ERC1155, IBookShare {
         return balanceOf[msg.sender][assetId] > 1;
     }
 
+    function getAssetsById(uint256 assetId) public view returns (Asset memory) {
+        return assets[assetId];
+    }
+
     function _curve(uint256 x) private pure returns (uint256) {
         return x <= CREATOR_PREMINT ? 0 : ((x - CREATOR_PREMINT) * (x - CREATOR_PREMINT) * (x - CREATOR_PREMINT));
     }

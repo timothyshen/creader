@@ -67,6 +67,7 @@ export declare namespace ChapterLog {
 export interface ChapterLogInterface extends utils.Interface {
   functions: {
     "MAX_REMIXES()": FunctionFragment;
+    "chapterMap(uint256)": FunctionFragment;
     "chapters(uint256)": FunctionFragment;
     "createChapter(string,string,uint256)": FunctionFragment;
     "getChapter(uint256)": FunctionFragment;
@@ -82,6 +83,8 @@ export interface ChapterLogInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "MAX_REMIXES"
       | "MAX_REMIXES()"
+      | "chapterMap"
+      | "chapterMap(uint256)"
       | "chapters"
       | "chapters(uint256)"
       | "createChapter"
@@ -109,6 +112,14 @@ export interface ChapterLogInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "MAX_REMIXES()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "chapterMap",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "chapterMap(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "chapters",
@@ -207,6 +218,11 @@ export interface ChapterLogInterface extends utils.Interface {
     functionFragment: "MAX_REMIXES()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "chapterMap", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "chapterMap(uint256)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "chapters", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "chapters(uint256)",
@@ -271,6 +287,7 @@ export interface ChapterLogInterface extends utils.Interface {
   events: {
     "AuthorTipped(uint256,address,uint256)": EventFragment;
     "ChapterCreated(uint256,address)": EventFragment;
+    "ChapterRemixed(uint256,uint256,address)": EventFragment;
     "ChapterRemixed(uint256,uint256)": EventFragment;
   };
 
@@ -282,7 +299,9 @@ export interface ChapterLogInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "ChapterCreated(uint256,address)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "ChapterRemixed"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ChapterRemixed(uint256,uint256,address)"
+  ): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ChapterRemixed(uint256,uint256)"
   ): EventFragment;
@@ -311,16 +330,30 @@ export type ChapterCreatedEvent = TypedEvent<
 
 export type ChapterCreatedEventFilter = TypedEventFilter<ChapterCreatedEvent>;
 
-export interface ChapterRemixedEventObject {
+export interface ChapterRemixed_uint256_uint256_address_EventObject {
+  originalChapterId: BigNumber;
+  newChapterId: BigNumber;
+  author: string;
+}
+export type ChapterRemixed_uint256_uint256_address_Event = TypedEvent<
+  [BigNumber, BigNumber, string],
+  ChapterRemixed_uint256_uint256_address_EventObject
+>;
+
+export type ChapterRemixed_uint256_uint256_address_EventFilter =
+  TypedEventFilter<ChapterRemixed_uint256_uint256_address_Event>;
+
+export interface ChapterRemixed_uint256_uint256_EventObject {
   originalChapterId: BigNumber;
   newChapterId: BigNumber;
 }
-export type ChapterRemixedEvent = TypedEvent<
+export type ChapterRemixed_uint256_uint256_Event = TypedEvent<
   [BigNumber, BigNumber],
-  ChapterRemixedEventObject
+  ChapterRemixed_uint256_uint256_EventObject
 >;
 
-export type ChapterRemixedEventFilter = TypedEventFilter<ChapterRemixedEvent>;
+export type ChapterRemixed_uint256_uint256_EventFilter =
+  TypedEventFilter<ChapterRemixed_uint256_uint256_Event>;
 
 export interface ChapterLog extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -352,6 +385,32 @@ export interface ChapterLog extends BaseContract {
     MAX_REMIXES(overrides?: CallOverrides): Promise<[number]>;
 
     "MAX_REMIXES()"(overrides?: CallOverrides): Promise<[number]>;
+
+    chapterMap(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, number, boolean] & {
+        title: string;
+        content: string;
+        author: string;
+        remixes: number;
+        isRemix: boolean;
+      }
+    >;
+
+    "chapterMap(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, number, boolean] & {
+        title: string;
+        content: string;
+        author: string;
+        remixes: number;
+        isRemix: boolean;
+      }
+    >;
 
     chapters(
       arg0: PromiseOrValue<BigNumberish>,
@@ -464,6 +523,32 @@ export interface ChapterLog extends BaseContract {
 
   "MAX_REMIXES()"(overrides?: CallOverrides): Promise<number>;
 
+  chapterMap(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, number, boolean] & {
+      title: string;
+      content: string;
+      author: string;
+      remixes: number;
+      isRemix: boolean;
+    }
+  >;
+
+  "chapterMap(uint256)"(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, number, boolean] & {
+      title: string;
+      content: string;
+      author: string;
+      remixes: number;
+      isRemix: boolean;
+    }
+  >;
+
   chapters(
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -574,6 +659,32 @@ export interface ChapterLog extends BaseContract {
     MAX_REMIXES(overrides?: CallOverrides): Promise<number>;
 
     "MAX_REMIXES()"(overrides?: CallOverrides): Promise<number>;
+
+    chapterMap(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, number, boolean] & {
+        title: string;
+        content: string;
+        author: string;
+        remixes: number;
+        isRemix: boolean;
+      }
+    >;
+
+    "chapterMap(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, number, boolean] & {
+        title: string;
+        content: string;
+        author: string;
+        remixes: number;
+        isRemix: boolean;
+      }
+    >;
 
     chapters(
       arg0: PromiseOrValue<BigNumberish>,
@@ -700,20 +811,31 @@ export interface ChapterLog extends BaseContract {
     ): ChapterCreatedEventFilter;
     ChapterCreated(chapterId?: null, author?: null): ChapterCreatedEventFilter;
 
+    "ChapterRemixed(uint256,uint256,address)"(
+      originalChapterId?: null,
+      newChapterId?: null,
+      author?: null
+    ): ChapterRemixed_uint256_uint256_address_EventFilter;
     "ChapterRemixed(uint256,uint256)"(
       originalChapterId?: null,
       newChapterId?: null
-    ): ChapterRemixedEventFilter;
-    ChapterRemixed(
-      originalChapterId?: null,
-      newChapterId?: null
-    ): ChapterRemixedEventFilter;
+    ): ChapterRemixed_uint256_uint256_EventFilter;
   };
 
   estimateGas: {
     MAX_REMIXES(overrides?: CallOverrides): Promise<BigNumber>;
 
     "MAX_REMIXES()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    chapterMap(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "chapterMap(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     chapters(
       arg0: PromiseOrValue<BigNumberish>,
@@ -806,6 +928,16 @@ export interface ChapterLog extends BaseContract {
     MAX_REMIXES(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "MAX_REMIXES()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    chapterMap(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "chapterMap(uint256)"(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     chapters(
       arg0: PromiseOrValue<BigNumberish>,

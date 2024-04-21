@@ -404,6 +404,47 @@
         "internalType": "uint256",
         "name": "assetId",
         "type": "uint256"
+      }
+    ],
+    "name": "getAssetsById",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "arTxId",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "creator",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct IBookShare.Asset",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetId",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",

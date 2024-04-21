@@ -68,6 +68,31 @@
         "internalType": "uint256",
         "name": "newChapterId",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "author",
+        "type": "address"
+      }
+    ],
+    "name": "ChapterRemixed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "originalChapterId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "newChapterId",
+        "type": "uint256"
       }
     ],
     "name": "ChapterRemixed",
@@ -81,6 +106,45 @@
         "internalType": "uint8",
         "name": "",
         "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "chapterMap",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "content",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "author",
+        "type": "address"
+      },
+      {
+        "internalType": "uint8",
+        "name": "remixes",
+        "type": "uint8"
+      },
+      {
+        "internalType": "bool",
+        "name": "isRemix",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",

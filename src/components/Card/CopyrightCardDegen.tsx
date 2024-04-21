@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import {
     Card,
     CardContent,
@@ -9,7 +9,6 @@ import {
     CardTitle
 } from '@/components/ui/card'
 import AddNew from '@/components/Modal/ChapterModal/AddNew'
-import TippingModal from '@/components/Tipping/TippingModal'
 import { getBalanceOf } from '@/lib/BookShareContract'
 import { getBuyPrice } from '@/lib/BodhiContract';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
@@ -27,7 +26,7 @@ interface CopyrightCardProps {
     aggregatePrice?: any
 }
 
-export const CopyrightCard = ({
+export const CopyrightCardDegen = ({
     id,
     address,
     owner,
@@ -43,6 +42,14 @@ export const CopyrightCard = ({
 
     const newPrice = useNativeCurrencyPrice();
 
+    const fetchPrices = async (supply: bigint, newPrice: number) => {
+        const getPriceFeedETH = await getBuyPrice(BigInt(0), 1);
+        const priceEth = newPrice;
+        const priceUsd = (getPriceFeedETH * priceEth).toFixed(2);
+        return { eth: getPriceFeedETH.toString(), usd: priceUsd };
+    };
+
+
 
     useEffect(() => {
         async function fetchData() {
@@ -54,18 +61,22 @@ export const CopyrightCard = ({
     }, [])
 
     useEffect(() => {
+        const supply = BigInt(10);
         if (supply) {
-            fetchPrices(supply, newPrice).then(({ eth, usd }) => {
+            fetchPrices(supply, newPrice).then(({ eth, usd }: { eth: string, usd: string }) => {
                 setFilePriceETH(eth);
                 setFilePriceUSD(usd);
             });
         }
-    }, [supply, newPrice]);
+    }, [newPrice]);
 
     const sliceAddress = (address: string) => {
         return address.slice(0, 6) + '...' + address.slice(-4);
     }
 
+    const sliceArTxId = useCallback((arTxId: string) => (
+        `${arTxId.slice(0, 6)}...${arTxId.slice(-4)}`
+    ), []);
 
 
     return (
@@ -75,8 +86,13 @@ export const CopyrightCard = ({
                 <div>
                     <CardTitle>#{id.toString()} {title}</CardTitle>
                     <CardDescription>
-                        Created by {sliceAddress(address)} <br />
-                        TBA by {sliceAddress(coverAcc)}
+                        <p>
+                            AR ID: <span className="underline text-blue-400 cursor-pointer" onClick={() => {
+                                window.location.href = `https://devnet.irys.xyz/${id}`;
+                            }}>xxxx</span>
+                        </p>
+
+                        Created by {sliceAddress(address)}
                     </CardDescription>
                 </div>
                 <div className='pt-[10px] text-left'>
@@ -94,36 +110,38 @@ export const CopyrightCard = ({
                 <p>{content}</p>
 
             </CardContent>
-            <CardFooter className='justify-center'>
-                {/* <TippingModal coverAcc={coverAcc} /> */}
-                <div>
-                    <div className='text-lg'>
-                        ${filePriceUSD}
+            <CardFooter className='justify-cente flex flex-col'>
+                <div className='flex flex-row justify-between border-t-2 py-3 px-4 w-full'>
+                    <div>
+                        <div className='text-lg'>
+                            {/* ${filePriceUSD} */}
+                            $1000
+                        </div>
+                        <div className='text-sm text-gray-400'>
+                            0.000002 ETH / Share
+                        </div>
                     </div>
-                    <div className='text-sm text-gray-400'>
-                        {filePriceETH} ETH / Share
+                    <div className='flex gap-x-2'>
+                        <TradeModalBuy chapterId={BigInt(0)} price={
+                            {
+                                eth: filePriceETH,
+                                usd: newPrice
+                            }
+                        } />
+                        <TradeModalSell chapterId={BigInt(0)} price={
+                            {
+                                eth: filePriceETH,
+                                usd: newPrice
+                            }
+                        } />
                     </div>
-                </div>
-                <div className='flex gap-x-2'>
-                    <TradeModalBuy chapterId={0} price={
-                        {
-                            eth: filePriceETH,
-                            usd: newPrice
-                        }
-                    } />
-                    <TradeModalSell chapterId={0} price={
-                        {
-                            eth: filePriceETH,
-                            usd: newPrice
-                        }
-                    } />
                 </div>
                 {userHoldings >= 1 ? (
-                    <AddNew nftAcc={coverAcc} />
+                    <p>ddd</p>
                 ) : (
                     <p className='text-red-500'>You need at least 1 share to create a new chapter</p>
                 )}
             </CardFooter>
-        </Card>
+        </Card >
     )
 }

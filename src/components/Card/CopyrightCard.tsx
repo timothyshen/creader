@@ -83,9 +83,10 @@ export const CopyrightCard = ({
             <CardFooter className='justify-center'>
                 {/* <TippingModal coverAcc={coverAcc} /> */}
                 {userHoldings >= 1 ? (
-                    <AddNew nftAcc={coverAcc} />
+                    <AddNew nftAcc={coverAcc} setIsMintedBodhi={setIsMintedBodhi} />
                 ) : (
                     <p className='text-red-500'>You need at least 1 share to create a new chapter</p>
+                
                 )}
             </CardFooter>
         </Card>
