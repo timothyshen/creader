@@ -4,7 +4,7 @@ import { CopyrightCardDegen } from '@/components/Card/CopyrightCardDegen';
 import { getAssetsById } from '@/lib/BookShareContract';
 import { useAccount } from 'wagmi';
 import { BodhiCardView } from '@/components/BodhiCardView';
-import { useRouter } from 'next/navigation';
+
 
 
 
@@ -20,13 +20,13 @@ const ViewCoverViewDegen = () => {
         const init = async () => {
             setLoading(true);
             try {
-                const book = await getAssetsById(BigInt(0));
+                // const book = await getAssetsById(BigInt(0));
                 const work = {
                     id: 0,
-                    owner: '0x',
+                    owner: '0xD74554760Adc11bB290E28BA7fc07C33923693ef',
                     description: 'test',
                     title: 'test',
-                    nftAccount: '0x'
+                    nftAccount: '0xD74554760Adc11bB290E28BA7fc07C33923693ef'
                 }
                 // console.log('work', work)
 
@@ -44,27 +44,22 @@ const ViewCoverViewDegen = () => {
         <>
             {loading ? (
                 <p className='text-xl text-center font-bold mx-auto mt-20'>Loading...</p> // Display loading state
-            ) : works.length === 0 ? (
-                <p className='text-xl w-full text-center font-bold mx-auto mt-20'>Book not found</p> // Show when no works found
             ) : (
                 // Notice the return statement here and the key prop
                 <>
                     <CopyrightCardDegen
                         key={works.id} // Assuming `work.id` is unique
                         id={Number(works.id)}
-                        address={(works.owner).slice(0, 6) + '...' + (works.owner).slice(-4)}
+                        address={works.owner}
                         owner={account.address == works.owner}
                         content={works.description}
                         title={works.title}
                         coverAcc={works.nftAccount}
                         setIsMintedBodhi={setIsMintedBodhi}
-                        aggregatePrice={prices}
                     />
-                    <BodhiCardView nftAccount={works.nftAccount as `0x${string}`} onPriceUpdate={handlePriceUpdate} isMintedBodhi={isMintedBodhi} />
+
                 </>
             )}
-
-            {loading && <p>Loading...</p>}
         </>
     );
 };
