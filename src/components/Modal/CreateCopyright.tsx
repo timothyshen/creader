@@ -32,6 +32,7 @@ import { toast } from "sonner"
 import { CopyrightNFTAddress } from "@/constant/contract";
 import { ConnectWalletClient } from '@/provider/config';
 import { useGlobalState } from '@/stores/useGlobalState';
+import { BaseSepoliaChainExplorer } from '@/constant/contract';
 
 
 
@@ -175,7 +176,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                         {isConfirmed && <div>Transaction confirmed.</div>}
                         {hash &&
                             <div>Transaction Hash:
-                                <a className=" underline font-bold" href={`https://base-sepolia.etherscan.io/${hash}`}>
+                                <a className=" underline font-bold" href={`${BaseSepoliaChainExplorer}/${hash}`}>
                                     Here
                                 </a>
                             </div>}
