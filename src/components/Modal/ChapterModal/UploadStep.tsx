@@ -19,7 +19,7 @@ import { SetStateAction, useState } from "react";
 import { BodhiAddress } from '@/constant/contract'
 import MarkdownEditor from "@/components/MarkdownEditor"
 import { ArrowBigLeft } from "lucide-react";
-import { sliceAddress } from "@/lib/supportFunction";
+import { sliceAddress } from "@/utils/supportFunction";
 
 
 export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setIsMintedBodhi }) => {

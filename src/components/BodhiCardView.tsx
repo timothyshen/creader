@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getAssetIdsByAddress } from '@/lib/BodhiContract'
+import { getAssetIdsByAddress } from '@/utils/BodhiContract'
 import { Asset } from '@/types/contentTypes'
 import { fetchAndDecodeAssets } from '@/contract/assetService'
 import { Divider } from '@/components/ui/Divider'

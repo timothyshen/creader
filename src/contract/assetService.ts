@@ -1,6 +1,6 @@
 import { Asset } from "@/types/contentTypes";
 import getWebIrys from "@/provider/irys";
-import { getAssetsById, getAssetsSupply } from "@/lib/BodhiContract";
+import { getAssetsById, getAssetsSupply } from "@/utils/BodhiContract";
 
 // assetService.ts
 // Assuming getAssetsById is already defined and returns a Promise<Asset>

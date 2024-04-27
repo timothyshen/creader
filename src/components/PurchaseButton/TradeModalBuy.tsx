@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button'
 import { BuyButton } from '@/components/PurchaseButton/BuyButton'
-import { getBuyPrice, getBuyPriceAfterFee } from '@/lib/BodhiContract'
+import { getBuyPrice, getBuyPriceAfterFee } from '@/utils/BodhiContract'
 
 type TradeModalProps = {
   chapterId: bigint;

@@ -1,25 +1,28 @@
 import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
 import { Connector, useAccountEffect, useConnect } from "wagmi";
-import { Chain, baseSepolia } from "viem/chains";
 import { useEffect } from "react";
-import { config } from "@/provider/config";
+import creaderConfig from "@/provider/app.config";
+import { getTargetNetwork } from "@/utils/network";
 
 const WAGMI_WALLET_STORAGE_KEY = "wagmi.wallet";
 const BODHI_CREADER_WALLET_STORAGE_KEY = "bodhi6551.wallet";
 
 const getInitialConnector = (
-  initialNetwork: Chain,
   previousWalletId: string,
   connectors: readonly Connector[]
 ) => {
   if (previousWalletId) {
-    const connector = connectors.find(
-      (connector) => connector.id === previousWalletId
-    );
-    return { connector, chainId: initialNetwork.id };
-  } else {
-    return { connector: connectors[0], chainId: initialNetwork.id };
+    const connector = connectors.find((c) => c.id === previousWalletId);
+    if (connector) {
+      return {
+        connector,
+        chainId: creaderConfig.walletAutoConnect
+          ? creaderConfig.targetNetwork.id
+          : getTargetNetwork().id,
+      };
+    }
   }
+  return null;
 };
 
 export const useAutoConnect = (): void => {
@@ -28,10 +31,7 @@ export const useAutoConnect = (): void => {
   );
   const [walletId, setWalletId] = useLocalStorage<string>(
     BODHI_CREADER_WALLET_STORAGE_KEY,
-    wagmiWalletValue ?? "",
-    {
-      initializeWithValue: false,
-    }
+    wagmiWalletValue ?? ""
   );
 
   const connectState = useConnect();
@@ -49,7 +49,6 @@ export const useAutoConnect = (): void => {
 
   useEffect(() => {
     const initialConnector = getInitialConnector(
-      baseSepolia,
       walletId,
       connectState.connectors
     );

@@ -1,5 +1,5 @@
 import { WebIrys } from "@irys/sdk";
-import { ConnectWalletClient } from "@/provider/config";
+import { ConnectWalletClient } from "@/provider/viemConfig";
 import { parseEther } from "viem";
 
 const getWebIrys = async () => {

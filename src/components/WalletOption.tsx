@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Connector, useConnect } from 'wagmi';
 import { Button } from './ui/button';
-import { useGlobalState } from '@/stores/useGlobalState';
-import { ConnectWalletClient } from '@/provider/config';
+import { ConnectWalletClient } from '@/provider/viemConfig';
+import { getTargetNetwork } from '@/utils/network';
 
 
 const WalletOptions = () => {
     const { connectors, connect } = useConnect();
-    const { currentChain, setCurrentChain } = useGlobalState();
+    const currentChain = getTargetNetwork();
     const walletClient = ConnectWalletClient();
 
     return (

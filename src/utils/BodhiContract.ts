@@ -1,4 +1,4 @@
-import { client } from "@/provider/config";
+import { client } from "@/provider/viemConfig";
 import { Bodhi__factory } from "@/contract-config/typechain";
 import { BodhiAddress } from "@/constant/contract";
 import { bigint } from "zod";
