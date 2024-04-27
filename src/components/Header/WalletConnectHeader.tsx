@@ -11,9 +11,11 @@ import {
 } from "@/components/ui/dialog"
 
 import { Button } from "@/components/ui/button"
+import { useAutoConnect } from "@/hooks/useAutoConnect"
 
 
 const WalletConnectComponentHeader = () => {
+    useAutoConnect()
     const { isConnected } = useAccount()
 
     return (

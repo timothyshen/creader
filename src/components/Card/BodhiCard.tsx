@@ -8,7 +8,7 @@ import {
     CardTitle
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { getBuyPrice } from '@/lib/BodhiContract';
+import { getBuyPrice } from '@/utils/BodhiContract';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
 import { TradeModalBuy } from '@/components/PurchaseButton/TradeModalBuy';
 import { TradeModalSell } from '@/components/PurchaseButton/TradeModalSell';

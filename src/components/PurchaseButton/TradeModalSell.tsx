@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button'
 import { SellButton } from '@/components/PurchaseButton/SellButton'
-import { getSellPrice, getSellPriceAfterFee, getBalanceOf } from '@/lib/BodhiContract'
+import { getSellPrice, getSellPriceAfterFee, getBalanceOf } from '@/utils/BodhiContract'
 import { useAccount } from 'wagmi'
 
 type TradeModalProps = {

@@ -30,8 +30,9 @@ import {
 } from "wagmi";
 import { toast } from "sonner"
 import { CopyrightNFTAddress } from "@/constant/contract";
-import { ConnectWalletClient } from '@/provider/config';
-import { useGlobalState } from '@/stores/useGlobalState';
+import { ConnectWalletClient } from '@/provider/viemConfig';
+import { BaseSepoliaChainExplorer } from '@/constant/contract';
+import { getTargetNetwork } from "@/utils/network"
 
 
 
@@ -66,7 +67,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
     const account = useAccount()
     const chainId = useChainId()
     const walletClient = ConnectWalletClient()
-    const { currentChain, setCurrentChain } = useGlobalState();
+    const currentChain = getTargetNetwork()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -87,7 +88,6 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
         }
 
         // address: '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9'
-        console.log(currentChain)
         if (currentChain.id !== chainId) walletClient.switchChain(currentChain);
 
         try {
@@ -175,7 +175,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                         {isConfirmed && <div>Transaction confirmed.</div>}
                         {hash &&
                             <div>Transaction Hash:
-                                <a className=" underline font-bold" href={`https://base-sepolia.etherscan.io/${hash}`}>
+                                <a className=" underline font-bold" href={`${BaseSepoliaChainExplorer}/${hash}`}>
                                     Here
                                 </a>
                             </div>}

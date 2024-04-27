@@ -3,8 +3,8 @@ import { Account } from "@/components/AccountDisplay";
 import WalletOptions from "@/components/WalletOption";
 import { useAccount } from "wagmi";
 import AuthorCoverView from '@/components/AuthorCoverView';
-import { useGlobalState } from "@/stores/useGlobalState";
-import { ConnectWalletClient } from "@/provider/config";
+import { ConnectWalletClient } from "@/provider/viemConfig";
+import { getTargetNetwork } from "@/utils/network";
 
 
 type WalletConnectComponentProps = {
@@ -14,7 +14,7 @@ type WalletConnectComponentProps = {
 
 const WalletConnectAuthorComponent = ({ addr }: WalletConnectComponentProps) => {
     const { isConnected } = useAccount()
-    const { currentChain } = useGlobalState();
+    const currentChain = getTargetNetwork();
 
     if (isConnected) {
         console.log('currentChain', currentChain);

@@ -1,10 +1,10 @@
 'use client'
 import { useAccount, useDisconnect, useBalance } from 'wagmi'
 import { Button } from '@/components/ui/button'
-import { sliceAddress } from '@/lib/supportFunction'
+import { sliceAddress } from '@/utils/supportFunction'
 import { CreateCopyright } from '@/components/Modal/CreateCopyright'
 import { useRouter } from 'next/navigation'
-import { NetworkState } from "./NetworkState";
+import { NetworkState } from '@/components/Header/NetworkState'
 
 export function AccountDisplayHeader() {
     const { address } = useAccount()
@@ -24,6 +24,7 @@ export function AccountDisplayHeader() {
             {/* <NetworkState /> */}
             {/* // eslint-disable-next-line @next/next/no-img-element */}
             <CreateCopyright />
+            <NetworkState />
             {address &&
                 <div className='w-max py-2 px-4 rounded-md bg-primary text-primary-foreground hover:cursor-pointer hover:bg-primary/90' onClick={handleClick}>
                     {sliceAddress(address)}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getCover } from '@/lib/CopyrightContract';
+import { getCover } from '@/utils/CopyrightContract';
 import { CopyrightCard } from './Card/CopyrightCard';
 import { useAccount } from 'wagmi';
 import { BodhiCardView } from '@/components/BodhiCardView';

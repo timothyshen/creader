@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react';
-import { getAllCopyright } from '@/lib/CopyrightContract';
+import { getAllCopyright } from '@/utils/CopyrightContract';
 import { CopyrightCard } from '@/components/Card/CopyrightCard';
 import { useAccount } from 'wagmi';
 import { Button } from '@/components/ui/button';

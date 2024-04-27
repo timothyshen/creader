@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { config } from "@/provider/config"
+import { config } from "@/provider/viemConfig"
 import { useGlobalState } from '@/stores/useGlobalState';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
 
