@@ -23,12 +23,12 @@
       },
       {
         "internalType": "address",
-        "name": "_erc6551Registry",
+        "name": "_registry",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "_ERC6551Account",
+        "name": "_resolverAddr",
         "type": "address"
       }
     ],
@@ -349,6 +349,68 @@
     "inputs": [
       {
         "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "coverId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "author",
+        "type": "address"
+      }
+    ],
+    "name": "RemixMint",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "author",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "coverId",
+        "type": "uint256"
+      }
+    ],
+    "name": "RemixMintCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
         "internalType": "address",
         "name": "from",
         "type": "address"
@@ -371,10 +433,23 @@
   },
   {
     "inputs": [],
-    "name": "ERC6551Account",
+    "name": "MIN_ROYALTY",
     "outputs": [
       {
-        "internalType": "address",
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "REGISTRY",
+    "outputs": [
+      {
+        "internalType": "contract IPAssetRegistry",
         "name": "",
         "type": "address"
       }
@@ -801,11 +876,35 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "registry",
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "licenseIds",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "remix",
     "outputs": [
       {
-        "internalType": "contract IERC6551Registry",
+        "internalType": "address",
+        "name": "ipId",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "resolver",
+    "outputs": [
+      {
+        "internalType": "contract IPResolver",
         "name": "",
         "type": "address"
       }

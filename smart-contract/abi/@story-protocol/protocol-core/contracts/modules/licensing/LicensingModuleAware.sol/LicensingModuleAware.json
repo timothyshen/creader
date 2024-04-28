@@ -1,0 +1,15 @@
+[
+  {
+    "inputs": [],
+    "name": "LICENSING_MODULE",
+    "outputs": [
+      {
+        "internalType": "contract ILicensingModule",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

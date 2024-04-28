@@ -8,12 +8,11 @@ import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
 import '@openzeppelin/contracts/utils/Strings.sol';
 import '@openzeppelin/contracts/utils/Base64.sol';
 
-import "@story-protocol/core/contracts/registries/IPAssetRegistry.sol";
-import "@story-protocol/core/contracts/resolvers/IPResolver.sol";
-import "@story-protocol/core/contracts/lib/IP.sol";
+import "@story-protocol/protocol-core/contracts/registries/IPAssetRegistry.sol";
+import "@story-protocol/protocol-core/contracts/resolvers/IPResolver.sol";
+import "@story-protocol/protocol-core/contracts/lib/IP.sol";
 
 
-import '../ERC6551/interfaces/IERC6551Registry.sol';
 import './interfaces/ICopyrightNFT.sol';
 import '../creaderToken/CreaderToken.sol';
 
@@ -29,8 +28,6 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
     uint256 private _tokenIds;
 
     CreaderToken public creaderToken;
-    IERC6551Registry public registry;
-    address public ERC6551Account;
 
     IPResolver public resolver;
     IPAssetRegistry public immutable REGISTRY;
@@ -64,11 +61,12 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
         string memory _name,
         string memory _symbol,
         address _creaderToken,
-       
+        address _registry,
+        address _resolverAddr
     ) ERC721(_name, _symbol) {  // Constructor function
         creaderToken = CreaderToken(_creaderToken);  // Initializing CreaderToken instance
-        REGISTRY = IPAssetRegistry(registry);
-        resolver = IPResolver(resolverAddr);
+        REGISTRY = IPAssetRegistry(_registry);
+        resolver = IPResolver(_resolverAddr);
         baseURI = baseURI_;  // Setting base URI
     }
 
@@ -96,14 +94,14 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
         bytes memory metadata = abi.encode(
             IP.MetadataV1({
                 name: "Creader Copyright Token",
-                hash:  bytes32(_title + _description),
+                hash:  bytes32("This is a book"),
                 registrationDate: uint64(block.timestamp),
                 registrant: msg.sender,
                 uri: "https://bodhi-6551.vercel.app/"
             })
         );
 
-        ipId = REGISTRY.register(
+        address ipId = REGISTRY.register(
             block.chainid,
             contractAddress,
             newCoverId,
@@ -136,22 +134,25 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
     function remix(
         uint256[] calldata licenseIds,
         uint256 tokenId
-    ) public returns (address) {
+    ) public returns (address ipId) {
         bytes memory metadata = abi.encode(
             IP.MetadataV1({
                 name: "Creader Copyright Token",
-                hash:  bytes32(_title + _description),
+                hash:  bytes32("This is a book"),
                 registrationDate: uint64(block.timestamp),
                 registrant: msg.sender,
                 uri: "https://bodhi-6551.vercel.app/"
             })
         );
 
+        address contractAddress = address(this);
+
+
         ipId = REGISTRY.register(
             licenseIds,
             ROYALTY_CONTEXT,
             block.chainid,
-            tokenContract,
+            contractAddress,
             tokenId,
             address(resolver),
             true,

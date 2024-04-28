@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
-import "@story-protocol/core/contracts/lib/PILFlavors.sol";
-import "@story-protocol/core/contracts/modules/licensing/PILPolicyFrameworkManager.sol";
-import "@story-protocol/core/contracts/modules/licensing/LicensingModule.sol";
+import "@story-protocol/protocol-core/contracts/lib/PILFlavors.sol";
+import "@story-protocol/protocol-core/contracts/modules/licensing/PILPolicyFrameworkManager.sol";
+import "@story-protocol/protocol-core/contracts/modules/licensing/LicensingModule.sol";
 
 contract IPAPolicyCreation {
     PILPolicyFrameworkManager public PIL_POLICY_MANAGER;
