@@ -30,6 +30,10 @@ const config: HardhatUserConfig = {
     hardhat: {
       chainId: 31337,
     },
+    ethSepolia: {
+      url: `https://sepolia.infura.io/v3/${ALCHEMY_KEY}`,
+      accounts: [PRIVATE_KEY],
+    },
     baseSepolia: {
       url: "https://base-sepolia.blockpi.network/v1/rpc/public",
       accounts: [PRIVATE_KEY],
