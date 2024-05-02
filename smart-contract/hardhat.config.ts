@@ -10,7 +10,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "";
-console.log("PRIVATE_KEY=", PRIVATE_KEY);
 const ALCHEMY_KEY = process.env.ALCHEMY_KEY || "";
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "";
 
