@@ -8,14 +8,12 @@ import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
 import '@openzeppelin/contracts/utils/Strings.sol';
 import '@openzeppelin/contracts/utils/Base64.sol';
 
+// Story Protocol imports
 import "@story-protocol/protocol-core/contracts/registries/IPAssetRegistry.sol";
-import "@story-protocol/protocol-core/contracts/resolvers/IPResolver.sol";
-import "@story-protocol/protocol-core/contracts/lib/IP.sol";
 
 
 import './interfaces/ICopyrightNFT.sol';
 import '../creaderToken/CreaderToken.sol';
-
 import './lib/NFTMetadata.sol';
 
 /**
@@ -29,13 +27,11 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
 
     CreaderToken public creaderToken;
 
-    IPResolver public resolver;
     IPAssetRegistry public immutable REGISTRY;
 
     uint256 public constant MIN_ROYALTY = 10;
     bytes ROYALTY_CONTEXT;
 
-    uint256 private _salt;
     // URId
     string internal baseURI;
 
@@ -62,11 +58,9 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
         string memory _symbol,
         address _creaderToken,
         address _registry,
-        address _resolverAddr
     ) ERC721(_name, _symbol) {  // Constructor function
         creaderToken = CreaderToken(_creaderToken);  // Initializing CreaderToken instance
         REGISTRY = IPAssetRegistry(_registry);
-        resolver = IPResolver(_resolverAddr);
         baseURI = baseURI_;  // Setting base URI
     }
 
@@ -126,39 +120,11 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
         coverToToken[newCoverId] = ipId;
 
         emit CoverCreation(_title, _description, msg.sender, _status, newCoverId);
-        _salt++;
 
         return ipId;
     }
 
-    function remix(
-        uint256[] calldata licenseIds,
-        uint256 tokenId
-    ) public returns (address ipId) {
-        bytes memory metadata = abi.encode(
-            IP.MetadataV1({
-                name: "Creader Copyright Token",
-                hash:  bytes32("This is a book"),
-                registrationDate: uint64(block.timestamp),
-                registrant: msg.sender,
-                uri: "https://bodhi-6551.vercel.app/"
-            })
-        );
-
-        address contractAddress = address(this);
-
-
-        ipId = REGISTRY.register(
-            licenseIds,
-            ROYALTY_CONTEXT,
-            block.chainid,
-            contractAddress,
-            tokenId,
-            address(resolver),
-            true,
-            metadata
-        );
-    }
+   
 
     // Function to update a cover
     function updateCover(

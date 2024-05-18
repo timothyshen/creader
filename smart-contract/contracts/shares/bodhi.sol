@@ -67,6 +67,10 @@ contract Bodhi is ERC1155 {
         return userAssets[addr];
     }
 
+    function checkIfUserHasShares(address user, uint256 assetId) public view returns (bool) {
+        return balanceOf[user][assetId] > 5;
+    }
+
     function _curve(uint256 x) private pure returns (uint256) {
         return x <= CREATOR_PREMINT ? 0 : ((x - CREATOR_PREMINT) * (x - CREATOR_PREMINT) * (x - CREATOR_PREMINT));
     }
