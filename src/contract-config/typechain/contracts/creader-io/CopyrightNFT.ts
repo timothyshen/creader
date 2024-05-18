@@ -59,7 +59,8 @@ export declare namespace ICopyrightNFT {
 
 export interface CopyrightNFTInterface extends utils.Interface {
   functions: {
-    "ERC6551Account()": FunctionFragment;
+    "MIN_ROYALTY()": FunctionFragment;
+    "REGISTRY()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "authorCovers(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -74,7 +75,6 @@ export interface CopyrightNFTInterface extends utils.Interface {
     "isApprovedForAll(address,address)": FunctionFragment;
     "name()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
-    "registry()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
@@ -88,8 +88,10 @@ export interface CopyrightNFTInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "ERC6551Account"
-      | "ERC6551Account()"
+      | "MIN_ROYALTY"
+      | "MIN_ROYALTY()"
+      | "REGISTRY"
+      | "REGISTRY()"
       | "approve"
       | "approve(address,uint256)"
       | "authorCovers"
@@ -118,8 +120,6 @@ export interface CopyrightNFTInterface extends utils.Interface {
       | "name()"
       | "ownerOf"
       | "ownerOf(uint256)"
-      | "registry"
-      | "registry()"
       | "safeTransferFrom(address,address,uint256)"
       | "safeTransferFrom(address,address,uint256,bytes)"
       | "setApprovalForAll"
@@ -139,11 +139,16 @@ export interface CopyrightNFTInterface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "ERC6551Account",
+    functionFragment: "MIN_ROYALTY",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "ERC6551Account()",
+    functionFragment: "MIN_ROYALTY()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "REGISTRY", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "REGISTRY()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -264,11 +269,6 @@ export interface CopyrightNFTInterface extends utils.Interface {
     functionFragment: "ownerOf(uint256)",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "registry", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "registry()",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "safeTransferFrom(address,address,uint256)",
     values: [
@@ -354,13 +354,15 @@ export interface CopyrightNFTInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "ERC6551Account",
+    functionFragment: "MIN_ROYALTY",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "ERC6551Account()",
+    functionFragment: "MIN_ROYALTY()",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "REGISTRY", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "REGISTRY()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "approve(address,uint256)",
@@ -452,8 +454,6 @@ export interface CopyrightNFTInterface extends utils.Interface {
     functionFragment: "ownerOf(uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "registry", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "registry()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "safeTransferFrom(address,address,uint256)",
     data: BytesLike
@@ -519,6 +519,8 @@ export interface CopyrightNFTInterface extends utils.Interface {
     "CoverMint(uint256,uint256,address)": EventFragment;
     "CoverUpdate(uint256,string,string,string)": EventFragment;
     "MetadataUpdate(uint256)": EventFragment;
+    "RemixMint(uint256,uint256,address)": EventFragment;
+    "RemixMintCreated(string,string,address,string,uint256)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
@@ -552,6 +554,14 @@ export interface CopyrightNFTInterface extends utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MetadataUpdate"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MetadataUpdate(uint256)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RemixMint"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "RemixMint(uint256,uint256,address)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RemixMintCreated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "RemixMintCreated(string,string,address,string,uint256)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "Transfer(address,address,uint256)"
@@ -657,6 +667,33 @@ export type MetadataUpdateEvent = TypedEvent<
 
 export type MetadataUpdateEventFilter = TypedEventFilter<MetadataUpdateEvent>;
 
+export interface RemixMintEventObject {
+  tokenId: BigNumber;
+  coverId: BigNumber;
+  author: string;
+}
+export type RemixMintEvent = TypedEvent<
+  [BigNumber, BigNumber, string],
+  RemixMintEventObject
+>;
+
+export type RemixMintEventFilter = TypedEventFilter<RemixMintEvent>;
+
+export interface RemixMintCreatedEventObject {
+  title: string;
+  description: string;
+  author: string;
+  status: string;
+  coverId: BigNumber;
+}
+export type RemixMintCreatedEvent = TypedEvent<
+  [string, string, string, string, BigNumber],
+  RemixMintCreatedEventObject
+>;
+
+export type RemixMintCreatedEventFilter =
+  TypedEventFilter<RemixMintCreatedEvent>;
+
 export interface TransferEventObject {
   from: string;
   to: string;
@@ -696,9 +733,13 @@ export interface CopyrightNFT extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    ERC6551Account(overrides?: CallOverrides): Promise<[string]>;
+    MIN_ROYALTY(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "ERC6551Account()"(overrides?: CallOverrides): Promise<[string]>;
+    "MIN_ROYALTY()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    REGISTRY(overrides?: CallOverrides): Promise<[string]>;
+
+    "REGISTRY()"(overrides?: CallOverrides): Promise<[string]>;
 
     approve(
       to: PromiseOrValue<string>,
@@ -860,10 +901,6 @@ export interface CopyrightNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    registry(overrides?: CallOverrides): Promise<[string]>;
-
-    "registry()"(overrides?: CallOverrides): Promise<[string]>;
-
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
@@ -954,9 +991,13 @@ export interface CopyrightNFT extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  ERC6551Account(overrides?: CallOverrides): Promise<string>;
+  MIN_ROYALTY(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "ERC6551Account()"(overrides?: CallOverrides): Promise<string>;
+  "MIN_ROYALTY()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  REGISTRY(overrides?: CallOverrides): Promise<string>;
+
+  "REGISTRY()"(overrides?: CallOverrides): Promise<string>;
 
   approve(
     to: PromiseOrValue<string>,
@@ -1118,10 +1159,6 @@ export interface CopyrightNFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  registry(overrides?: CallOverrides): Promise<string>;
-
-  "registry()"(overrides?: CallOverrides): Promise<string>;
-
   "safeTransferFrom(address,address,uint256)"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
@@ -1212,9 +1249,13 @@ export interface CopyrightNFT extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    ERC6551Account(overrides?: CallOverrides): Promise<string>;
+    MIN_ROYALTY(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "ERC6551Account()"(overrides?: CallOverrides): Promise<string>;
+    "MIN_ROYALTY()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    REGISTRY(overrides?: CallOverrides): Promise<string>;
+
+    "REGISTRY()"(overrides?: CallOverrides): Promise<string>;
 
     approve(
       to: PromiseOrValue<string>,
@@ -1375,10 +1416,6 @@ export interface CopyrightNFT extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    registry(overrides?: CallOverrides): Promise<string>;
-
-    "registry()"(overrides?: CallOverrides): Promise<string>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,
@@ -1557,6 +1594,32 @@ export interface CopyrightNFT extends BaseContract {
     "MetadataUpdate(uint256)"(_tokenId?: null): MetadataUpdateEventFilter;
     MetadataUpdate(_tokenId?: null): MetadataUpdateEventFilter;
 
+    "RemixMint(uint256,uint256,address)"(
+      tokenId?: PromiseOrValue<BigNumberish> | null,
+      coverId?: PromiseOrValue<BigNumberish> | null,
+      author?: PromiseOrValue<string> | null
+    ): RemixMintEventFilter;
+    RemixMint(
+      tokenId?: PromiseOrValue<BigNumberish> | null,
+      coverId?: PromiseOrValue<BigNumberish> | null,
+      author?: PromiseOrValue<string> | null
+    ): RemixMintEventFilter;
+
+    "RemixMintCreated(string,string,address,string,uint256)"(
+      title?: null,
+      description?: null,
+      author?: null,
+      status?: null,
+      coverId?: null
+    ): RemixMintCreatedEventFilter;
+    RemixMintCreated(
+      title?: null,
+      description?: null,
+      author?: null,
+      status?: null,
+      coverId?: null
+    ): RemixMintCreatedEventFilter;
+
     "Transfer(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
       to?: PromiseOrValue<string> | null,
@@ -1570,9 +1633,13 @@ export interface CopyrightNFT extends BaseContract {
   };
 
   estimateGas: {
-    ERC6551Account(overrides?: CallOverrides): Promise<BigNumber>;
+    MIN_ROYALTY(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "ERC6551Account()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "MIN_ROYALTY()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    REGISTRY(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "REGISTRY()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     approve(
       to: PromiseOrValue<string>,
@@ -1710,10 +1777,6 @@ export interface CopyrightNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    registry(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "registry()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
@@ -1805,11 +1868,13 @@ export interface CopyrightNFT extends BaseContract {
   };
 
   populateTransaction: {
-    ERC6551Account(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    MIN_ROYALTY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "ERC6551Account()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    "MIN_ROYALTY()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    REGISTRY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "REGISTRY()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     approve(
       to: PromiseOrValue<string>,
@@ -1948,10 +2013,6 @@ export interface CopyrightNFT extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    registry(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "registry()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,

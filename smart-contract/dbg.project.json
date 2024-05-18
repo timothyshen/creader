@@ -1,0 +1,13 @@
+{
+    "contractsDir": "contracts-dbg",
+    "selectedContract": "ERC6551Account",
+    "autoOpen": true,
+    "breakOnEntry": false,
+    "symbols": {
+        "hardhat": {
+            "projectPaths": [
+                "/Users/timothyshen/Documents/newcreader/apps/smart-contract"
+            ]
+        }
+    }
+}

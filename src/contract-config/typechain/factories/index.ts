@@ -2,5 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as openzeppelin from "./@openzeppelin";
+export * as storyProtocol from "./@story-protocol";
 export * as contracts from "./contracts";
+export * as erc6551 from "./erc6551";
 export * as solmate from "./solmate";
