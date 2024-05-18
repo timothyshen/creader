@@ -37,6 +37,7 @@ export interface BodhiInterface extends utils.Interface {
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
     "buy(uint256,uint256)": FunctionFragment;
+    "checkIfUserHasShares(address,uint256)": FunctionFragment;
     "create(string)": FunctionFragment;
     "getAssetIdsByAddress(address)": FunctionFragment;
     "getBuyPrice(uint256,uint256)": FunctionFragment;
@@ -74,6 +75,8 @@ export interface BodhiInterface extends utils.Interface {
       | "balanceOfBatch(address[],uint256[])"
       | "buy"
       | "buy(uint256,uint256)"
+      | "checkIfUserHasShares"
+      | "checkIfUserHasShares(address,uint256)"
       | "create"
       | "create(string)"
       | "getAssetIdsByAddress"
@@ -169,6 +172,14 @@ export interface BodhiInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "buy(uint256,uint256)",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "checkIfUserHasShares",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "checkIfUserHasShares(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "create",
@@ -389,6 +400,14 @@ export interface BodhiInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "buy", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "buy(uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "checkIfUserHasShares",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "checkIfUserHasShares(address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "create", data: BytesLike): Result;
@@ -739,6 +758,18 @@ export interface Bodhi extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    checkIfUserHasShares(
+      user: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    "checkIfUserHasShares(address,uint256)"(
+      user: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     create(
       arTxId: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1034,6 +1065,18 @@ export interface Bodhi extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  checkIfUserHasShares(
+    user: PromiseOrValue<string>,
+    assetId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  "checkIfUserHasShares(address,uint256)"(
+    user: PromiseOrValue<string>,
+    assetId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   create(
     arTxId: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1328,6 +1371,18 @@ export interface Bodhi extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    checkIfUserHasShares(
+      user: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "checkIfUserHasShares(address,uint256)"(
+      user: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     create(
       arTxId: PromiseOrValue<string>,
@@ -1699,6 +1754,18 @@ export interface Bodhi extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    checkIfUserHasShares(
+      user: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "checkIfUserHasShares(address,uint256)"(
+      user: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     create(
       arTxId: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1987,6 +2054,18 @@ export interface Bodhi extends BaseContract {
       assetId: PromiseOrValue<BigNumberish>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    checkIfUserHasShares(
+      user: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "checkIfUserHasShares(address,uint256)"(
+      user: PromiseOrValue<string>,
+      assetId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     create(
