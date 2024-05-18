@@ -171,15 +171,25 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                         </form>
                     </Form>
 
-                    <div>
-                        {isConfirmed && <div>Transaction confirmed.</div>}
-                        {hash &&
-                            <div>Transaction Hash:
-                                <a className=" underline font-bold" href={`${BaseSepoliaChainExplorer}/${hash}`}>
-                                    Here
-                                </a>
-                            </div>}
-                    </div>
+                    {isConfirmed && (
+                        <div className="mt-4 p-4 bg-green-100 border border-green-400 rounded-md">
+                            <p className="text-green-800 font-semibold">Transaction confirmed!</p>
+                        </div>
+                    )}
+
+                    {hash && (
+                        <div className="mt-2 p-4 bg-gray-100 border border-gray-300 rounded-md">
+                            <p className="font-semibold">Transaction Hash:</p>
+                            <a
+                                className="text-blue-600 underline"
+                                href={`${BaseSepoliaChainExplorer}/${hash}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {hash}
+                            </a>
+                        </div>
+                    )}
                 </DialogContent>
             </Dialog >
         </>

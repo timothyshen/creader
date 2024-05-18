@@ -11,6 +11,8 @@ export const CopyrightNFTAddress = CopyrightNFT.address;
 export const CopyrightNFTAbi = CopyrightNFT.abi;
 export const CreaderTokenAddress = CreaderToken.address;
 export const CreaderTokenAbi = CreaderToken.abi;
+export const IPALicenseTokenAddress = "0x0";
+export const IPALicenseTokenAbi = "0x0";
 
 export const BaseSepoliaChainExplorer = "https://sepolia.basescan.org";
 export const BaseSepoliaChainId = 84532;

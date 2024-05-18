@@ -39,7 +39,6 @@ contract IPALicenseToken {
         uint256 assetId,
         address ipId,
         uint8 licenseTermsId,
-        uint256 ltAmount,
         address ltRecipient
     )
         external
@@ -58,9 +57,20 @@ contract IPALicenseToken {
             licensorIpId: ipId,
             licenseTemplate: address(PIL_TEMPLATE),
             licenseTermsId: licenseTermsId,
-            amount: ltAmount,
+            amount: 1,
             receiver: ltRecipient,
             royaltyContext: "" // for PIL, royaltyContext is empty string
         });
+
+        //TODO: need to double check on the license token id
+        uint256[] memory carl_license_from_root_alice = new uint256[](
+            licenseTermsId
+        );
+
+        LICENSING_MODULE.registerDerivativeWithLicenseTokens(
+            ipId,
+            carl_license_from_root_alice,
+            "" // for PIL, royaltyContext is empty string
+        );
     }
 }
