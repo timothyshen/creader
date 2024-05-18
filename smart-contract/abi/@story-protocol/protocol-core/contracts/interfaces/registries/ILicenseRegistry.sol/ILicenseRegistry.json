@@ -5,23 +5,17 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "account",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "operator",
+        "name": "ipId",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "bool",
-        "name": "approved",
-        "type": "bool"
+        "internalType": "uint256",
+        "name": "expireTime",
+        "type": "uint256"
       }
     ],
-    "name": "ApprovalForAll",
+    "name": "ExpirationTimeSet",
     "type": "event"
   },
   {
@@ -30,52 +24,57 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "creator",
+        "name": "licenseTemplate",
         "type": "address"
-      },
+      }
+    ],
+    "name": "LicenseTemplateRegistered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
       {
         "indexed": true,
         "internalType": "address",
-        "name": "receiver",
+        "name": "ipId",
         "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "licenseId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
       },
       {
         "components": [
           {
+            "internalType": "bool",
+            "name": "isSet",
+            "type": "bool"
+          },
+          {
             "internalType": "uint256",
-            "name": "policyId",
+            "name": "mintingFee",
             "type": "uint256"
           },
           {
             "internalType": "address",
-            "name": "licensorIpId",
+            "name": "mintingFeeModule",
             "type": "address"
           },
           {
-            "internalType": "bool",
-            "name": "transferable",
-            "type": "bool"
+            "internalType": "address",
+            "name": "receiverCheckModule",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "receiverCheckData",
+            "type": "bytes"
           }
         ],
         "indexed": false,
-        "internalType": "struct Licensing.License",
-        "name": "licenseData",
+        "internalType": "struct Licensing.MintingLicenseConfig",
+        "name": "mintingLicenseConfig",
         "type": "tuple"
       }
     ],
-    "name": "LicenseMinted",
+    "name": "MintingLicenseConfigSetForIP",
     "type": "event"
   },
   {
@@ -84,113 +83,156 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "operator",
+        "name": "ipId",
         "type": "address"
       },
       {
         "indexed": true,
         "internalType": "address",
-        "name": "from",
+        "name": "licenseTemplate",
         "type": "address"
       },
       {
         "indexed": true,
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256[]",
-        "name": "ids",
-        "type": "uint256[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256[]",
-        "name": "values",
-        "type": "uint256[]"
+        "internalType": "uint256",
+        "name": "licenseTermsId",
+        "type": "uint256"
       }
     ],
-    "name": "TransferBatch",
+    "name": "MintingLicenseConfigSetLicense",
     "type": "event"
   },
   {
-    "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
         "internalType": "address",
-        "name": "operator",
+        "name": "ipId",
         "type": "address"
       },
       {
-        "indexed": true,
         "internalType": "address",
-        "name": "from",
+        "name": "licenseTemplate",
         "type": "address"
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "indexed": false,
         "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "value",
+        "name": "licenseTermsId",
         "type": "uint256"
       }
     ],
-    "name": "TransferSingle",
-    "type": "event"
+    "name": "attachLicenseTermsToIp",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "string",
-        "name": "value",
-        "type": "string"
+        "internalType": "address",
+        "name": "licenseTemplate",
+        "type": "address"
       },
       {
-        "indexed": true,
         "internalType": "uint256",
-        "name": "id",
+        "name": "licenseTermsId",
         "type": "uint256"
       }
     ],
-    "name": "URI",
-    "type": "event"
+    "name": "exists",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "ipId",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      }
+    ],
+    "name": "getAttachedLicenseTerms",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "licenseTemplate",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "licenseTermsId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "ipId",
+        "type": "address"
+      }
+    ],
+    "name": "getAttachedLicenseTermsCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [],
-    "name": "DISPUTE_MODULE",
+    "name": "getDefaultLicenseTerms",
     "outputs": [
       {
-        "internalType": "contract IDisputeModule",
-        "name": "",
+        "internalType": "address",
+        "name": "licenseTemplate",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "licenseTermsId",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "LICENSING_MODULE",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "parentIpId",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      }
+    ],
+    "name": "getDerivativeIp",
     "outputs": [
       {
-        "internalType": "contract ILicensingModule",
-        "name": "",
+        "internalType": "address",
+        "name": "childIpId",
         "type": "address"
       }
     ],
@@ -201,16 +243,11 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "account",
+        "name": "parentIpId",
         "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
       }
     ],
-    "name": "balanceOf",
+    "name": "getDerivativeIpCount",
     "outputs": [
       {
         "internalType": "uint256",
@@ -223,42 +260,275 @@
   },
   {
     "inputs": [
+      {
+        "internalType": "address",
+        "name": "ipId",
+        "type": "address"
+      }
+    ],
+    "name": "getExpireTime",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "ipId",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "licenseTemplate",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "licenseTermsId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getMintingLicenseConfig",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "isSet",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mintingFee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "mintingFeeModule",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "receiverCheckModule",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "receiverCheckData",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct Licensing.MintingLicenseConfig",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "childIpId",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      }
+    ],
+    "name": "getParentIp",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "parentIpId",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "childIpId",
+        "type": "address"
+      }
+    ],
+    "name": "getParentIpCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "ipId",
+        "type": "address"
+      }
+    ],
+    "name": "hasDerivativeIps",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "ipId",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "licenseTemplate",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "licenseTermsId",
+        "type": "uint256"
+      }
+    ],
+    "name": "hasIpAttachedLicenseTerms",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "ipId",
+        "type": "address"
+      }
+    ],
+    "name": "isDerivativeIp",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "ipId",
+        "type": "address"
+      }
+    ],
+    "name": "isExpiredNow",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "parentIpId",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "childIpId",
+        "type": "address"
+      }
+    ],
+    "name": "isParentIp",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "licenseTemplate",
+        "type": "address"
+      }
+    ],
+    "name": "isRegisteredLicenseTemplate",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "ipId",
+        "type": "address"
+      },
       {
         "internalType": "address[]",
-        "name": "accounts",
+        "name": "parentIpIds",
         "type": "address[]"
       },
       {
-        "internalType": "uint256[]",
-        "name": "ids",
-        "type": "uint256[]"
-      }
-    ],
-    "name": "balanceOfBatch",
-    "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "",
-        "type": "uint256[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "address",
-        "name": "holder",
+        "name": "licenseTemplate",
         "type": "address"
       },
       {
         "internalType": "uint256[]",
-        "name": "licenseIds",
+        "name": "licenseTermsIds",
         "type": "uint256[]"
       }
     ],
-    "name": "burnLicenses",
+    "name": "registerDerivativeIp",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -267,224 +537,92 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "account",
+        "name": "licenseTemplate",
+        "type": "address"
+      }
+    ],
+    "name": "registerLicenseTemplate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newLicenseTemplate",
         "type": "address"
       },
       {
+        "internalType": "uint256",
+        "name": "newLicenseTermsId",
+        "type": "uint256"
+      }
+    ],
+    "name": "setDefaultLicenseTerms",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
-        "name": "operator",
+        "name": "ipId",
         "type": "address"
-      }
-    ],
-    "name": "isApprovedForAll",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "licenseId",
-        "type": "uint256"
-      }
-    ],
-    "name": "isLicenseRevoked",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "licenseId",
-        "type": "uint256"
       },
       {
-        "internalType": "address",
-        "name": "holder",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "expireTime",
+        "type": "uint256"
       }
     ],
-    "name": "isLicensee",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
+    "name": "setExpireTime",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "licenseId",
-        "type": "uint256"
-      }
-    ],
-    "name": "license",
-    "outputs": [
+        "internalType": "address",
+        "name": "ipId",
+        "type": "address"
+      },
       {
         "components": [
           {
+            "internalType": "bool",
+            "name": "isSet",
+            "type": "bool"
+          },
+          {
             "internalType": "uint256",
-            "name": "policyId",
+            "name": "mintingFee",
             "type": "uint256"
           },
           {
             "internalType": "address",
-            "name": "licensorIpId",
+            "name": "mintingFeeModule",
             "type": "address"
           },
           {
-            "internalType": "bool",
-            "name": "transferable",
-            "type": "bool"
+            "internalType": "address",
+            "name": "receiverCheckModule",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "receiverCheckData",
+            "type": "bytes"
           }
         ],
-        "internalType": "struct Licensing.License",
-        "name": "",
+        "internalType": "struct Licensing.MintingLicenseConfig",
+        "name": "mintingLicenseConfig",
         "type": "tuple"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "licenseId",
-        "type": "uint256"
-      }
-    ],
-    "name": "licensorIpId",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "policyId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "licensorIpId_",
-        "type": "address"
-      },
-      {
-        "internalType": "bool",
-        "name": "transferable",
-        "type": "bool"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "receiver",
-        "type": "address"
-      }
-    ],
-    "name": "mintLicense",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "licenseId",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "mintedLicenses",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "licenseId",
-        "type": "uint256"
-      }
-    ],
-    "name": "policyIdForLicense",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "ids",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "values",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
-      }
-    ],
-    "name": "safeBatchTransferFrom",
+    "name": "setMintingLicenseConfigForIp",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -493,31 +631,53 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "from",
+        "name": "ipId",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "to",
+        "name": "licenseTemplate",
         "type": "address"
       },
       {
         "internalType": "uint256",
-        "name": "id",
+        "name": "licenseTermsId",
         "type": "uint256"
       },
       {
-        "internalType": "uint256",
-        "name": "value",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "isSet",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mintingFee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "mintingFeeModule",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "receiverCheckModule",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "receiverCheckData",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct Licensing.MintingLicenseConfig",
+        "name": "mintingLicenseConfig",
+        "type": "tuple"
       }
     ],
-    "name": "safeTransferFrom",
+    "name": "setMintingLicenseConfigForLicense",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -526,34 +686,58 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "operator",
+        "name": "licensorIpId",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "licenseTemplate",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "licenseTermsId",
+        "type": "uint256"
       },
       {
         "internalType": "bool",
-        "name": "approved",
+        "name": "isMintedByIpOwner",
         "type": "bool"
       }
     ],
-    "name": "setApprovalForAll",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes4",
-        "name": "interfaceId",
-        "type": "bytes4"
-      }
-    ],
-    "name": "supportsInterface",
+    "name": "verifyMintLicenseToken",
     "outputs": [
       {
-        "internalType": "bool",
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "isSet",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mintingFee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "mintingFeeModule",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "receiverCheckModule",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "receiverCheckData",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct Licensing.MintingLicenseConfig",
         "name": "",
-        "type": "bool"
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",

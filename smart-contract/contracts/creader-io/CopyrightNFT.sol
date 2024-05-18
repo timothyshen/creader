@@ -2,26 +2,24 @@
 
 pragma solidity ^0.8.0;
 
-import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
-import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
-import '@openzeppelin/contracts/utils/Strings.sol';
-import '@openzeppelin/contracts/utils/Base64.sol';
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/utils/Base64.sol";
 
 // Story Protocol imports
 import "@story-protocol/protocol-core/contracts/registries/IPAssetRegistry.sol";
 
-
-import './interfaces/ICopyrightNFT.sol';
-import '../creaderToken/CreaderToken.sol';
-import './lib/NFTMetadata.sol';
+import "./interfaces/ICopyrightNFT.sol";
+import "../creaderToken/CreaderToken.sol";
+import "./lib/NFTMetadata.sol";
 
 /**
  * @title Copyright NFT
  * @dev Create a Copyright NFT token
  */
 contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
-
     using NFTMetadata for uint256;
     uint256 private _tokenIds;
 
@@ -44,28 +42,49 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
 
     mapping(address => uint256[]) public authorCovers;
 
-    event CoverMint(uint256 indexed CoverId, uint256 indexed tokenId, address indexed author);
+    event CoverMint(
+        uint256 indexed CoverId,
+        uint256 indexed tokenId,
+        address indexed author
+    );
 
-    event CoverAccountCreated(address indexed account, address indexed to, uint256 indexed tokenId, string title);
+    event CoverAccountCreated(
+        address indexed account,
+        address indexed to,
+        uint256 indexed tokenId,
+        string title
+    );
 
-    event RemixMint(uint256 indexed tokenId, uint256 indexed coverId, address indexed author);
+    event RemixMint(
+        uint256 indexed tokenId,
+        uint256 indexed coverId,
+        address indexed author
+    );
 
-    event RemixMintCreated(string title, string description, address author, string status, uint256 coverId);
+    event RemixMintCreated(
+        string title,
+        string description,
+        address author,
+        string status,
+        uint256 coverId
+    );
 
     constructor(
         string memory baseURI_,
         string memory _name,
         string memory _symbol,
         address _creaderToken,
-        address _registry,
-    ) ERC721(_name, _symbol) {  // Constructor function
-        creaderToken = CreaderToken(_creaderToken);  // Initializing CreaderToken instance
+        address _registry
+    ) ERC721(_name, _symbol) {
+        // Constructor function
+        creaderToken = CreaderToken(_creaderToken); // Initializing CreaderToken instance
         REGISTRY = IPAssetRegistry(_registry);
-        baseURI = baseURI_;  // Setting base URI
+        baseURI = baseURI_; // Setting base URI
     }
 
-    modifier onlyOwner(uint256 _id) {  // Modifier to check if caller is the owner of the cover
-        require(covers[_id].owner == msg.sender, 'Caller is not the owner');
+    modifier onlyOwner(uint256 _id) {
+        // Modifier to check if caller is the owner of the cover
+        require(covers[_id].owner == msg.sender, "Caller is not the owner");
         _;
     }
 
@@ -85,25 +104,21 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
         _setTokenURI(newCoverId, NFTMetadata.getTokenURI(newCoverId));
         ++_tokenIds;
 
-        bytes memory metadata = abi.encode(
-            IP.MetadataV1({
-                name: "Creader Copyright Token",
-                hash:  bytes32("This is a book"),
-                registrationDate: uint64(block.timestamp),
-                registrant: msg.sender,
-                uri: "https://bodhi-6551.vercel.app/"
-            })
-        );
+        // bytes memory metadata = abi.encode(
+        //     IP.MetadataV1({
+        //         name: "Creader Copyright Token",
+        //         hash: bytes32("This is a book"),
+        //         registrationDate: uint64(block.timestamp),
+        //         registrant: msg.sender,
+        //         uri: "https://bodhi-6551.vercel.app/"
+        //     })
+        // );
 
         address ipId = REGISTRY.register(
             block.chainid,
             contractAddress,
-            newCoverId,
-            address(resolver),
-            true,
-            metadata
+            newCoverId
         );
-
 
         emit CoverAccountCreated(ipId, to, newCoverId, _title);
 
@@ -119,12 +134,16 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
 
         coverToToken[newCoverId] = ipId;
 
-        emit CoverCreation(_title, _description, msg.sender, _status, newCoverId);
+        emit CoverCreation(
+            _title,
+            _description,
+            msg.sender,
+            _status,
+            newCoverId
+        );
 
         return ipId;
     }
-
-   
 
     // Function to update a cover
     function updateCover(
@@ -136,7 +155,7 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
         Cover memory cover = covers[_id];
         cover.title = _title;
         cover.description = _description;
-        emit CoverUpdate(_id, _title, _description, 'active');
+        emit CoverUpdate(_id, _title, _description, "active");
         return _id;
     }
 
@@ -159,7 +178,9 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
     }
 
     // Function to get a cover by author address
-    function getAuthorCover(address _author) external view returns (Cover[] memory) {
+    function getAuthorCover(
+        address _author
+    ) external view returns (Cover[] memory) {
         uint256[] memory authorCoverIds = authorCovers[_author];
         Cover[] memory result = new Cover[](authorCoverIds.length);
 

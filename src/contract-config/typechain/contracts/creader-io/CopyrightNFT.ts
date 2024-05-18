@@ -75,8 +75,6 @@ export interface CopyrightNFTInterface extends utils.Interface {
     "isApprovedForAll(address,address)": FunctionFragment;
     "name()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
-    "remix(uint256[],uint256)": FunctionFragment;
-    "resolver()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
@@ -122,10 +120,6 @@ export interface CopyrightNFTInterface extends utils.Interface {
       | "name()"
       | "ownerOf"
       | "ownerOf(uint256)"
-      | "remix"
-      | "remix(uint256[],uint256)"
-      | "resolver"
-      | "resolver()"
       | "safeTransferFrom(address,address,uint256)"
       | "safeTransferFrom(address,address,uint256,bytes)"
       | "setApprovalForAll"
@@ -274,19 +268,6 @@ export interface CopyrightNFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "ownerOf(uint256)",
     values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "remix",
-    values: [PromiseOrValue<BigNumberish>[], PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "remix(uint256[],uint256)",
-    values: [PromiseOrValue<BigNumberish>[], PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(functionFragment: "resolver", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "resolver()",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "safeTransferFrom(address,address,uint256)",
@@ -473,13 +454,6 @@ export interface CopyrightNFTInterface extends utils.Interface {
     functionFragment: "ownerOf(uint256)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "remix", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "remix(uint256[],uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "resolver", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "resolver()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "safeTransferFrom(address,address,uint256)",
     data: BytesLike
@@ -927,22 +901,6 @@ export interface CopyrightNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    remix(
-      licenseIds: PromiseOrValue<BigNumberish>[],
-      tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    "remix(uint256[],uint256)"(
-      licenseIds: PromiseOrValue<BigNumberish>[],
-      tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    resolver(overrides?: CallOverrides): Promise<[string]>;
-
-    "resolver()"(overrides?: CallOverrides): Promise<[string]>;
-
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
@@ -1201,22 +1159,6 @@ export interface CopyrightNFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  remix(
-    licenseIds: PromiseOrValue<BigNumberish>[],
-    tokenId: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  "remix(uint256[],uint256)"(
-    licenseIds: PromiseOrValue<BigNumberish>[],
-    tokenId: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  resolver(overrides?: CallOverrides): Promise<string>;
-
-  "resolver()"(overrides?: CallOverrides): Promise<string>;
-
   "safeTransferFrom(address,address,uint256)"(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
@@ -1474,22 +1416,6 @@ export interface CopyrightNFT extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    remix(
-      licenseIds: PromiseOrValue<BigNumberish>[],
-      tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "remix(uint256[],uint256)"(
-      licenseIds: PromiseOrValue<BigNumberish>[],
-      tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    resolver(overrides?: CallOverrides): Promise<string>;
-
-    "resolver()"(overrides?: CallOverrides): Promise<string>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,
@@ -1851,22 +1777,6 @@ export interface CopyrightNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    remix(
-      licenseIds: PromiseOrValue<BigNumberish>[],
-      tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    "remix(uint256[],uint256)"(
-      licenseIds: PromiseOrValue<BigNumberish>[],
-      tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    resolver(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "resolver()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
@@ -2103,22 +2013,6 @@ export interface CopyrightNFT extends BaseContract {
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    remix(
-      licenseIds: PromiseOrValue<BigNumberish>[],
-      tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "remix(uint256[],uint256)"(
-      licenseIds: PromiseOrValue<BigNumberish>[],
-      tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    resolver(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "resolver()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,

@@ -80,6 +80,37 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "address",
+        "name": "parentIpId",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "derivativeIpId",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "parentDisputeId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "tag",
+        "type": "bytes32"
+      }
+    ],
+    "name": "DerivativeTaggedOnParentInfringement",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "uint256",
         "name": "disputeId",
         "type": "uint256"
@@ -315,6 +346,11 @@
         "internalType": "bytes32",
         "name": "currentTag",
         "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "parentDisputeId",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -441,6 +477,11 @@
         "internalType": "uint256",
         "name": "disputeId",
         "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
       }
     ],
     "name": "resolveDispute",
@@ -498,6 +539,29 @@
       }
     ],
     "name": "setDisputeJudgement",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "parentIpId",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "derivativeIpId",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "parentDisputeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "tagDerivativeIfParentInfringed",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

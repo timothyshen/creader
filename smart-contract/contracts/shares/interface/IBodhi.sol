@@ -6,7 +6,6 @@ pragma solidity ^0.8.0;
  * @dev Interface for the Bodhi contract.
  */
 interface IBodhi {
-
     /**
      * @notice Creates a new asset.
      * @param arTxId The Arweave transaction ID associated with the asset.
@@ -24,7 +23,9 @@ interface IBodhi {
      * @param addr The address to query for asset IDs.
      * @return An array of asset IDs associated with the address.
      */
-    function getAssetIdsByAddress(address addr) external view returns (uint256[] memory);
+    function getAssetIdsByAddress(
+        address addr
+    ) external view returns (uint256[] memory);
 
     /**
      * @notice Gets the price for buying a certain amount of an asset.
@@ -32,7 +33,10 @@ interface IBodhi {
      * @param amount The amount of the asset to buy.
      * @return The price for buying the specified amount of the asset.
      */
-    function getBuyPrice(uint256 assetId, uint256 amount) external view returns (uint256);
+    function getBuyPrice(
+        uint256 assetId,
+        uint256 amount
+    ) external view returns (uint256);
 
     /**
      * @notice Gets the price for selling a certain amount of an asset.
@@ -40,7 +44,10 @@ interface IBodhi {
      * @param amount The amount of the asset to sell.
      * @return The price for selling the specified amount of the asset.
      */
-    function getSellPrice(uint256 assetId, uint256 amount) external view returns (uint256);
+    function getSellPrice(
+        uint256 assetId,
+        uint256 amount
+    ) external view returns (uint256);
 
     /**
      * @notice Gets the buy price after adding the creator fee.
@@ -48,7 +55,10 @@ interface IBodhi {
      * @param amount The amount of the asset to buy.
      * @return The price for buying the specified amount of the asset after adding the creator fee.
      */
-    function getBuyPriceAfterFee(uint256 assetId, uint256 amount) external view returns (uint256);
+    function getBuyPriceAfterFee(
+        uint256 assetId,
+        uint256 amount
+    ) external view returns (uint256);
 
     /**
      * @notice Gets the sell price after subtracting the creator fee.
@@ -56,7 +66,10 @@ interface IBodhi {
      * @param amount The amount of the asset to sell.
      * @return The price for selling the specified amount of the asset after subtracting the creator fee.
      */
-    function getSellPriceAfterFee(uint256 assetId, uint256 amount) external view returns (uint256);
+    function getSellPriceAfterFee(
+        uint256 assetId,
+        uint256 amount
+    ) external view returns (uint256);
 
     /**
      * @notice Buys a certain amount of an asset.
@@ -85,14 +98,22 @@ interface IBodhi {
      * @param assetId The ID of the asset.
      * @return True if the user has shares in the asset, false otherwise.
      */
-    function hasShares(address user, uint256 assetId) external view returns (bool);
+    function hasShares(
+        address user,
+        uint256 assetId
+    ) external view returns (bool);
 
-
-    function checkIfUserHasShares(address user, uint256 assetId) public view returns (bool);
-
+    function checkIfUserHasShares(
+        address user,
+        uint256 assetId
+    ) external view returns (bool);
 
     /// @dev Event emitted when an asset is created.
-    event Create(uint256 indexed assetId, address indexed sender, string arTxId);
+    event Create(
+        uint256 indexed assetId,
+        address indexed sender,
+        string arTxId
+    );
 
     /// @dev Event emitted when an asset is removed.
     event Remove(uint256 indexed assetId, address indexed sender);

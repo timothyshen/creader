@@ -27,7 +27,7 @@ contract IPALicenseToken {
         BODHI = IBodhi(bodhi);
     }
 
-    modeifier onlyAssetMoreThanFive(address user, uint256 assetId) {
+    modifier onlyAssetMoreThanFive(address user, uint256 assetId) {
         require(
             BODHI.checkIfUserHasShares(user, assetId),
             "Asset must have more than 5 tokens"
@@ -44,7 +44,7 @@ contract IPALicenseToken {
     )
         external
         onlyAssetMoreThanFive(msg.sender, assetId)
-        returns (address ipId, uint256 tokenId, uint256 startLicenseTokenId)
+        returns (uint256 tokenId, uint256 startLicenseTokenId)
     {
         LICENSING_MODULE.attachLicenseTerms(
             ipId,

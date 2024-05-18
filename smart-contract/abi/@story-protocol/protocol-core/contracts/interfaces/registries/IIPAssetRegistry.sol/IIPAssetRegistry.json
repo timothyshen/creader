@@ -5,31 +5,6 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "operator",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "bool",
-        "name": "approved",
-        "type": "bool"
-      }
-    ],
-    "name": "ApprovalForAll",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
         "name": "account",
         "type": "address"
       },
@@ -90,68 +65,24 @@
       },
       {
         "indexed": false,
-        "internalType": "address",
-        "name": "resolver",
-        "type": "address"
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
       },
       {
         "indexed": false,
-        "internalType": "address",
-        "name": "provider",
-        "type": "address"
+        "internalType": "string",
+        "name": "uri",
+        "type": "string"
       },
       {
         "indexed": false,
-        "internalType": "bytes",
-        "name": "metadata",
-        "type": "bytes"
+        "internalType": "uint256",
+        "name": "registrationDate",
+        "type": "uint256"
       }
     ],
     "name": "IPRegistered",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "ipId",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "resolver",
-        "type": "address"
-      }
-    ],
-    "name": "IPResolverSet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "ipId",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "metadataProvider",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "metadata",
-        "type": "bytes"
-      }
-    ],
-    "name": "MetadataSet",
     "type": "event"
   },
   {
@@ -188,32 +119,6 @@
         "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "MODULE_REGISTRY",
-    "outputs": [
-      {
-        "internalType": "contract IModuleRegistry",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "REGISTRATION_MODULE",
-    "outputs": [
-      {
-        "internalType": "contract IRegistrationModule",
-        "name": "",
-        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -294,30 +199,6 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "operator",
-        "type": "address"
-      }
-    ],
-    "name": "isApprovedForAll",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
         "name": "id",
         "type": "address"
       }
@@ -336,59 +217,8 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "id",
-        "type": "address"
-      }
-    ],
-    "name": "metadata",
-    "outputs": [
-      {
-        "internalType": "bytes",
-        "name": "",
-        "type": "bytes"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "id",
-        "type": "address"
-      }
-    ],
-    "name": "metadataProvider",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "metadataProvider",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "uint256",
-        "name": "chainId",
+        "name": "chainid",
         "type": "uint256"
       },
       {
@@ -400,82 +230,13 @@
         "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "resolverAddr",
-        "type": "address"
-      },
-      {
-        "internalType": "bool",
-        "name": "createAccount",
-        "type": "bool"
-      },
-      {
-        "internalType": "bytes",
-        "name": "metadata_",
-        "type": "bytes"
       }
     ],
     "name": "register",
     "outputs": [
       {
         "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "licenseIds",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "bytes",
-        "name": "royaltyContext",
-        "type": "bytes"
-      },
-      {
-        "internalType": "uint256",
-        "name": "chainId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "tokenContract",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "resolverAddr",
-        "type": "address"
-      },
-      {
-        "internalType": "bool",
-        "name": "createAccount",
-        "type": "bool"
-      },
-      {
-        "internalType": "bytes",
-        "name": "metadata_",
-        "type": "bytes"
-      }
-    ],
-    "name": "register",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
+        "name": "id",
         "type": "address"
       }
     ],
@@ -508,84 +269,6 @@
         "type": "address"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "id",
-        "type": "address"
-      }
-    ],
-    "name": "resolver",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "operator",
-        "type": "address"
-      },
-      {
-        "internalType": "bool",
-        "name": "approved",
-        "type": "bool"
-      }
-    ],
-    "name": "setApprovalForAll",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "id",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "metadataProvider",
-        "type": "address"
-      },
-      {
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
-      }
-    ],
-    "name": "setMetadata",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "id",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "resolverAddr",
-        "type": "address"
-      }
-    ],
-    "name": "setResolver",
-    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },

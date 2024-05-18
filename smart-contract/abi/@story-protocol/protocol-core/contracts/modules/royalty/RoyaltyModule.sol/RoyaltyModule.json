@@ -3,7 +3,12 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "governance",
+        "name": "disputeModule",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "licenseRegistry",
         "type": "address"
       }
     ],
@@ -11,29 +16,93 @@
     "type": "constructor"
   },
   {
-    "inputs": [],
-    "name": "Governance__InconsistentState",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "Governance__OnlyProtocolAdmin",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "authority",
+        "type": "address"
+      }
+    ],
+    "name": "AccessManagedInvalidAuthority",
     "type": "error"
   },
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "interfaceName",
-        "type": "string"
+        "internalType": "address",
+        "name": "caller",
+        "type": "address"
+      },
+      {
+        "internalType": "uint32",
+        "name": "delay",
+        "type": "uint32"
       }
     ],
-    "name": "Governance__UnsupportedInterface",
+    "name": "AccessManagedRequiredDelay",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "caller",
+        "type": "address"
+      }
+    ],
+    "name": "AccessManagedUnauthorized",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "target",
+        "type": "address"
+      }
+    ],
+    "name": "AddressEmptyCode",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      }
+    ],
+    "name": "ERC1967InvalidImplementation",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "Governance__ZeroAddress",
+    "name": "ERC1967NonPayable",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "EnforcedPause",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ExpectedPause",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "FailedInnerCall",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidInitialization",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotInitializing",
     "type": "error"
   },
   {
@@ -49,6 +118,16 @@
   {
     "inputs": [],
     "name": "RoyaltyModule__IncompatibleRoyaltyPolicy",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RoyaltyModule__IpIsExpired",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RoyaltyModule__IpIsTagged",
     "type": "error"
   },
   {
@@ -78,6 +157,21 @@
   },
   {
     "inputs": [],
+    "name": "RoyaltyModule__ZeroAccessManager",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RoyaltyModule__ZeroDisputeModule",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RoyaltyModule__ZeroLicenseRegistry",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "RoyaltyModule__ZeroLicensingModule",
     "type": "error"
   },
@@ -92,16 +186,45 @@
     "type": "error"
   },
   {
+    "inputs": [],
+    "name": "UUPSUnauthorizedCallContext",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "slot",
+        "type": "bytes32"
+      }
+    ],
+    "name": "UUPSUnsupportedProxiableUUID",
+    "type": "error"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "address",
-        "name": "newGovernance",
+        "name": "authority",
         "type": "address"
       }
     ],
-    "name": "GovernanceUpdated",
+    "name": "AuthorityUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "version",
+        "type": "uint64"
+      }
+    ],
+    "name": "Initialized",
     "type": "event"
   },
   {
@@ -133,6 +256,19 @@
       }
     ],
     "name": "LicenseMintingFeePaid",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Paused",
     "type": "event"
   },
   {
@@ -211,8 +347,86 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Unpaused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      }
+    ],
+    "name": "Upgraded",
+    "type": "event"
+  },
+  {
     "inputs": [],
-    "name": "LICENSING_MODULE",
+    "name": "DISPUTE_MODULE",
+    "outputs": [
+      {
+        "internalType": "contract IDisputeModule",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "LICENSE_REGISTRY",
+    "outputs": [
+      {
+        "internalType": "contract ILicenseRegistry",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "UPGRADE_INTERFACE_VERSION",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "accessManager",
+        "type": "address"
+      }
+    ],
+    "name": "__ProtocolPausable_init",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "authority",
     "outputs": [
       {
         "internalType": "address",
@@ -224,26 +438,26 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getGovernance",
-    "outputs": [
+    "inputs": [
       {
         "internalType": "address",
-        "name": "",
+        "name": "accessManager",
         "type": "address"
       }
     ],
-    "stateMutability": "view",
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "governance",
+    "name": "isConsumingScheduledOp",
     "outputs": [
       {
-        "internalType": "address",
+        "internalType": "bytes4",
         "name": "",
-        "type": "address"
+        "type": "bytes4"
       }
     ],
     "stateMutability": "view",
@@ -261,7 +475,7 @@
     "outputs": [
       {
         "internalType": "bool",
-        "name": "isWhitelisted",
+        "name": "",
         "type": "bool"
       }
     ],
@@ -282,6 +496,19 @@
         "internalType": "bool",
         "name": "",
         "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "licensingModule",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -362,6 +589,26 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "pause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "paused",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -423,6 +670,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "proxiableUUID",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -434,7 +694,7 @@
     "outputs": [
       {
         "internalType": "address",
-        "name": "royaltyPolicy",
+        "name": "",
         "type": "address"
       }
     ],
@@ -445,11 +705,11 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "newGovernance",
+        "name": "newAuthority",
         "type": "address"
       }
     ],
-    "name": "setGovernance",
+    "name": "setAuthority",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -458,7 +718,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "licensingModule",
+        "name": "licensing",
         "type": "address"
       }
     ],
@@ -484,6 +744,31 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "unpause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newImplementation",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "upgradeToAndCall",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
