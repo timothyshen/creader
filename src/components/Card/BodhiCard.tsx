@@ -10,9 +10,10 @@ import {
 import { Button } from '@/components/ui/button';
 import { getBuyPrice } from '@/utils/BodhiContract';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
-import { TradeModalBuy } from '@/components/PurchaseButton/TradeModalBuy';
-import { TradeModalSell } from '@/components/PurchaseButton/TradeModalSell';
+import { TradeModalBuy } from '@/components/Modal/PurchaseModal/TradeModalBuy';
+import { TradeModalSell } from '@/components/Modal/PurchaseModal/TradeModalSell';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
+import { RemixButton } from '../Modal/DerivetiveModal/RemixButton';
 
 
 interface BodhiCardProps {
@@ -86,28 +87,35 @@ export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPric
                     {isExpanded ? 'View less' : 'View more'}
                 </Button>
             </CardContent>
-            <CardFooter className='flex justify-between border-t-2 py-3 px-4'>
-                <div>
-                    <div className='text-lg'>
-                        ${filePriceUSD}
+            <CardFooter className='flex flex-col border-t-2 py-3 px-4'>
+                <div className='flex justify-between items-center w-full'>
+                    <div>
+                        <div className='text-lg'>
+                            ${filePriceUSD}
+                        </div>
+                        <div className='text-sm text-gray-400'>
+                            {filePriceETH} ETH / Share
+                        </div>
                     </div>
-                    <div className='text-sm text-gray-400'>
-                        {filePriceETH} ETH / Share
+                    <div className='flex gap-x-2'>
+                        <TradeModalBuy
+                            chapterId={chapterId}
+                            price={{
+                                eth: filePriceETH,
+                                usd: newPrice
+                            }}
+                        />
+                        <TradeModalSell
+                            chapterId={chapterId}
+                            price={{
+                                eth: filePriceETH,
+                                usd: newPrice
+                            }}
+                        />
                     </div>
                 </div>
-                <div className='flex gap-x-2'>
-                    <TradeModalBuy chapterId={chapterId} price={
-                        {
-                            eth: filePriceETH,
-                            usd: newPrice
-                        }
-                    } />
-                    <TradeModalSell chapterId={chapterId} price={
-                        {
-                            eth: filePriceETH,
-                            usd: newPrice
-                        }
-                    } />
+                <div className=' mt-2 w-full'>
+                    <RemixButton></RemixButton>
                 </div>
             </CardFooter>
         </Card >

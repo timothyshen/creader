@@ -16,7 +16,7 @@ interface UseMintLicenseTokenReturn {
   error: Error | null;
 }
 
-export const useBodhiBuy = (): UseMintLicenseTokenReturn => {
+export const useMintLicenseToken = (): UseMintLicenseTokenReturn => {
   const { data: hash, error, isPending, writeContract } = useWriteContract();
 
   const mintLicenseToken = async (

@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button'
-import { BuyButton } from '@/components/PurchaseButton/BuyButton'
+import { BuyButton } from '@/components/Modal/PurchaseModal/BuyButton'
 import { getBuyPrice, getBuyPriceAfterFee } from '@/utils/BodhiContract'
 
 type TradeModalProps = {

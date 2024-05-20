@@ -24,7 +24,6 @@ export function AccountDisplayHeader() {
             {/* <NetworkState /> */}
             {/* // eslint-disable-next-line @next/next/no-img-element */}
             <CreateCopyright />
-            <NetworkState />
             {address &&
                 <div className='w-max py-2 px-4 rounded-md bg-primary text-primary-foreground hover:cursor-pointer hover:bg-primary/90' onClick={handleClick}>
                     {sliceAddress(address)}

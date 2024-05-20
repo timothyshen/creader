@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { StepProps } from "@/types/steptypes"
-import { AccountERC6551__factory, Bodhi__factory } from "@/contract-config/typechain";
+import { IIPAccount__factory, Bodhi__factory } from "@/contract-config/typechain";
 import {
     useWaitForTransactionReceipt,
     useWriteContract,
@@ -58,8 +58,8 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
 
             writeContract({
                 address: nftAcc,
-                abi: AccountERC6551__factory.abi,
-                functionName: 'executeCall',
+                abi: IIPAccount__factory.abi,
+                functionName: 'execute',
                 args: [
                     BodhiAddress as `0x${string}`,
                     parseEther('0'),

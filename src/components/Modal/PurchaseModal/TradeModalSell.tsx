@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button'
-import { SellButton } from '@/components/PurchaseButton/SellButton'
+import { SellButton } from '@/components/Modal/PurchaseModal/SellButton'
 import { getSellPrice, getSellPriceAfterFee, getBalanceOf } from '@/utils/BodhiContract'
 import { useAccount } from 'wagmi'
 
