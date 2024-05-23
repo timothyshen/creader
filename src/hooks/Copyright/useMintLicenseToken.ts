@@ -1,5 +1,5 @@
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
-import { IPALicenseToken__factory } from "@/contract-config/typechain";
+import { IPALicenseToken__factory } from "../../../contract-config/typechain";
 import { IPALicenseTokenAddress } from "@/constant/contract";
 
 interface UseMintLicenseTokenReturn {

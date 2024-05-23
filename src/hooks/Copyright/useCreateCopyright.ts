@@ -15,7 +15,7 @@ import {
   CopyrightNFTAddress,
   BaseSepoliaChainExplorer,
 } from "@/constant/contract";
-import { CopyrightNFT__factory } from "@/contract-config/typechain";
+import { CopyrightNFT__factory } from "../../../contract-config/typechain";
 
 const formSchema = z.object({
   title: z.string().min(2, {

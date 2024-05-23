@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { StepProps } from "@/types/steptypes"
-import { IIPAccount__factory, Bodhi__factory } from "@/contract-config/typechain";
+import { IIPAccount__factory, Bodhi__factory } from "../../../../contract-config/typechain";
 import {
     useWaitForTransactionReceipt,
     useWriteContract,

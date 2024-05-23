@@ -1,7 +1,7 @@
-import AccountERC6551 from "@/contract-config/deployments/baseSepolia/AccountERC6551.json";
-import Bodhi from "@/contract-config/deployments/baseSepolia/Bodhi.json";
-import CopyrightNFT from "@/contract-config/deployments/baseSepolia/CopyrightNFT.json";
-import CreaderToken from "@/contract-config/deployments/baseSepolia/CreaderToken.json";
+import AccountERC6551 from "../../contract-config/deployments/baseSepolia/AccountERC6551.json";
+import Bodhi from "../../contract-config/deployments/baseSepolia/Bodhi.json";
+import CopyrightNFT from "../../contract-config/deployments/baseSepolia/CopyrightNFT.json";
+import CreaderToken from "../../contract-config/deployments/baseSepolia/CreaderToken.json";
 
 export const AccountERC6551Address = AccountERC6551.address;
 export const AccountERC6551Abi = AccountERC6551.abi;

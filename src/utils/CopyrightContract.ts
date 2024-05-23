@@ -1,4 +1,4 @@
-import { CopyrightNFT__factory } from "@/contract-config/typechain";
+import { CopyrightNFT__factory } from "../../contract-config/typechain";
 import { client } from "@/provider/viemConfig";
 import { CopyrightNFTAddress } from "@/constant/contract";
 

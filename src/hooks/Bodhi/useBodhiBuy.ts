@@ -1,5 +1,5 @@
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
-import { Bodhi__factory } from "@/contract-config/typechain";
+import { Bodhi__factory } from "../../../contract-config/typechain";
 import { parseEther } from "viem";
 import { BodhiAddress } from "@/constant/contract";
 
@@ -14,7 +14,7 @@ interface UseBodhiBuyReturn {
 /* @returns
  * bodhiBuy: Function to call the buy method on the Bodhi contract
  * isPending: Pending state from the writeContract hook
- * isConfirming: Confirming state from the useWaitForTransactionReceipt hook 
+ * isConfirming: Confirming state from the useWaitForTransactionReceipt hook
  * isConfirmed: Confirmed state from the useWaitForTransactionReceipt hook
  * error: Error state from the writeContract hook
  */
@@ -49,7 +49,7 @@ export const useBodhiBuy = (): UseBodhiBuyReturn => {
     });
 
   return {
-    bodhiBuy, 
+    bodhiBuy,
     isPending, // Pending state from writeContract hook
     isConfirming, // Confirming state from useWaitForTransactionReceipt hook
     isConfirmed, // Confirmed state from useWaitForTransactionReceipt hook

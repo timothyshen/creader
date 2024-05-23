@@ -38,7 +38,7 @@ import { getTargetNetwork } from "@/utils/network"
 
 // test
 
-import { CopyrightNFT__factory } from '@/contract-config/typechain'
+import { CopyrightNFT__factory } from '../../../contract-config/typechain'
 import { useEffect, useState } from "react";
 
 type CreateCopyrightProps = {
