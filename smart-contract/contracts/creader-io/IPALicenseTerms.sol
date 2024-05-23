@@ -80,7 +80,7 @@ contract IPALicenseToken {
         onlyAssetMoreThanFive(msg.sender, assetId)
         returns (uint256 tokenId, uint256 startLicenseTokenId)
     {
-        require(remixType <= uint256(RemapType.SOUND), "Invalid RemixType");
+        require(remixType <= uint256(RemixType.SOUND), "Invalid RemixType");
 
         LICENSING_MODULE.attachLicenseTerms(
             ipId,

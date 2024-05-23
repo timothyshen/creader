@@ -43,5 +43,9 @@
     "solhint": "^3.4.1",
     "solidity-coverage": "^0.7.21",
     "solmate": "^6.2.0"
-  }
+  },
+  "files": [
+    "src/**/*",
+    "!src/contract-config"
+  ]
 }

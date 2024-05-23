@@ -7,6 +7,7 @@ import {
   createWalletClient,
   custom,
 } from "viem";
+import creaderConfig from "./app.config";
 
 import degenChain from "./degenChain";
 
@@ -24,7 +25,7 @@ const localhost = defineChain({
 });
 
 export const config = createConfig({
-  chains: [baseSepolia, degenChain],
+  chains: [creaderConfig.targetNetwork, degenChain],
   client({ chain }) {
     return createClient({ chain, transport: http() });
   },
@@ -38,7 +39,7 @@ export const ConnectWalletClient = () => {
   }
 
   const walletClient = createWalletClient({
-    chain: baseSepolia,
+    chain: creaderConfig.targetNetwork,
     transport: transport,
   });
 
@@ -46,6 +47,6 @@ export const ConnectWalletClient = () => {
 };
 
 export const client = createPublicClient({
-  chain: baseSepolia,
+  chain: creaderConfig.targetNetwork,
   transport: http(),
 });
