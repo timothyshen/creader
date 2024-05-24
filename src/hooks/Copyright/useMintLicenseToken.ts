@@ -7,8 +7,8 @@ interface UseMintLicenseTokenReturn {
     assetId: bigint,
     ipId: `0x${string}`,
     licenseTermsId: number,
-    ltAmount: bigint,
-    ltRecipient: `0x${string}`
+    ltRecipient: `0x${string}`,
+    ltAmount: bigint
   ) => Promise<void>;
   isPending: boolean;
   isConfirming: boolean;
@@ -23,15 +23,15 @@ export const useMintLicenseToken = (): UseMintLicenseTokenReturn => {
     assetId: bigint,
     ipId: `0x${string}`,
     licenseTermsId: number,
-    ltAmount: bigint,
-    ltRecipient: `0x${string}`
+    ltRecipient: `0x${string}`,
+    ltAmount: bigint
   ) => {
     try {
       await writeContract({
         address: IPALicenseTokenAddress as `0x${string}`,
         abi: IPALicenseToken__factory.abi,
         functionName: "mintLicenseToken",
-        args: [assetId, ipId, licenseTermsId, ltAmount, ltRecipient],
+        args: [assetId, ipId, licenseTermsId, ltRecipient, ltAmount],
       });
     } catch (err) {
       console.error("Error calling mintLicenseToken:", err);

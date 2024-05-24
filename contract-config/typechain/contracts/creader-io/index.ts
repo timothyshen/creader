@@ -3,7 +3,7 @@
 /* eslint-disable */
 import type * as ipaLicenseTermsSol from "./IPALicenseTerms.sol";
 export type { ipaLicenseTermsSol };
-import type * as interfaces from "./interfaces";
-export type { interfaces };
+import type * as sc_interfaces from "./interfaces";
+export type { sc_interfaces };
 export type { CopyrightNFT } from "./CopyrightNFT";
 export type { LicenseNFT } from "./LicenseNFT";

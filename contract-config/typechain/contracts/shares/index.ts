@@ -3,5 +3,5 @@
 /* eslint-disable */
 import type * as bodhiSol from "./bodhi.sol";
 export type { bodhiSol };
-import type * as interface from "./interface";
-export type { interface };
+import type * as sc_interfaces from "./interface";
+export type { sc_interfaces };
