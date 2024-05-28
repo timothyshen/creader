@@ -13,8 +13,7 @@ import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
 import { TradeModalBuy } from '@/components/Modal/PurchaseModal/TradeModalBuy';
 import { TradeModalSell } from '@/components/Modal/PurchaseModal/TradeModalSell';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
-import { RemixButton } from '../Modal/DerivetiveModal/RemixButton';
-
+import { RemixModal } from '@/components/Modal/DerivetiveModal/RemixModal';
 
 interface BodhiCardProps {
     order: number;
@@ -115,7 +114,7 @@ export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPric
                     </div>
                 </div>
                 <div className=' mt-2 w-full'>
-                    <RemixButton></RemixButton>
+                    <RemixModal assetsId={chapterId} ipId={owner} />
                 </div>
             </CardFooter>
         </Card >

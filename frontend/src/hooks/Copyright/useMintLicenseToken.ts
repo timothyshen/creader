@@ -24,14 +24,14 @@ export const useMintLicenseToken = (): UseMintLicenseTokenReturn => {
     ipId: `0x${string}`,
     licenseTermsId: number,
     ltRecipient: `0x${string}`,
-    ltAmount: bigint
+    remixType: bigint
   ) => {
     try {
       await writeContract({
         address: IPALicenseTokenAddress as `0x${string}`,
         abi: IPALicenseToken__factory.abi,
         functionName: "mintLicenseToken",
-        args: [assetId, ipId, licenseTermsId, ltRecipient, ltAmount],
+        args: [assetId, ipId, licenseTermsId, ltRecipient, remixType],
       });
     } catch (err) {
       console.error("Error calling mintLicenseToken:", err);
