@@ -25,7 +25,7 @@ const localhost = defineChain({
 });
 
 export const config = createConfig({
-  chains: [creaderConfig.targetNetwork, degenChain],
+  chains: [creaderConfig.targetNetwork],
   client({ chain }) {
     return createClient({ chain, transport: http() });
   },

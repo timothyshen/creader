@@ -57,7 +57,7 @@ const formSchema = z.object({
 export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted }) => {
     const {
         data: hash,
-        error,
+        error: errorLog,
         isPending,
         writeContract
     } = useWriteContract()
@@ -91,16 +91,17 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
         if (currentChain.id !== chainId) walletClient.switchChain(currentChain);
 
         try {
+            console.log(data)
             if (!data.to) return null
             writeContract({
-                address: CopyrightNFTAddress as `0x${string}`,
+                address: "0x0645bb5606545f3C9Df7aA60e89e54a9f2dD461e",
                 abi: CopyrightNFT__factory.abi,
                 functionName: 'createCopyright',
                 args: [data.to, BigInt(data.chainId), data.title, data.description, data.status],
             })
-
+            console.log('writeContract')
         } catch (error) {
-            console.log(error)
+            console.log(errorLog)
         }
     }
 

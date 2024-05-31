@@ -11,8 +11,9 @@ export type CreaderConfig = {
 const creaderConfig = {
   targetNetwork: chains.sepolia,
   pollingInterval: 3000,
-  archemyApiKey: process.env.ARCHEMY_API_KEY as string,
-  walletConnectProjectId: process.env.WALLET_CONNECT_PROJECT_ID as string,
+  archemyApiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY as string,
+  walletConnectProjectId: process.env
+    .NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
   walletAutoConnect: true,
 } satisfies CreaderConfig;
 
