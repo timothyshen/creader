@@ -5,6 +5,8 @@ import { parseEther } from "viem";
 const getWebIrys = async () => {
   const url = "https://devnet.irys.xyz";
   const token = "ethereum";
+  // const token = "base-eth";
+  // const rpcUrl = "https://base-sepolia.blockpi.network/v1/rpc/public";
   const walletClient = ConnectWalletClient();
 
   //@ts-expect-error injected

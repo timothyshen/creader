@@ -77,9 +77,9 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
         address _registry
     ) ERC721(_name, _symbol) {
         // Constructor function
+        baseURI = baseURI_; // Setting base URI
         creaderToken = CreaderToken(_creaderToken); // Initializing CreaderToken instance
         REGISTRY = IPAssetRegistry(_registry);
-        baseURI = baseURI_; // Setting base URI
     }
 
     modifier onlyOwner(uint256 _id) {

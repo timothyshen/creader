@@ -19,7 +19,7 @@ interface BodhiCardProps {
     order: number;
     id: string;
     chapterId: bigint
-    owner: `0x${string}` | undefined;
+    owner: `0x${string}`;
     content: string;
     supply: bigint | undefined;
     onPriceUpdate: (owner: `0x${string}` | undefined, eth: number, usd: number) => void;

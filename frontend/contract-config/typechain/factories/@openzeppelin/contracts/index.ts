@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as access from "./access";
-export * as sc_interfaces from "./interfaces";
+export * as Interfaces from "./interfaces";
 export * as proxy from "./proxy";
 export * as token from "./token";
 export * as utils from "./utils";

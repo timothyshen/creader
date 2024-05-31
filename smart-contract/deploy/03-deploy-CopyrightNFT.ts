@@ -18,7 +18,6 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     "TBC",
     creaderToken.address,
     REGISTRY,
-    RESOLVER,
   ];
   const deployment = await deploy(name, {
     from: deployer,

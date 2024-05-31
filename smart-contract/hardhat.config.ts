@@ -48,7 +48,7 @@ const config: HardhatUserConfig = {
     },
   },
   paths: {
-    deployments: "../contract-config/deployments",
+    deployments: "../frontend/contract-config/deployments",
   },
   // etherscan: {
   //     apiKey: ETHERSCAN_API_KEY,
@@ -59,7 +59,7 @@ const config: HardhatUserConfig = {
   //     enabled: true,
   // },
   typechain: {
-    outDir: "../contract-config/typechain",
+    outDir: "../frontend/contract-config/typechain",
     target: "ethers-v5",
     alwaysGenerateOverloads: true,
   },

@@ -4,7 +4,6 @@ pragma solidity ^0.8.23;
 import "@story-protocol/protocol-core/contracts/registries/IPAssetRegistry.sol";
 import "@story-protocol/protocol-core/contracts/modules/licensing/LicensingModule.sol";
 import "@story-protocol/protocol-core/contracts/modules/licensing/PILicenseTemplate.sol";
-import "./LicenseNFT.sol";
 import "../shares/interface/IBodhi.sol";
 
 /// @title IPALicenseToken
