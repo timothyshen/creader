@@ -12,6 +12,6 @@ export const CreaderTokenAbi = CreaderToken.abi;
 export const IPALicenseTokenAddress = IPALicenseToken.address;
 export const IPALicenseTokenAbi = IPALicenseToken.abi;
 
-export const BaseSepoliaChainExplorer = "https://sepolia.etherscan.io/";
+export const BaseSepoliaChainExplorer = "https://sepolia.etherscan.io";
 export const BaseSepoliaChainId = 11_155_111;
 export const CREATER_FEES = 0.05;

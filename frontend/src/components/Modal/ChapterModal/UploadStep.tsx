@@ -16,7 +16,7 @@ import {
 import { encodeFunctionData, parseEther } from "viem";
 import getWebIrys from "@/provider/irys";
 import { SetStateAction, useState } from "react";
-import { BodhiAddress } from '@/constant/contract'
+import { BodhiAddress } from '@/constant/contract-sepolia'
 import MarkdownEditor from "@/components/MarkdownEditor"
 import { ArrowBigLeft } from "lucide-react";
 import { sliceAddress } from "@/utils/supportFunction";

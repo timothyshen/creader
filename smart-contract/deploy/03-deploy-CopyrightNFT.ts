@@ -9,8 +9,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployer } = await getNamedAccounts();
   const chainId = network.config.chainId;
   const creaderToken = await deployments.get("CreaderToken");
-  const REGISTRY = "0x292639452A975630802C17c9267169D93BD5a793";
-  const RESOLVER = "0x3809f4128B0B33AFb17576edafD7D4F4E2ABE933";
+  const REGISTRY = "0xd43fE0d865cb5C26b1351d3eAf2E3064BE3276F6";
 
   const args: any[] = [
     "https://creader.io/",
