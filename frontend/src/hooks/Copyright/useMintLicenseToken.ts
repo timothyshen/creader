@@ -1,6 +1,6 @@
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { IPALicenseToken__factory } from "../../../contract-config/typechain";
-import { IPALicenseTokenAddress } from "@/constant/contract";
+// import { IPALicenseTokenAddress } from "@/constant/contract";
 
 interface UseMintLicenseTokenReturn {
   mintLicenseToken: (
@@ -28,7 +28,8 @@ export const useMintLicenseToken = (): UseMintLicenseTokenReturn => {
   ) => {
     try {
       await writeContract({
-        address: IPALicenseTokenAddress as `0x${string}`,
+        // address: IPALicenseTokenAddress as `0x${string}`,
+        address: "0x",
         abi: IPALicenseToken__factory.abi,
         functionName: "mintLicenseToken",
         args: [assetId, ipId, licenseTermsId, ltRecipient, remixType],

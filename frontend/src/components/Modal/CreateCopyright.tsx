@@ -94,7 +94,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
             console.log(data)
             if (!data.to) return null
             writeContract({
-                address: "0x0645bb5606545f3C9Df7aA60e89e54a9f2dD461e",
+                address: CopyrightNFTAddress as `0x${string}`,
                 abi: CopyrightNFT__factory.abi,
                 functionName: 'createCopyright',
                 args: [data.to, BigInt(data.chainId), data.title, data.description, data.status],

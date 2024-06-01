@@ -35,7 +35,7 @@ export const ListCoverView = () => {
             setLoading(true);
             try {
                 const work = await getAllCopyright();
-                // console.log('work', work[0].id)
+                console.log('work', work[0].id)
                 setWorks([...work]);
             } catch (error) {
                 console.error("Failed to fetch works:", error);
