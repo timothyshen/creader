@@ -48,18 +48,18 @@ const config: HardhatUserConfig = {
     },
   },
   paths: {
-    deployments: "../src/contract-config/deployments",
+    deployments: "../frontend/contract-config/deployments",
   },
-  // etherscan: {
-  //     apiKey: ETHERSCAN_API_KEY,
-  // },
+  etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
+  },
   // gasReporter: {
   //     currency: 'USD',
   //     gasPrice: 100,
   //     enabled: true,
   // },
   typechain: {
-    outDir: "../src/contract-config/typechain",
+    outDir: "../frontend/contract-config/typechain",
     target: "ethers-v5",
     alwaysGenerateOverloads: true,
   },
