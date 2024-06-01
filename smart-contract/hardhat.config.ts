@@ -50,9 +50,9 @@ const config: HardhatUserConfig = {
   paths: {
     deployments: "../frontend/contract-config/deployments",
   },
-  // etherscan: {
-  //     apiKey: ETHERSCAN_API_KEY,
-  // },
+  etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
+  },
   // gasReporter: {
   //     currency: 'USD',
   //     gasPrice: 100,
