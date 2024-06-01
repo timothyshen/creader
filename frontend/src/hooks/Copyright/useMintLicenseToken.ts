@@ -29,7 +29,6 @@ export const useMintLicenseToken = (): UseMintLicenseTokenReturn => {
     try {
       await writeContract({
         address: IPALicenseTokenAddress as `0x${string}`,
-        // address: "0x",
         abi: IPALicenseToken__factory.abi,
         functionName: "mintLicenseToken",
         args: [assetId, ipId, licenseTermsId, ltRecipient, remixType],
