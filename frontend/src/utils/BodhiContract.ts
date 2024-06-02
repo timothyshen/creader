@@ -23,7 +23,7 @@ export async function getBalanceOf(address: `0x${string}`, assetId: bigint) {
     address: BodhiAddress as `0x${string}`,
     args: [address, BigInt(assetId)],
   });
-  //   console.log("getAssetsId", getAssetsId);
+  console.log("getBalanceOf", getBalanceOf);
   const getNum = Number(getBalanceOf) / 10 ** 18;
   return getNum;
 }

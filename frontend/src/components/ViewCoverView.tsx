@@ -13,7 +13,6 @@ const ViewCoverView = ({ id }: { id: string | undefined }) => {
     const [works, setWorks] = useState<any>();
     const [isMintedBodhi, setIsMintedBodhi] = useState<boolean>(false)
     const [prices, setPrices] = useState<PriceData>();
-    const router = useRouter();
 
     const account = useAccount();
 
@@ -73,7 +72,7 @@ const ViewCoverView = ({ id }: { id: string | undefined }) => {
                         setIsMintedBodhi={setIsMintedBodhi}
                         aggregatePrice={prices}
                     />
-                    <BodhiCardView nftAccount={works.nftAccount as `0x${string}`} onPriceUpdate={handlePriceUpdate} isMintedBodhi={isMintedBodhi} />
+                    <BodhiCardView nftAccount={works.nftAccount as `0x${string}`} onPriceUpdate={handlePriceUpdate} isMintedBodhi={isMintedBodhi} currentUser={account.address} />
                 </>
             )}
 

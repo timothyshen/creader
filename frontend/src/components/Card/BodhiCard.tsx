@@ -23,11 +23,12 @@ interface BodhiCardProps {
     content: string;
     supply: bigint | undefined;
     onPriceUpdate: (owner: `0x${string}` | undefined, eth: number, usd: number) => void;
+    currentUser: `0x${string}`;
 }
 
 
 
-export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPriceUpdate }: BodhiCardProps) => {
+export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPriceUpdate, currentUser }: BodhiCardProps) => {
     const [filePriceETH, setFilePriceETH] = useState<string>();
     const [filePriceUSD, setFilePriceUSD] = useState<string>();
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
@@ -48,14 +49,15 @@ export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPric
 
     const toggleContent = () => setIsExpanded(!isExpanded);
 
-    const fetchPrices = async (supply: bigint, newPrice: number) => {
+    const fetchPrices = useCallback(async (supply: bigint, newPrice: number) => {
         const getPriceFeedETH = await getBuyPrice(chapterId, 1);
-        const holding = await getBalanceOf(owner, chapterId);
+        const holding = await getBalanceOf(currentUser, chapterId);
+        console.log('holding', holding);
         const priceEth = newPrice;
         const priceUsd = (getPriceFeedETH * priceEth).toFixed(2);
         onPriceUpdate(owner, Number(getPriceFeedETH), Number(priceUsd));
         return { eth: getPriceFeedETH.toString(), usd: priceUsd, amountHolding: holding };
-    };
+    }, [chapterId, currentUser, onPriceUpdate, owner]);
 
 
     useEffect(() => {
@@ -67,7 +69,7 @@ export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPric
             });
 
         }
-    }, [supply, newPrice, owner, chapterId, amountHolding]);
+    }, [supply, newPrice, owner, chapterId, fetchPrices]);
 
     return (
         <Card className='mb-4 p-2'>
