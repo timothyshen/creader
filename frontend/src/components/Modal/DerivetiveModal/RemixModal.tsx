@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { useMintLicenseToken } from '@/hooks/Copyright/useMintLicenseToken';
 import { RemixSelect } from '@/components/Modal/DerivetiveModal/RemixSelect'
+import ImageDerivetive from './DerivetiveType/ImageDerivetive'
 
 type RemixModalProps = {
     assetsId: bigint;
@@ -76,6 +77,9 @@ export const RemixModal = ({
                             onChange={(e) => setSelected(e.target.value)}
                             className="col-span-3"
                         />
+                    </div>
+                    <div>
+                        <ImageDerivetive />
                     </div>
                 </div>
                 <DialogFooter>

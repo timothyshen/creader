@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getCover } from '@/utils/CopyrightContract';
 import { CopyrightCard } from './Card/CopyrightCard';
 import { useAccount } from 'wagmi';
@@ -16,7 +16,7 @@ const ViewCoverView = ({ id }: { id: string | undefined }) => {
 
     const account = useAccount();
 
-    const handlePriceUpdate = (coverAcc: any, ethPrice: any, usdPrice: any) => {
+    const handlePriceUpdate = useCallback((coverAcc: any, ethPrice: any, usdPrice: any) => {
         setPrices(prevPrices => {
             if (!prevPrices) {
                 return {
@@ -36,7 +36,7 @@ const ViewCoverView = ({ id }: { id: string | undefined }) => {
                 },
             };
         });
-    };
+    }, []);
 
     useEffect(() => {
         const init = async () => {
