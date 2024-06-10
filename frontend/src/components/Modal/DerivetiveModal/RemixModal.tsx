@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react'
 import {
     Dialog,
@@ -14,6 +15,8 @@ import { Button } from "@/components/ui/button"
 import { useMintLicenseToken } from '@/hooks/Copyright/useMintLicenseToken';
 import { RemixSelect } from '@/components/Modal/DerivetiveModal/RemixSelect'
 import ImageDerivetive from './DerivetiveType/ImageDerivetive'
+import SoundDerivetive from './DerivetiveType/SoundDerivetive'
+import SettingDerivetive from './DerivetiveType/SettingDerivetive'
 
 type RemixModalProps = {
     assetsId: bigint;
@@ -34,8 +37,20 @@ export const RemixModal = ({
         error
     } = useMintLicenseToken();
 
-    const handleMintLicenseToken = async () => {
+    const handleMintLicenseToken = () => {
         // Function to handle minting the license token
+    }
+
+    const showDerivtiveContent = () => {
+        if (selected === 'bgm') {
+            return <SoundDerivetive />
+        }
+        if (selected === 'setting') {
+            return <SettingDerivetive />
+        }
+        if (selected === 'character') {
+            return <ImageDerivetive />
+        }
     }
 
     return (
@@ -79,7 +94,7 @@ export const RemixModal = ({
                         />
                     </div>
                     <div>
-                        <ImageDerivetive />
+                        {showDerivtiveContent()}
                     </div>
                 </div>
                 <DialogFooter>
