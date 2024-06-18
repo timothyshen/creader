@@ -2,4 +2,3 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as manager from "./manager";
-export { Ownable__factory } from "./Ownable__factory";

@@ -2,6 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as ipaLicenseTermsSol from "./IPALicenseTerms.sol";
-export * as Interfaces from "./interfaces";
+export * as interfaces from "./interfaces";
 export { CopyrightNFT__factory } from "./CopyrightNFT__factory";
-export { LicenseNFT__factory } from "./LicenseNFT__factory";

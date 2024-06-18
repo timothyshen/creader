@@ -5,6 +5,7 @@ import "@story-protocol/protocol-core/contracts/registries/IPAssetRegistry.sol";
 import "@story-protocol/protocol-core/contracts/modules/licensing/LicensingModule.sol";
 import "@story-protocol/protocol-core/contracts/modules/licensing/PILicenseTemplate.sol";
 import "../shares/interface/IBodhi.sol";
+import {SimpleNFT} from "./SimpleNFT.sol";
 
 /// @title IPALicenseToken
 /// @notice Mint a License Token from Programmable IP License Terms attached to an IP Account.
@@ -13,6 +14,7 @@ contract IPALicenseToken {
     LicensingModule public immutable LICENSING_MODULE;
     PILicenseTemplate public immutable PIL_TEMPLATE;
     IBodhi public immutable BODHI;
+    SimpleNFT public immutable SNFT;
 
     /// @notice Enum to represent the type of remix.
     enum RemixType {
@@ -42,6 +44,7 @@ contract IPALicenseToken {
         LICENSING_MODULE = LicensingModule(licensingModule);
         PIL_TEMPLATE = PILicenseTemplate(pilTemplate);
         BODHI = IBodhi(bodhi);
+        SNFT = new SimpleNFT();
     }
 
     /**
@@ -60,7 +63,6 @@ contract IPALicenseToken {
     /**
      * @notice Mints a License Token from attached license terms.
      * @dev Attaches license terms to an IP, then mints a License Token to the recipient.
-     * @param assetId The ID of the asset.
      * @param ipId The IP ID to which the license terms will be attached.
      * @param licenseTermsId The ID of the license terms.
      * @param ltRecipient The address to receive the License Token.
@@ -69,23 +71,15 @@ contract IPALicenseToken {
      * @return startLicenseTokenId The starting License Token ID.
      */
     function mintLicenseToken(
-        uint256 assetId,
         address ipId,
         uint8 licenseTermsId,
         address ltRecipient,
         uint256 remixType
-    )
-        external
-        onlyAssetMoreThanFive(msg.sender, assetId)
-        returns (uint256 tokenId, uint256 startLicenseTokenId)
-    {
+    ) external returns (uint256 tokenId, uint256 startLicenseTokenId) {
         require(remixType <= uint256(RemixType.SOUND), "Invalid RemixType");
+        tokenId = SNFT.mint(address(this));
 
-        LICENSING_MODULE.attachLicenseTerms(
-            ipId,
-            address(PIL_TEMPLATE),
-            licenseTermsId
-        );
+        LICENSING_MODULE.attachLicenseTerms(ipId, address(SNFT), tokenId);
 
         // Mint a License Token from the attached license terms.
         // Note that the License Token is minted to the ltRecipient.
@@ -102,13 +96,11 @@ contract IPALicenseToken {
         remixTypes[ltRecipient][startLicenseTokenId] = RemixType(remixType);
 
         // TODO: need to double check on the license token id
-        uint256[] memory carl_license_from_root_alice = new uint256[](
-            licenseTermsId
-        );
+        uint256[] memory licenseId = new uint256[](licenseTermsId);
 
         LICENSING_MODULE.registerDerivativeWithLicenseTokens(
             ipId,
-            carl_license_from_root_alice,
+            licenseId,
             ""
         );
 

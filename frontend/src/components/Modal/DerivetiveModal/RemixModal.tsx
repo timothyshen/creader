@@ -17,6 +17,7 @@ import { RemixSelect } from '@/components/Modal/DerivetiveModal/RemixSelect'
 import ImageDerivetive from './DerivetiveType/ImageDerivetive'
 import SoundDerivetive from './DerivetiveType/SoundDerivetive'
 import SettingDerivetive from './DerivetiveType/SettingDerivetive'
+import { useAccount } from 'wagmi'
 
 type RemixModalProps = {
     assetsId: bigint;
@@ -28,6 +29,7 @@ export const RemixModal = ({
     ipId,
 }: RemixModalProps) => {
     const [selected, setSelected] = useState<string | null>(null)
+    const { address } = useAccount()
 
     const {
         mintLicenseToken,
@@ -39,6 +41,18 @@ export const RemixModal = ({
 
     const handleMintLicenseToken = () => {
         // Function to handle minting the license token
+        if (!address) {
+            return
+        }
+        console.log(address, assetsId, ipId)
+        mintLicenseToken(
+            assetsId,
+            ipId,
+            3,
+            address,
+            BigInt(1)
+        )
+        setSelected(null)
     }
 
     const showDerivtiveContent = () => {
@@ -98,7 +112,7 @@ export const RemixModal = ({
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type="submit">Save changes</Button>
+                    <Button onClick={handleMintLicenseToken}>Remix</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
