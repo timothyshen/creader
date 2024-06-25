@@ -1,13 +1,17 @@
-
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import {ERC1155} from "solmate/src/tokens/ERC1155.sol";
 //6909 need to check
 import "hardhat/console.sol";
+
 error Unauthorized();
 
 contract Bodhi is ERC1155 {
-    event Create(uint256 indexed assetId, address indexed sender, string arTxId);
+    event Create(
+        uint256 indexed assetId,
+        address indexed sender,
+        string arTxId
+    );
     event Remove(uint256 indexed assetId, address indexed sender);
     event Trade(
         TradeType indexed tradeType,
@@ -25,11 +29,17 @@ contract Bodhi is ERC1155 {
     }
 
     uint256 public assetIndex;
+
+    IPAssetRegistry public immutable IP_ASSET_REGISTRY;
+    LicensingModule public immutable LICENSING_MODULE;
+    PILicenseTemplate public immutable PIL_TEMPLATE;
+
     mapping(uint256 => Asset) public assets;
     mapping(address => uint256[]) public userAssets;
     mapping(bytes32 => uint256) public txToAssetId;
     mapping(uint256 => uint256) public totalSupply;
     mapping(uint256 => uint256) public pool;
+
     uint256 public constant CREATOR_PREMINT = 1 ether; // 1e18
     uint256 public constant CREATOR_FEE_PERCENT = 0.05 ether; // 5%
 
@@ -50,7 +60,14 @@ contract Bodhi is ERC1155 {
         assetIndex = newAssetId + 1;
         _mint(msg.sender, newAssetId, CREATOR_PREMINT, "");
         emit Create(newAssetId, msg.sender, arTxId);
-        emit Trade(TradeType.Mint, newAssetId, msg.sender, CREATOR_PREMINT, 0, 0);
+        emit Trade(
+            TradeType.Mint,
+            newAssetId,
+            msg.sender,
+            CREATOR_PREMINT,
+            0,
+            0
+        );
     }
 
     function remove(uint256 assetId) public {
@@ -63,37 +80,66 @@ contract Bodhi is ERC1155 {
         emit Remove(assetId, msg.sender);
     }
 
-    function getAssetIdsByAddress(address addr) public view returns (uint256[] memory) {
+    function getAssetIdsByAddress(
+        address addr
+    ) public view returns (uint256[] memory) {
         return userAssets[addr];
     }
 
-    function checkIfUserHasShares(address user, uint256 assetId) public view returns (bool) {
+    function checkIfUserHasShares(
+        address user,
+        uint256 assetId
+    ) public view returns (bool) {
         return balanceOf[user][assetId] > 5;
     }
 
     function _curve(uint256 x) private pure returns (uint256) {
-        return x <= CREATOR_PREMINT ? 0 : ((x - CREATOR_PREMINT) * (x - CREATOR_PREMINT) * (x - CREATOR_PREMINT));
+        return
+            x <= CREATOR_PREMINT
+                ? 0
+                : ((x - CREATOR_PREMINT) *
+                    (x - CREATOR_PREMINT) *
+                    (x - CREATOR_PREMINT));
     }
 
-    function getPrice(uint256 supply, uint256 amount) public pure returns (uint256) {
-        return (_curve(supply + amount) - _curve(supply)) / 1 ether / 1 ether / 50_000;
+    function getPrice(
+        uint256 supply,
+        uint256 amount
+    ) public pure returns (uint256) {
+        return
+            (_curve(supply + amount) - _curve(supply)) /
+            1 ether /
+            1 ether /
+            50_000;
     }
 
-    function getBuyPrice(uint256 assetId, uint256 amount) public view returns (uint256) {
+    function getBuyPrice(
+        uint256 assetId,
+        uint256 amount
+    ) public view returns (uint256) {
         return getPrice(totalSupply[assetId], amount);
     }
 
-    function getSellPrice(uint256 assetId, uint256 amount) public view returns (uint256) {
+    function getSellPrice(
+        uint256 assetId,
+        uint256 amount
+    ) public view returns (uint256) {
         return getPrice(totalSupply[assetId] - amount, amount);
     }
 
-    function getBuyPriceAfterFee(uint256 assetId, uint256 amount) public view returns (uint256) {
+    function getBuyPriceAfterFee(
+        uint256 assetId,
+        uint256 amount
+    ) public view returns (uint256) {
         uint256 price = getBuyPrice(assetId, amount);
         uint256 creatorFee = (price * CREATOR_FEE_PERCENT) / 1 ether;
         return price + creatorFee;
     }
 
-    function getSellPriceAfterFee(uint256 assetId, uint256 amount) public view returns (uint256) {
+    function getSellPriceAfterFee(
+        uint256 assetId,
+        uint256 amount
+    ) public view returns (uint256) {
         uint256 price = getSellPrice(assetId, amount);
         uint256 creatorFee = (price * CREATOR_FEE_PERCENT) / 1 ether;
         return price - creatorFee;
@@ -107,24 +153,48 @@ contract Bodhi is ERC1155 {
         totalSupply[assetId] += amount;
         pool[assetId] += price;
         _mint(msg.sender, assetId, amount, "");
-        emit Trade(TradeType.Buy, assetId, msg.sender, amount, price, creatorFee);
-        (bool creatorFeeSent, ) = payable(assets[assetId].creator).call{value: creatorFee}("");
+        emit Trade(
+            TradeType.Buy,
+            assetId,
+            msg.sender,
+            amount,
+            price,
+            creatorFee
+        );
+        (bool creatorFeeSent, ) = payable(assets[assetId].creator).call{
+            value: creatorFee
+        }("");
         require(creatorFeeSent, "Failed to send Ether");
     }
 
     function sell(uint256 assetId, uint256 amount) public {
         require(assetId < assetIndex, "Asset does not exist");
-        require(balanceOf[msg.sender][assetId] >= amount, "Insufficient balance");
+        require(
+            balanceOf[msg.sender][assetId] >= amount,
+            "Insufficient balance"
+        );
         uint256 supply = totalSupply[assetId];
-        require(supply - amount >= CREATOR_PREMINT, "Supply not allowed below premint amount");
+        require(
+            supply - amount >= CREATOR_PREMINT,
+            "Supply not allowed below premint amount"
+        );
         uint256 price = getSellPrice(assetId, amount);
         uint256 creatorFee = (price * CREATOR_FEE_PERCENT) / 1 ether;
         _burn(msg.sender, assetId, amount);
         totalSupply[assetId] = supply - amount;
         pool[assetId] -= price;
-        emit Trade(TradeType.Sell, assetId, msg.sender, amount, price, creatorFee);
+        emit Trade(
+            TradeType.Sell,
+            assetId,
+            msg.sender,
+            amount,
+            price,
+            creatorFee
+        );
         (bool sent, ) = payable(msg.sender).call{value: price - creatorFee}("");
-        (bool creatorFeeSent, ) = payable(assets[assetId].creator).call{value: creatorFee}("");
+        (bool creatorFeeSent, ) = payable(assets[assetId].creator).call{
+            value: creatorFee
+        }("");
         require(sent && creatorFeeSent, "Failed to send Ether");
     }
 
