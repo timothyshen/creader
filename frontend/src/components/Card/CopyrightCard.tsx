@@ -8,11 +8,12 @@ import {
     CardTitle
 } from '@/components/ui/card'
 import AddNew from '@/components/Modal/ChapterModal/AddNew'
-import TippingModal from '@/components/Tipping/TippingModal'
+import { Button } from '@/components/ui/button'
+import { RemixModal } from '../Modal/DerivetiveModal/RemixModal'
 
 interface CopyrightCardProps {
     id: Number,
-    address: string,
+    address: `0x${string}`,
     owner: boolean,
     title: string,
     content: string,
@@ -62,8 +63,11 @@ export const CopyrightCard = ({
                 <p>{content}</p>
 
             </CardContent>
-            <CardFooter className='justify-center'>
+            <CardFooter className='justify-center flex flex-col gap-2'>
                 {/* <TippingModal coverAcc={coverAcc} /> */}
+
+                <RemixModal assetsId={BigInt(0)} ipId={coverAcc} />
+
                 {owner && setIsMintedBodhi && (
                     <AddNew nftAcc={coverAcc} setIsMintedBodhi={setIsMintedBodhi} />
                 )}

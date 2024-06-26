@@ -148,6 +148,8 @@ export type { ICopyrightNFT } from "./contracts/creader-io/interfaces/ICopyright
 export { ICopyrightNFT__factory } from "./factories/contracts/creader-io/interfaces/ICopyrightNFT__factory";
 export type { IPALicenseToken } from "./contracts/creader-io/IPALicenseTerms.sol/IPALicenseToken";
 export { IPALicenseToken__factory } from "./factories/contracts/creader-io/IPALicenseTerms.sol/IPALicenseToken__factory";
+export type { SimpleNFT } from "./contracts/creader-io/SimpleNFT";
+export { SimpleNFT__factory } from "./factories/contracts/creader-io/SimpleNFT__factory";
 export type { CreaderToken } from "./contracts/creaderToken/CreaderToken";
 export { CreaderToken__factory } from "./factories/contracts/creaderToken/CreaderToken__factory";
 export type { ICreaderToken } from "./contracts/creaderToken/interfaces/ICreaderToken";

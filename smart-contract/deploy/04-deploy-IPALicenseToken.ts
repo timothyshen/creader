@@ -10,14 +10,13 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployments, getNamedAccounts, network } = hre;
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
-  const bodhi = await deployments.get("Bodhi");
   const chainId = network.config.chainId;
 
   const deployment = await deploy(name, {
     from: deployer,
     log: true,
     waitConfirmations: chainId == 31337 ? 1 : 6,
-    args: [pilPolicyManager, licensingModule, pilTemplate, bodhi.address],
+    args: [pilPolicyManager, licensingModule, pilTemplate],
   });
   console.log(deployment.address);
 };

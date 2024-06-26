@@ -28,7 +28,6 @@ export default async function Image() {
                     fontWeight: 600,
                 }}
             >
-                <img src="/creader_logo.svg" alt="CReader Logo" />
                 <div style={{ marginTop: 40 }}>Hello, World</div>
             </div>
         ),

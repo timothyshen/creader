@@ -30,9 +30,7 @@ contract Bodhi is ERC1155 {
 
     uint256 public assetIndex;
 
-    IPAssetRegistry public immutable IP_ASSET_REGISTRY;
-    LicensingModule public immutable LICENSING_MODULE;
-    PILicenseTemplate public immutable PIL_TEMPLATE;
+    address immutable owner;
 
     mapping(uint256 => Asset) public assets;
     mapping(address => uint256[]) public userAssets;
@@ -48,6 +46,10 @@ contract Bodhi is ERC1155 {
         Buy,
         Sell
     } // = 0, 1, 2
+
+    constructor(address _owner) {
+        owner = _owner;
+    }
 
     function create(string calldata arTxId) public {
         bytes32 txHash = keccak256(abi.encodePacked(arTxId));

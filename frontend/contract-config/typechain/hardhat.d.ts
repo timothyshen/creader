@@ -285,6 +285,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IPALicenseToken__factory>;
     getContractFactory(
+      name: "SimpleNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SimpleNFT__factory>;
+    getContractFactory(
       name: "CreaderToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CreaderToken__factory>;
@@ -669,6 +673,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IPALicenseToken>;
+    getContractAt(
+      name: "SimpleNFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SimpleNFT>;
     getContractAt(
       name: "CreaderToken",
       address: string,

@@ -10,6 +10,7 @@ import { Header } from "@/components/Header/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://creader.vercel.app/'),
   title: "Creader | Next generation Content",
   description: "Creader | Next generation Content",
   openGraph: {

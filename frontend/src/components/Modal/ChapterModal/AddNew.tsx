@@ -26,6 +26,7 @@ const AddNew = ({ nftAcc, setIsMintedBodhi }: AddNewProps) => {
     };
 
     return (
+        
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button variant='default' className='mb-2 w-full'>Add New</Button>
