@@ -10,6 +10,8 @@ pnpm exec hardhat test
 REPORT_GAS=true npx hardhat test
 pnpm exec hardhat node
 pnpm exec hardhat run scripts/deploy.ts
+npx hardhat --network ethSepolia etherscan-verify
+npx hardhat deploy --network ethSepolia --deploy-scripts ./deploy/04-deploy-IPALic
 ```
 
 Base
