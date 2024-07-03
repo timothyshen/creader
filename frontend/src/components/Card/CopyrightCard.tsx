@@ -13,7 +13,7 @@ import { RemixModal } from '../Modal/DerivetiveModal/RemixModal'
 
 interface CopyrightCardProps {
     id: Number,
-    address: `0x${string}`,
+    address: string,
     owner: boolean,
     title: string,
     content: string,

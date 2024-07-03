@@ -2,4 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as bodhiSol from "./bodhi.sol";
-export * as interface from "./interface";
+export * as interfaceModule from "./interface";

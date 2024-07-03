@@ -72,7 +72,9 @@ const ViewCoverView = ({ id }: { id: string | undefined }) => {
                         setIsMintedBodhi={setIsMintedBodhi}
                         aggregatePrice={prices}
                     />
-                    <BodhiCardView nftAccount={works.nftAccount as `0x${string}`} onPriceUpdate={handlePriceUpdate} isMintedBodhi={isMintedBodhi} currentUser={account.address} />
+                    {works.nftAccount && account.address && (
+                        <BodhiCardView nftAccount={works.nftAccount as `0x${string}`} onPriceUpdate={handlePriceUpdate} isMintedBodhi={isMintedBodhi} currentUser={account.address} />
+                    )}
                 </>
             )}
 
