@@ -30,7 +30,7 @@ export interface IPALicenseTokenInterface extends utils.Interface {
     "LICENSING_MODULE()": FunctionFragment;
     "PIL_TEMPLATE()": FunctionFragment;
     "SNFT()": FunctionFragment;
-    "mintLicenseTokenCopyright(address,uint8,address,uint256)": FunctionFragment;
+    "mintLicenseTokenCopyright(address)": FunctionFragment;
     "remixTypes(address,uint256)": FunctionFragment;
   };
 
@@ -47,7 +47,7 @@ export interface IPALicenseTokenInterface extends utils.Interface {
       | "SNFT"
       | "SNFT()"
       | "mintLicenseTokenCopyright"
-      | "mintLicenseTokenCopyright(address,uint8,address,uint256)"
+      | "mintLicenseTokenCopyright(address)"
       | "remixTypes"
       | "remixTypes(address,uint256)"
   ): FunctionFragment;
@@ -82,21 +82,11 @@ export interface IPALicenseTokenInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "SNFT()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "mintLicenseTokenCopyright",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "mintLicenseTokenCopyright(address,uint8,address,uint256)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    functionFragment: "mintLicenseTokenCopyright(address)",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "remixTypes",
@@ -140,7 +130,7 @@ export interface IPALicenseTokenInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "mintLicenseTokenCopyright(address,uint8,address,uint256)",
+    functionFragment: "mintLicenseTokenCopyright(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "remixTypes", data: BytesLike): Result;
@@ -201,17 +191,11 @@ export interface IPALicenseToken extends BaseContract {
 
     mintLicenseTokenCopyright(
       ipId: PromiseOrValue<string>,
-      licenseTermsId: PromiseOrValue<BigNumberish>,
-      ltRecipient: PromiseOrValue<string>,
-      ltAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "mintLicenseTokenCopyright(address,uint8,address,uint256)"(
+    "mintLicenseTokenCopyright(address)"(
       ipId: PromiseOrValue<string>,
-      licenseTermsId: PromiseOrValue<BigNumberish>,
-      ltRecipient: PromiseOrValue<string>,
-      ltAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -250,17 +234,11 @@ export interface IPALicenseToken extends BaseContract {
 
   mintLicenseTokenCopyright(
     ipId: PromiseOrValue<string>,
-    licenseTermsId: PromiseOrValue<BigNumberish>,
-    ltRecipient: PromiseOrValue<string>,
-    ltAmount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "mintLicenseTokenCopyright(address,uint8,address,uint256)"(
+  "mintLicenseTokenCopyright(address)"(
     ipId: PromiseOrValue<string>,
-    licenseTermsId: PromiseOrValue<BigNumberish>,
-    ltRecipient: PromiseOrValue<string>,
-    ltAmount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -299,19 +277,13 @@ export interface IPALicenseToken extends BaseContract {
 
     mintLicenseTokenCopyright(
       ipId: PromiseOrValue<string>,
-      licenseTermsId: PromiseOrValue<BigNumberish>,
-      ltRecipient: PromiseOrValue<string>,
-      ltAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[string, BigNumber]>;
+    ): Promise<string>;
 
-    "mintLicenseTokenCopyright(address,uint8,address,uint256)"(
+    "mintLicenseTokenCopyright(address)"(
       ipId: PromiseOrValue<string>,
-      licenseTermsId: PromiseOrValue<BigNumberish>,
-      ltRecipient: PromiseOrValue<string>,
-      ltAmount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[string, BigNumber]>;
+    ): Promise<string>;
 
     remixTypes(
       arg0: PromiseOrValue<string>,
@@ -351,17 +323,11 @@ export interface IPALicenseToken extends BaseContract {
 
     mintLicenseTokenCopyright(
       ipId: PromiseOrValue<string>,
-      licenseTermsId: PromiseOrValue<BigNumberish>,
-      ltRecipient: PromiseOrValue<string>,
-      ltAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "mintLicenseTokenCopyright(address,uint8,address,uint256)"(
+    "mintLicenseTokenCopyright(address)"(
       ipId: PromiseOrValue<string>,
-      licenseTermsId: PromiseOrValue<BigNumberish>,
-      ltRecipient: PromiseOrValue<string>,
-      ltAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -405,17 +371,11 @@ export interface IPALicenseToken extends BaseContract {
 
     mintLicenseTokenCopyright(
       ipId: PromiseOrValue<string>,
-      licenseTermsId: PromiseOrValue<BigNumberish>,
-      ltRecipient: PromiseOrValue<string>,
-      ltAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "mintLicenseTokenCopyright(address,uint8,address,uint256)"(
+    "mintLicenseTokenCopyright(address)"(
       ipId: PromiseOrValue<string>,
-      licenseTermsId: PromiseOrValue<BigNumberish>,
-      ltRecipient: PromiseOrValue<string>,
-      ltAmount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

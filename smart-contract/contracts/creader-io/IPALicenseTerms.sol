@@ -75,22 +75,10 @@ contract IPALicenseToken {
     // }
 
     function mintLicenseTokenCopyright(
-        address ipId,
-        uint8 licenseTermsId,
-        address ltRecipient,
-        uint256 ltAmount
-    ) external returns (address, uint256) {
+        address ipId
+    ) external returns (address) {
         LICENSING_MODULE.attachLicenseTerms(ipId, address(PIL_TEMPLATE), 2);
 
-        uint256 startLicenseTokenId = LICENSING_MODULE.mintLicenseTokens({
-            licensorIpId: ipId,
-            licenseTemplate: address(PIL_TEMPLATE),
-            licenseTermsId: 2,
-            amount: ltAmount,
-            receiver: ltRecipient,
-            royaltyContext: "" // for PIL, royaltyContext is empty string
-        });
-
-        return (ipId, startLicenseTokenId);
+        return (ipId);
     }
 }

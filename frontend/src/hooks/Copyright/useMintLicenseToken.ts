@@ -3,7 +3,7 @@ import { IPALicenseToken__factory } from "../../../contract-config/typechain";
 import { IPALicenseTokenAddress } from "@/constant/contract-sepolia";
 
 interface UseMintLicenseTokenReturn {
-  mintLicenseToken: (
+  mintLicenseTokenCopyright: (
     assetId: bigint,
     ipId: `0x${string}`,
     licenseTermsId: number,
@@ -16,10 +16,10 @@ interface UseMintLicenseTokenReturn {
   error: Error | null;
 }
 
-export const useMintLicenseToken = (): UseMintLicenseTokenReturn => {
+export const useMintLicenseTokenCopyright = (): UseMintLicenseTokenReturn => {
   const { data: hash, error, isPending, writeContract } = useWriteContract();
 
-  const mintLicenseToken = async (
+  const mintLicenseTokenCopyright = async (
     assetId: bigint,
     ipId: `0x${string}`,
     licenseTermsId: number,
@@ -32,8 +32,8 @@ export const useMintLicenseToken = (): UseMintLicenseTokenReturn => {
       const result = writeContract({
         address: IPALicenseTokenAddress as `0x${string}`,
         abi: IPALicenseToken__factory.abi,
-        functionName: "mintLicenseToken",
-        args: [assetId, ipId, licenseTermsId, ltRecipient, remixType],
+        functionName: "mintLicenseTokenCopyright",
+        args: [ipId],
       });
       console.log("Transaction result:", result);
     } catch (err) {
@@ -46,7 +46,7 @@ export const useMintLicenseToken = (): UseMintLicenseTokenReturn => {
     });
 
   return {
-    mintLicenseToken,
+    mintLicenseTokenCopyright,
     isPending,
     isConfirming,
     isConfirmed,

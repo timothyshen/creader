@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { useMintLicenseToken } from '@/hooks/Copyright/useMintLicenseToken';
+import { useMintLicenseTokenCopyright } from '@/hooks/Copyright/useMintLicenseToken';
 import { RemixSelect } from '@/components/Modal/DerivetiveModal/RemixSelect'
 import ImageDerivetive from './DerivetiveType/ImageDerivetive'
 import SoundDerivetive from './DerivetiveType/SoundDerivetive'
@@ -32,12 +32,12 @@ export const RemixModal = ({
     const { address } = useAccount()
 
     const {
-        mintLicenseToken,
+        mintLicenseTokenCopyright,
         isPending,
         isConfirming,
         isConfirmed,
         error
-    } = useMintLicenseToken();
+    } = useMintLicenseTokenCopyright();
 
     const handleMintLicenseToken = () => {
         // Function to handle minting the license token
@@ -45,8 +45,8 @@ export const RemixModal = ({
             return
         }
         console.log(address, assetsId, ipId)
-        mintLicenseToken(
-            assetsId,
+        mintLicenseTokenCopyright(
+            BigInt(1),
             ipId,
             3,
             address,
