@@ -102,7 +102,14 @@ const AuthorCoverView: React.FC<AuthorCoverViewProps> = ({ addr }) => {
                         setIsMintedBodhi={setIsMintedBodhi}
                         aggregatePrice={prices}
                     />
-                    <BodhiCardView nftAccount={work.nftAccount as `0x${string}`} onPriceUpdate={handlePriceUpdate} isMintedBodhi={isMintedBodhi} /> {/* Update the type of `nftAccount` prop */}
+                    {address && (
+                        <BodhiCardView
+                            nftAccount={work.nftAccount as `0x${string}`}
+                            onPriceUpdate={handlePriceUpdate}
+                            isMintedBodhi={isMintedBodhi}
+                            currentUser={address as `0x${string}`} // Ensure `address` is defined
+                        />
+                    )}
                 </React.Fragment>
             )))}
         </div>

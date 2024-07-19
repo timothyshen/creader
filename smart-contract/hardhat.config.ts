@@ -32,6 +32,12 @@ const config: HardhatUserConfig = {
     ethSepolia: {
       url: `https://sepolia.infura.io/v3/${ALCHEMY_KEY}`,
       accounts: [PRIVATE_KEY],
+      verify: {
+        etherscan: {
+          apiUrl: "https://api-sepolia.etherscan.io",
+          apiKey: ETHERSCAN_API_KEY,
+        },
+      },
     },
     baseSepolia: {
       url: "https://base-sepolia.blockpi.network/v1/rpc/public",

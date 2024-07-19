@@ -29,10 +29,11 @@ import {
     useWriteContract
 } from "wagmi";
 import { toast } from "sonner"
-import { CopyrightNFTAddress } from "@/constant/contract";
+import { CopyrightNFTAddress } from "@/constant/contract-sepolia";
 import { ConnectWalletClient } from '@/provider/viemConfig';
-import { BaseSepoliaChainExplorer } from '@/constant/contract';
+import { BaseSepoliaChainExplorer } from '@/constant/contract-sepolia';
 import { getTargetNetwork } from "@/utils/network"
+import { sliceAddress } from "@/utils/supportFunction";
 
 
 
@@ -99,6 +100,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                 functionName: 'createCopyright',
                 args: [data.to, BigInt(data.chainId), data.title, data.description, data.status],
             })
+            console.log(errorLog)
             console.log('writeContract')
         } catch (error) {
             console.log(errorLog)
@@ -187,7 +189,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                {hash}
+                                {sliceAddress(hash)}
                             </a>
                         </div>
                     )}

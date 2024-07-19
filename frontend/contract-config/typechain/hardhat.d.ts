@@ -49,10 +49,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IAuthority__factory>;
     getContractFactory(
-      name: "Ownable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Ownable__factory>;
-    getContractFactory(
       name: "IERC1822Proxiable",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC1822Proxiable__factory>;
@@ -289,9 +285,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IPALicenseToken__factory>;
     getContractFactory(
-      name: "LicenseNFT",
+      name: "SimpleNFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.LicenseNFT__factory>;
+    ): Promise<Contracts.SimpleNFT__factory>;
     getContractFactory(
       name: "CreaderToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -382,11 +378,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IAuthority>;
-    getContractAt(
-      name: "Ownable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Ownable>;
     getContractAt(
       name: "IERC1822Proxiable",
       address: string,
@@ -683,10 +674,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IPALicenseToken>;
     getContractAt(
-      name: "LicenseNFT",
+      name: "SimpleNFT",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.LicenseNFT>;
+    ): Promise<Contracts.SimpleNFT>;
     getContractAt(
       name: "CreaderToken",
       address: string,

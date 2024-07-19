@@ -1,6 +1,6 @@
 import { client } from "@/provider/viemConfig";
 import { Bodhi__factory } from "../../contract-config/typechain";
-import { BodhiAddress } from "@/constant/contract";
+import { BodhiAddress } from "@/constant/contract-sepolia";
 import { bigint } from "zod";
 
 // address: '0x5FC8d32690cc91D4c39d9d3abcBD16989F875707',
@@ -23,7 +23,7 @@ export async function getBalanceOf(address: `0x${string}`, assetId: bigint) {
     address: BodhiAddress as `0x${string}`,
     args: [address, BigInt(assetId)],
   });
-  //   console.log("getAssetsId", getAssetsId);
+  console.log("getBalanceOf", getBalanceOf);
   const getNum = Number(getBalanceOf) / 10 ** 18;
   return getNum;
 }

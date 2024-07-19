@@ -9,9 +9,10 @@ type BodhiCardViewProps = {
     nftAccount: `0x${string}`
     isMintedBodhi: boolean
     onPriceUpdate: (owner: `0x${string}` | undefined, eth: number, usd: number) => void
+    currentUser: `0x${string}`
 }
 
-export const BodhiCardView = ({ nftAccount, isMintedBodhi, onPriceUpdate }: BodhiCardViewProps) => {
+export const BodhiCardView = ({ nftAccount, isMintedBodhi, onPriceUpdate, currentUser }: BodhiCardViewProps) => {
 
     const [chapter, setChapter] = useState<Asset[]>([])
     const [loading, setLoading] = useState<boolean>(false);
@@ -45,6 +46,7 @@ export const BodhiCardView = ({ nftAccount, isMintedBodhi, onPriceUpdate }: Bodh
                     content={chapter.content ?? ''}
                     supply={chapter.supply as bigint | undefined}
                     onPriceUpdate={onPriceUpdate}
+                    currentUser={currentUser}
                 />)
             )}
             <Divider />

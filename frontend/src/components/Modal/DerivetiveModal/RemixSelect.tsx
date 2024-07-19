@@ -17,9 +17,8 @@ export function RemixSelect({ selectRemix }: { selectRemix: (value: string) => v
                 <SelectValue placeholder="Select a type of Remix" />
             </SelectTrigger>
             <SelectContent>
-                <SelectItem value="scene">Scene</SelectItem>
                 <SelectItem value="bgm">BGM</SelectItem>
-                <SelectItem value="object">Object</SelectItem>
+                <SelectItem value="setting">Setting</SelectItem>
                 <SelectItem value="character">Character</SelectItem>
             </SelectContent>
         </Select>

@@ -10,6 +10,8 @@ pnpm exec hardhat test
 REPORT_GAS=true npx hardhat test
 pnpm exec hardhat node
 pnpm exec hardhat run scripts/deploy.ts
+npx hardhat --network ethSepolia etherscan-verify
+npx hardhat deploy --network ethSepolia --deploy-scripts ./deploy/04-deploy-IPALic
 ```
 
 Base
@@ -47,4 +49,4 @@ ethSepolia
 0x0645bb5606545f3C9Df7aA60e89e54a9f2dD461e
 
 "IPALicenseToken" at
-0x820174c105ab4fd5BDBFd29D346A2b574610a146
+0x90155352E9643aa86149B90Eb8F622De9Aa066c9

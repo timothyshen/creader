@@ -30,8 +30,6 @@ export type { IAccessManager } from "./@openzeppelin/contracts/access/manager/IA
 export { IAccessManager__factory } from "./factories/@openzeppelin/contracts/access/manager/IAccessManager__factory";
 export type { IAuthority } from "./@openzeppelin/contracts/access/manager/IAuthority";
 export { IAuthority__factory } from "./factories/@openzeppelin/contracts/access/manager/IAuthority__factory";
-export type { Ownable } from "./@openzeppelin/contracts/access/Ownable";
-export { Ownable__factory } from "./factories/@openzeppelin/contracts/access/Ownable__factory";
 export type { IERC1822Proxiable } from "./@openzeppelin/contracts/interfaces/draft-IERC1822.sol/IERC1822Proxiable";
 export { IERC1822Proxiable__factory } from "./factories/@openzeppelin/contracts/interfaces/draft-IERC1822.sol/IERC1822Proxiable__factory";
 export type { IERC1155Errors } from "./@openzeppelin/contracts/interfaces/draft-IERC6093.sol/IERC1155Errors";
@@ -150,8 +148,8 @@ export type { ICopyrightNFT } from "./contracts/creader-io/interfaces/ICopyright
 export { ICopyrightNFT__factory } from "./factories/contracts/creader-io/interfaces/ICopyrightNFT__factory";
 export type { IPALicenseToken } from "./contracts/creader-io/IPALicenseTerms.sol/IPALicenseToken";
 export { IPALicenseToken__factory } from "./factories/contracts/creader-io/IPALicenseTerms.sol/IPALicenseToken__factory";
-export type { LicenseNFT } from "./contracts/creader-io/LicenseNFT";
-export { LicenseNFT__factory } from "./factories/contracts/creader-io/LicenseNFT__factory";
+export type { SimpleNFT } from "./contracts/creader-io/SimpleNFT";
+export { SimpleNFT__factory } from "./factories/contracts/creader-io/SimpleNFT__factory";
 export type { CreaderToken } from "./contracts/creaderToken/CreaderToken";
 export { CreaderToken__factory } from "./factories/contracts/creaderToken/CreaderToken__factory";
 export type { ICreaderToken } from "./contracts/creaderToken/interfaces/ICreaderToken";

@@ -104,16 +104,6 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
         _setTokenURI(newCoverId, NFTMetadata.getTokenURI(newCoverId));
         ++_tokenIds;
 
-        // bytes memory metadata = abi.encode(
-        //     IP.MetadataV1({
-        //         name: "Creader Copyright Token",
-        //         hash: bytes32("This is a book"),
-        //         registrationDate: uint64(block.timestamp),
-        //         registrant: msg.sender,
-        //         uri: "https://bodhi-6551.vercel.app/"
-        //     })
-        // );
-
         address ipId = REGISTRY.register(
             block.chainid,
             contractAddress,

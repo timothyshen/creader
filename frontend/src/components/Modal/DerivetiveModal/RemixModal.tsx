@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react'
 import {
     Dialog,
@@ -11,8 +12,12 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { useMintLicenseToken } from '@/hooks/Copyright/useMintLicenseToken';
+import { useMintLicenseTokenCopyright } from '@/hooks/Copyright/useMintLicenseToken';
 import { RemixSelect } from '@/components/Modal/DerivetiveModal/RemixSelect'
+import ImageDerivetive from './DerivetiveType/ImageDerivetive'
+import SoundDerivetive from './DerivetiveType/SoundDerivetive'
+import SettingDerivetive from './DerivetiveType/SettingDerivetive'
+import { useAccount } from 'wagmi'
 
 type RemixModalProps = {
     assetsId: bigint;
@@ -24,17 +29,42 @@ export const RemixModal = ({
     ipId,
 }: RemixModalProps) => {
     const [selected, setSelected] = useState<string | null>(null)
+    const { address } = useAccount()
 
     const {
-        mintLicenseToken,
+        mintLicenseTokenCopyright,
         isPending,
         isConfirming,
         isConfirmed,
         error
-    } = useMintLicenseToken();
+    } = useMintLicenseTokenCopyright();
 
-    const handleMintLicenseToken = async () => {
+    const handleMintLicenseToken = () => {
         // Function to handle minting the license token
+        if (!address) {
+            return
+        }
+        console.log(address, assetsId, ipId)
+        mintLicenseTokenCopyright(
+            BigInt(1),
+            ipId,
+            3,
+            address,
+            BigInt(1)
+        )
+        setSelected(null)
+    }
+
+    const showDerivtiveContent = () => {
+        if (selected === 'bgm') {
+            return <SoundDerivetive />
+        }
+        if (selected === 'setting') {
+            return <SettingDerivetive />
+        }
+        if (selected === 'character') {
+            return <ImageDerivetive />
+        }
     }
 
     return (
@@ -77,9 +107,12 @@ export const RemixModal = ({
                             className="col-span-3"
                         />
                     </div>
+                    <div>
+                        {showDerivtiveContent()}
+                    </div>
                 </div>
                 <DialogFooter>
-                    <Button type="submit">Save changes</Button>
+                    <Button onClick={handleMintLicenseToken}>Remix</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

@@ -14,7 +14,7 @@ import { getTargetNetwork } from "@/utils/network";
 import {
   CopyrightNFTAddress,
   BaseSepoliaChainExplorer,
-} from "@/constant/contract";
+} from "@/constant/contract-sepolia";
 import { CopyrightNFT__factory } from "../../../contract-config/typechain";
 
 const formSchema = z.object({

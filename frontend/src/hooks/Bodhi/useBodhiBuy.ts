@@ -1,7 +1,7 @@
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { Bodhi__factory } from "../../../contract-config/typechain";
 import { parseEther } from "viem";
-import { BodhiAddress } from "@/constant/contract";
+import { BodhiAddress } from "@/constant/contract-sepolia";
 
 interface UseBodhiBuyReturn {
   bodhiBuy: (id: bigint, amount: number, ethPrice: string) => Promise<void>;

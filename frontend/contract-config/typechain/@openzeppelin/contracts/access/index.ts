@@ -3,4 +3,3 @@
 /* eslint-disable */
 import type * as manager from "./manager";
 export type { manager };
-export type { Ownable } from "./Ownable";

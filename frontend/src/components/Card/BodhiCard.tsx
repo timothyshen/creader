@@ -8,12 +8,12 @@ import {
     CardTitle
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { getBuyPrice } from '@/utils/BodhiContract';
+import { getBuyPrice, getBalanceOf } from '@/utils/BodhiContract';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
 import { TradeModalBuy } from '@/components/Modal/PurchaseModal/TradeModalBuy';
 import { TradeModalSell } from '@/components/Modal/PurchaseModal/TradeModalSell';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
-// import { RemixModal } from '@/components/Modal/DerivetiveModal/RemixModal';
+import { RemixModal } from '@/components/Modal/DerivetiveModal/RemixModal';
 
 interface BodhiCardProps {
     order: number;
@@ -23,14 +23,16 @@ interface BodhiCardProps {
     content: string;
     supply: bigint | undefined;
     onPriceUpdate: (owner: `0x${string}` | undefined, eth: number, usd: number) => void;
+    currentUser: `0x${string}`;
 }
 
 
 
-export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPriceUpdate }: BodhiCardProps) => {
+export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPriceUpdate, currentUser }: BodhiCardProps) => {
     const [filePriceETH, setFilePriceETH] = useState<string>();
     const [filePriceUSD, setFilePriceUSD] = useState<string>();
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
+    const [amountHolding, setAmountHolding] = useState<number>(0);
 
 
     const newPrice = useNativeCurrencyPrice();
@@ -47,23 +49,27 @@ export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPric
 
     const toggleContent = () => setIsExpanded(!isExpanded);
 
-    const fetchPrices = async (supply: bigint, newPrice: number) => {
+    const fetchPrices = useCallback(async (supply: bigint, newPrice: number) => {
         const getPriceFeedETH = await getBuyPrice(chapterId, 1);
+        const holding = await getBalanceOf(currentUser, chapterId);
+        console.log('holding', holding);
         const priceEth = newPrice;
         const priceUsd = (getPriceFeedETH * priceEth).toFixed(2);
         onPriceUpdate(owner, Number(getPriceFeedETH), Number(priceUsd));
-        return { eth: getPriceFeedETH.toString(), usd: priceUsd };
-    };
+        return { eth: getPriceFeedETH.toString(), usd: priceUsd, amountHolding: holding };
+    }, [chapterId, currentUser, onPriceUpdate, owner]);
 
 
     useEffect(() => {
         if (supply) {
-            fetchPrices(supply, newPrice).then(({ eth, usd }) => {
+            fetchPrices(supply, newPrice).then(({ eth, usd, amountHolding }) => {
                 setFilePriceETH(eth);
                 setFilePriceUSD(usd);
+                setAmountHolding(amountHolding);
             });
+
         }
-    }, [supply, newPrice]);
+    }, [supply, newPrice, owner, chapterId, fetchPrices]);
 
     return (
         <Card className='mb-4 p-2'>
@@ -113,9 +119,11 @@ export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPric
                         />
                     </div>
                 </div>
-                {/* <div className=' mt-2 w-full'>
-                    <RemixModal assetsId={chapterId} ipId={owner} />
-                </div> */}
+                {amountHolding > 5 && (
+                    <div className=' mt-2 w-full'>
+                        <RemixModal assetsId={chapterId} ipId={owner} />
+                    </div>
+                )}
             </CardFooter>
         </Card >
     );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getCover } from '@/utils/CopyrightContract';
 import { CopyrightCard } from './Card/CopyrightCard';
 import { useAccount } from 'wagmi';
@@ -13,11 +13,10 @@ const ViewCoverView = ({ id }: { id: string | undefined }) => {
     const [works, setWorks] = useState<any>();
     const [isMintedBodhi, setIsMintedBodhi] = useState<boolean>(false)
     const [prices, setPrices] = useState<PriceData>();
-    const router = useRouter();
 
     const account = useAccount();
 
-    const handlePriceUpdate = (coverAcc: any, ethPrice: any, usdPrice: any) => {
+    const handlePriceUpdate = useCallback((coverAcc: any, ethPrice: any, usdPrice: any) => {
         setPrices(prevPrices => {
             if (!prevPrices) {
                 return {
@@ -37,7 +36,7 @@ const ViewCoverView = ({ id }: { id: string | undefined }) => {
                 },
             };
         });
-    };
+    }, []);
 
     useEffect(() => {
         const init = async () => {
@@ -73,7 +72,9 @@ const ViewCoverView = ({ id }: { id: string | undefined }) => {
                         setIsMintedBodhi={setIsMintedBodhi}
                         aggregatePrice={prices}
                     />
-                    <BodhiCardView nftAccount={works.nftAccount as `0x${string}`} onPriceUpdate={handlePriceUpdate} isMintedBodhi={isMintedBodhi} />
+                    {works.nftAccount && account.address && (
+                        <BodhiCardView nftAccount={works.nftAccount as `0x${string}`} onPriceUpdate={handlePriceUpdate} isMintedBodhi={isMintedBodhi} currentUser={account.address} />
+                    )}
                 </>
             )}
 
