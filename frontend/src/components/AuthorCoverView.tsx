@@ -72,11 +72,13 @@ const AuthorCoverView: React.FC<AuthorCoverViewProps> = ({ addr }) => {
 
     // TODO: fix onPriceUpdate
     return (
-        <div className='flex flex-col w-[450px] space-y-5'>
+        <div className='flex flex-col space-y-5'>
 
             <p className='my-2 py-2 text-lg font-bold'>Book: </p>
 
-            {works.length !== 0 && <CreateCopyright setIsMinted={setIsMintedCopyright} />}
+            <div className='flex flex-col w-[450px] space-y-5'>
+                {works.length !== 0 && <CreateCopyright setIsMinted={setIsMintedCopyright} />}
+            </div>
 
             {loading ? (
                 <p className='text-xl font-bold mx-auto mt-20'>Loading...</p> // Display loading state
@@ -90,26 +92,27 @@ const AuthorCoverView: React.FC<AuthorCoverViewProps> = ({ addr }) => {
             ) : (works.filter(item => item.owner == address).map((work: any, index: number) => (
                 // Notice the return statement here and the key prop
                 <React.Fragment key={work.id}>
-
-                    <CopyrightCard
-                        key={work.id} // Assuming `work.id` is unique
-                        id={Number(work.id)}
-                        address={(work.owner).slice(0, 6) + '...' + (work.owner).slice(-4)}
-                        owner={address == work.owner}
-                        content={work.description}
-                        title={work.title}
-                        coverAcc={work.nftAccount}
-                        setIsMintedBodhi={setIsMintedBodhi}
-                        aggregatePrice={prices}
-                    />
-                    {address && (
-                        <BodhiCardView
-                            nftAccount={work.nftAccount as `0x${string}`}
-                            onPriceUpdate={handlePriceUpdate}
-                            isMintedBodhi={isMintedBodhi}
-                            currentUser={address as `0x${string}`} // Ensure `address` is defined
+                    <div className='flex flex-row space-x-5'>
+                        <CopyrightCard
+                            key={work.id} // Assuming `work.id` is unique
+                            id={Number(work.id)}
+                            address={(work.owner).slice(0, 6) + '...' + (work.owner).slice(-4)}
+                            owner={address == work.owner}
+                            content={work.description}
+                            title={work.title}
+                            coverAcc={work.nftAccount}
+                            setIsMintedBodhi={setIsMintedBodhi}
+                            aggregatePrice={prices}
                         />
-                    )}
+                        {address && (
+                            <BodhiCardView
+                                nftAccount={work.nftAccount as `0x${string}`}
+                                onPriceUpdate={handlePriceUpdate}
+                                isMintedBodhi={isMintedBodhi}
+                                currentUser={address as `0x${string}`} // Ensure `address` is defined
+                            />
+                        )}
+                    </div>
                 </React.Fragment>
             )))}
         </div>

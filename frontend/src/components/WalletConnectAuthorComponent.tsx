@@ -23,7 +23,7 @@ const WalletConnectAuthorComponent = ({ addr }: WalletConnectComponentProps) => 
     }
 
     return (
-        <div className="flex flex-col w-[450px]">
+        <div className="flex flex-col">
             {isConnected ?
                 (<>
                     <Account />

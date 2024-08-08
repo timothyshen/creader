@@ -85,7 +85,6 @@ export const BodhiCard = ({ order, owner, id, chapterId, content, supply, onPric
                 </div>
                 <Button
                     onClick={toggleContent}
-                    variant="outline"
                     className='w-full'
                 >
                     {/* Button text based on isExpanded state */}
