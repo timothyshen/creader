@@ -17,7 +17,6 @@ const WalletConnectAuthorComponent = ({ addr }: WalletConnectComponentProps) => 
     const currentChain = getTargetNetwork();
 
     if (isConnected) {
-        console.log('currentChain', currentChain);
         const walletClient = ConnectWalletClient();
         walletClient.switchChain(currentChain);
     }

@@ -48,7 +48,7 @@ export const ListCoverView = () => {
     // TODO: Add a search bar to filter the list of works
 
     return (
-        <div>
+        <div className="flex justify-center">
             {/* <div className='mb-4'>
                 <Search className=" absolute h-4 w-4 m-3 text-muted-foreground" />
                 <Input
@@ -65,7 +65,7 @@ export const ListCoverView = () => {
                     <TabsTrigger value="recent">Most Recent</TabsTrigger>
                 </TabsList>
                 <TabsContent value="listAll">
-                    <div className=" flex flex-col w-[450px]">
+                    <div className=" flex flex-col w-[450px] mx-auto">
                         {loading ? (
                             <p className='text-xl font-bold mx-auto mt-20'>Loading...</p> // Display loading state
                         ) : works.length === 0 ? (
@@ -92,7 +92,7 @@ export const ListCoverView = () => {
                     <PagenationComponent />
                 </TabsContent>
                 <TabsContent value="recent">
-                    <div className="flex flex-col w-[450px]">
+                    <div className="flex flex-col w-[450px] mx-auto">
                         {loading ? (
                             <p className='text-xl font-bold mx-auto mt-20'>Loading...</p> // Display loading state
                         ) : works.length === 0 ? (
