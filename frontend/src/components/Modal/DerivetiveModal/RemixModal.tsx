@@ -17,7 +17,12 @@ import { RemixSelect } from '@/components/Modal/DerivetiveModal/RemixSelect'
 import ImageDerivetive from './DerivetiveType/ImageDerivetive'
 import SoundDerivetive from './DerivetiveType/SoundDerivetive'
 import SettingDerivetive from './DerivetiveType/SettingDerivetive'
-import { useAccount } from 'wagmi'
+import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
+import { IIPAccount__factory, IPALicenseToken__factory } from '../../../../contract-config/typechain'
+import { encodeFunctionData, parseEther } from 'viem'
+import { IPALicenseTokenAddress } from '@/constant/contract-sepolia'
+
+
 
 type RemixModalProps = {
     assetsId: bigint;
@@ -30,30 +35,55 @@ export const RemixModal = ({
 }: RemixModalProps) => {
     const [selected, setSelected] = useState<string | null>(null)
     const { address } = useAccount()
-
     const {
-        mintLicenseTokenCopyright,
+        data: hash,
+        error,
         isPending,
-        isConfirming,
-        isConfirmed,
-        error
-    } = useMintLicenseTokenCopyright();
+        writeContract
+    } = useWriteContract()
+
 
     const handleMintLicenseToken = () => {
+        console.log("test")
+
+        const data = encodeFunctionData({
+            abi: IPALicenseToken__factory.abi,
+            functionName: "mintLicenseTokenCopyright",
+            args: [ipId],
+        });
+        console.log(data)
+        console.log(IPALicenseTokenAddress)
+
+        writeContract({
+            address: ipId,
+            abi: IIPAccount__factory.abi,
+            functionName: 'execute',
+            args: [
+                IPALicenseTokenAddress as `0x${string}`,
+                parseEther('0'),
+                data,
+            ],
+        });
+        console.log(error)
         // Function to handle minting the license token
-        if (!address) {
-            return
-        }
-        console.log(address, assetsId, ipId)
-        mintLicenseTokenCopyright(
-            BigInt(1),
-            ipId,
-            3,
-            address,
-            BigInt(1)
-        )
-        setSelected(null)
+        // if (!address) {
+        //     return
+        // }
+        // console.log(address, assetsId, ipId)
+        // mintLicenseTokenCopyright(
+        //     BigInt(1),
+        //     ipId,
+        //     3,
+        //     address,
+        //     BigInt(1)
+        // )
+        // setSelected(null)
     }
+
+    const { isLoading: isConfirming, isSuccess: isConfirmed } =
+        useWaitForTransactionReceipt({
+            hash,
+        })
 
     const showDerivtiveContent = () => {
         if (selected === 'bgm') {
@@ -113,6 +143,9 @@ export const RemixModal = ({
                 </div>
                 <DialogFooter>
                     <Button onClick={handleMintLicenseToken}>Remix</Button>
+                    {isConfirming && <p>Confirming...</p>}
+                    {isConfirmed && <p>Confirmed</p>}
+                    {error && <p>Error: {error.message}</p>}
                 </DialogFooter>
             </DialogContent>
         </Dialog>

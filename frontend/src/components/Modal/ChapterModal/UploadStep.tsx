@@ -1,12 +1,10 @@
 import {
-    DialogContent,
     DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { StepProps } from "@/types/steptypes"
 import { IIPAccount__factory, Bodhi__factory } from "../../../../contract-config/typechain";
 import {
@@ -15,7 +13,7 @@ import {
 } from "wagmi";
 import { encodeFunctionData, parseEther } from "viem";
 import getWebIrys from "@/provider/irys";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { BodhiAddress } from '@/constant/contract-sepolia'
 import MarkdownEditor from "@/components/MarkdownEditor"
 import { ArrowBigLeft } from "lucide-react";
