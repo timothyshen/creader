@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description: "Creating world with the community",
     type: "website",
     locale: "en_US",
-    url: "https://bodhi-6551.vercel.app/",
+    url: "https://creader.vercel.app/",
   },
 };
 

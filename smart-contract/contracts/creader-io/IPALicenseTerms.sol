@@ -77,6 +77,7 @@ contract IPALicenseToken {
     function mintLicenseTokenCopyright(
         address ipId
     ) external returns (address) {
+        
         LICENSING_MODULE.attachLicenseTerms(ipId, address(PIL_TEMPLATE), 1);
 
         return (ipId);

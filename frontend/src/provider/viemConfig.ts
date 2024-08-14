@@ -1,5 +1,4 @@
 import { createConfig, http } from "wagmi";
-import { baseSepolia } from "wagmi/chains";
 import {
   createClient,
   createPublicClient,
@@ -8,6 +7,7 @@ import {
   custom,
 } from "viem";
 import creaderConfig from "./app.config";
+import { StoryClient, StoryConfig } from "@story-protocol/core-sdk";
 
 import degenChain from "./degenChain";
 
@@ -50,6 +50,8 @@ export const client = createPublicClient({
   chain: creaderConfig.targetNetwork,
   transport: http(),
 });
+
+
 
 // const localhost = defineChain({
 //   id: 1,
