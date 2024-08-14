@@ -91,7 +91,6 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
     // Function to create a new copyright
     function createCopyright(
         address to,
-        uint256 chainId,
         string memory _title,
         string memory _description,
         string memory _status
