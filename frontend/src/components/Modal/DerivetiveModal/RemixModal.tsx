@@ -19,6 +19,7 @@ import SoundDerivetive from './DerivetiveType/SoundDerivetive'
 import SettingDerivetive from './DerivetiveType/SettingDerivetive'
 import { useAccount, useWriteContract, useWaitForTransactionReceipt, useWalletClient } from 'wagmi'
 import { IIPAccount__factory, IPALicenseToken__factory } from '../../../../contract-config/typechain'
+import { AccessController__factory } from '../../../../contract-config/typechain'
 import { custom, encodeFunctionData, parseEther } from 'viem'
 import { IPALicenseTokenAddress } from '@/constant/contract-sepolia'
 import { StoryClient, StoryConfig } from '@story-protocol/core-sdk'
@@ -60,23 +61,37 @@ export const RemixModal = ({
 
 
     const handleMintLicenseToken = async () => {
-        try {
-            console.log("Starting mint process");
+        // try {
+        //     console.log("Starting mint process");
 
-            const client = setupStoryClient();
+        //     const client = setupStoryClient();
 
-            const resp = await client.permission.setPermission({
-                ipId: ipId,
-                to: "0xe89b0eaa8a0949738efa80bb531a165fb3456cbe",
-                signer: IPALicenseTokenAddress as `0x${string}`,
-                func: "0x2a4130c0",
-                permission: 1
-            });
-            console.log("Permission set:", resp);
-        } catch (error) {
-            console.error("Error minting license token:", error);
-            // Handle the error appropriately, e.g., show an error message to the user
-        }
+        //     const resp = await client.permission.setPermission({
+        //         ipId: ipId,
+        //         to: "0xe89b0eaa8a0949738efa80bb531a165fb3456cbe",
+        //         signer: IPALicenseTokenAddress as `0x${string}`,
+        //         func: "2A4130C0",
+        //         permission: 1
+        //     });
+        //     console.log(resp);
+        //     console.log("Permission set:", resp);
+        // } catch (error) {
+        //     console.error("Error minting license token:", error);
+        //     // Handle the error appropriately, e.g., show an error message to the user
+        // }
+
+        writeContract({
+            address: "0xf9936a224b3deb6f9a4645ccafa66f7ece83cf0a",
+            abi: AccessController__factory.abi,
+            functionName: "setPermission",
+            args: [
+                IPALicenseTokenAddress as `0x${string}`,
+                "0xe89b0eaa8a0949738efa80bb531a165fb3456cbe",
+                IPALicenseTokenAddress as `0x${string}`,
+                "2A4130C0",
+                1
+            ],
+        })
 
         const data = encodeFunctionData({
             abi: IPALicenseToken__factory.abi,
@@ -96,6 +111,7 @@ export const RemixModal = ({
                 data,
             ],
         });
+
         // mintLicenseTokenCopyright(
         //     BigInt(1),
         //     ipId,

@@ -161,6 +161,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AccessControlled__factory>;
     getContractFactory(
+      name: "AccessController",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AccessController__factory>;
+    getContractFactory(
       name: "IAccessController",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IAccessController__factory>;
@@ -224,6 +228,10 @@ declare module "hardhat/types/runtime" {
       name: "ILicenseRegistry",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ILicenseRegistry__factory>;
+    getContractFactory(
+      name: "IModuleRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IModuleRegistry__factory>;
     getContractFactory(
       name: "AccessPermission",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -519,6 +527,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.AccessControlled>;
     getContractAt(
+      name: "AccessController",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AccessController>;
+    getContractAt(
       name: "IAccessController",
       address: string,
       signer?: ethers.Signer
@@ -598,6 +611,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ILicenseRegistry>;
+    getContractAt(
+      name: "IModuleRegistry",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IModuleRegistry>;
     getContractAt(
       name: "AccessPermission",
       address: string,

@@ -47,9 +47,7 @@ contract Bodhi is ERC1155 {
         Sell
     } // = 0, 1, 2
 
-    constructor(address _owner) {
-        owner = _owner;
-    }
+    constructor() {}
 
     function create(string calldata arTxId) public {
         bytes32 txHash = keccak256(abi.encodePacked(arTxId));

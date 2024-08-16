@@ -25,6 +25,7 @@ import type {
 
 export interface IPALicenseTokenInterface extends utils.Interface {
   functions: {
+    "ACCESS_CONTROLLER()": FunctionFragment;
     "BODHI()": FunctionFragment;
     "IP_ASSET_REGISTRY()": FunctionFragment;
     "LICENSING_MODULE()": FunctionFragment;
@@ -36,6 +37,8 @@ export interface IPALicenseTokenInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "ACCESS_CONTROLLER"
+      | "ACCESS_CONTROLLER()"
       | "BODHI"
       | "BODHI()"
       | "IP_ASSET_REGISTRY"
@@ -52,6 +55,14 @@ export interface IPALicenseTokenInterface extends utils.Interface {
       | "remixTypes(address,uint256)"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "ACCESS_CONTROLLER",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "ACCESS_CONTROLLER()",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "BODHI", values?: undefined): string;
   encodeFunctionData(functionFragment: "BODHI()", values?: undefined): string;
   encodeFunctionData(
@@ -97,6 +108,14 @@ export interface IPALicenseTokenInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "ACCESS_CONTROLLER",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "ACCESS_CONTROLLER()",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "BODHI", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "BODHI()", data: BytesLike): Result;
   decodeFunctionResult(
@@ -169,6 +188,10 @@ export interface IPALicenseToken extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    ACCESS_CONTROLLER(overrides?: CallOverrides): Promise<[string]>;
+
+    "ACCESS_CONTROLLER()"(overrides?: CallOverrides): Promise<[string]>;
+
     BODHI(overrides?: CallOverrides): Promise<[string]>;
 
     "BODHI()"(overrides?: CallOverrides): Promise<[string]>;
@@ -211,6 +234,10 @@ export interface IPALicenseToken extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[number]>;
   };
+
+  ACCESS_CONTROLLER(overrides?: CallOverrides): Promise<string>;
+
+  "ACCESS_CONTROLLER()"(overrides?: CallOverrides): Promise<string>;
 
   BODHI(overrides?: CallOverrides): Promise<string>;
 
@@ -255,6 +282,10 @@ export interface IPALicenseToken extends BaseContract {
   ): Promise<number>;
 
   callStatic: {
+    ACCESS_CONTROLLER(overrides?: CallOverrides): Promise<string>;
+
+    "ACCESS_CONTROLLER()"(overrides?: CallOverrides): Promise<string>;
+
     BODHI(overrides?: CallOverrides): Promise<string>;
 
     "BODHI()"(overrides?: CallOverrides): Promise<string>;
@@ -301,6 +332,10 @@ export interface IPALicenseToken extends BaseContract {
   filters: {};
 
   estimateGas: {
+    ACCESS_CONTROLLER(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "ACCESS_CONTROLLER()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     BODHI(overrides?: CallOverrides): Promise<BigNumber>;
 
     "BODHI()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -345,6 +380,12 @@ export interface IPALicenseToken extends BaseContract {
   };
 
   populateTransaction: {
+    ACCESS_CONTROLLER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "ACCESS_CONTROLLER()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     BODHI(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "BODHI()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
