@@ -12,22 +12,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { useMintLicenseTokenCopyright } from '@/hooks/Copyright/useMintLicenseToken';
 import { RemixSelect } from '@/components/Modal/DerivetiveModal/RemixSelect'
 import ImageDerivetive from './DerivetiveType/ImageDerivetive'
 import SoundDerivetive from './DerivetiveType/SoundDerivetive'
 import SettingDerivetive from './DerivetiveType/SettingDerivetive'
-import { useAccount, useWriteContract, useWaitForTransactionReceipt, useWalletClient } from 'wagmi'
-import { IIPAccount__factory, IPALicenseToken__factory } from '../../../../contract-config/typechain'
-import { AccessController__factory } from '../../../../contract-config/typechain'
-import { custom, encodeFunctionData, parseEther } from 'viem'
-import { IPALicenseTokenAddress } from '@/constant/contract-sepolia'
-import { StoryClient, StoryConfig } from '@story-protocol/core-sdk'
-
-type RemixModalProps = {
-    assetsId: bigint;
-    ipId: `0x${string}`;
-}
+import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
+import { ILicensingModule__factory } from '../../../../contract-config/typechain'
+import { RemixModalProps } from './DerivetiveType'
 
 export const RemixModal = ({
     assetsId,
@@ -42,85 +33,19 @@ export const RemixModal = ({
         writeContract
     } = useWriteContract()
 
-    // const { mintLicenseTokenCopyright, isPending, isConfirming, isConfirmed, error } = useMintLicenseTokenCopyright();
-
-    const { data: wallet } = useWalletClient();
-
-    function setupStoryClient() {
-        if (!wallet) {
-            throw new Error("Wallet is not connected");
-        }
-        const config: StoryConfig = {
-            account: wallet.account,
-            transport: custom(wallet.transport),
-            chainId: "sepolia"
-        };
-        const client = StoryClient.newClient(config);
-        return client;
-    }
-
 
     const handleMintLicenseToken = async () => {
-        // try {
-        //     console.log("Starting mint process");
-
-        //     const client = setupStoryClient();
-
-        //     const resp = await client.permission.setPermission({
-        //         ipId: ipId,
-        //         to: "0xe89b0eaa8a0949738efa80bb531a165fb3456cbe",
-        //         signer: IPALicenseTokenAddress as `0x${string}`,
-        //         func: "2A4130C0",
-        //         permission: 1
-        //     });
-        //     console.log(resp);
-        //     console.log("Permission set:", resp);
-        // } catch (error) {
-        //     console.error("Error minting license token:", error);
-        //     // Handle the error appropriately, e.g., show an error message to the user
-        // }
 
         writeContract({
-            address: "0xf9936a224b3deb6f9a4645ccafa66f7ece83cf0a",
-            abi: AccessController__factory.abi,
-            functionName: "setPermission",
+            address: "0xe89b0EaA8a0949738efA80bB531a165FB3456CBe" as `0x${string}`,
+            abi: ILicensingModule__factory.abi,
+            functionName: "attachLicenseTerms",
             args: [
-                IPALicenseTokenAddress as `0x${string}`,
-                "0xe89b0eaa8a0949738efa80bb531a165fb3456cbe",
-                IPALicenseTokenAddress as `0x${string}`,
-                "2A4130C0",
-                1
-            ],
+                ipId,
+                "0x260B6CB6284c89dbE660c0004233f7bB99B5edE7" as `0x${string}`,
+                BigInt(1)
+            ]
         })
-
-        const data = encodeFunctionData({
-            abi: IPALicenseToken__factory.abi,
-            functionName: "mintLicenseTokenCopyright",
-            args: [ipId],
-        });
-
-        console.log("Encoded function data:", data);
-
-        writeContract({
-            address: ipId,
-            abi: IIPAccount__factory.abi,
-            functionName: 'execute',
-            args: [
-                IPALicenseTokenAddress as `0x${string}`,
-                parseEther('0'),
-                data,
-            ],
-        });
-
-        // mintLicenseTokenCopyright(
-        //     BigInt(1),
-        //     ipId,
-        //     3,
-        //     address as `0x${string}`,
-        //     BigInt(1)
-        // )
-
-
     }
 
     const { isLoading: isConfirming, isSuccess: isConfirmed } =
@@ -185,7 +110,7 @@ export const RemixModal = ({
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button onClick={handleMintLicenseToken}>Remix</Button>
+                    <Button onClick={handleMintLicenseToken}>Attach License Terms</Button>
                     {isConfirming && <p>Confirming...</p>}
                     {isConfirmed && <p>Confirmed</p>}
                     {error && <p>Error: {error.message}</p>}

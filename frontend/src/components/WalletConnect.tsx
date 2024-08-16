@@ -7,6 +7,7 @@ import ViewCoverView from "./ViewCoverView";
 import { ConnectWalletClient } from "@/provider/viemConfig";
 import { getTargetNetwork } from "@/utils/network";
 import { Card } from "./ui/card";
+import { RemixCard } from "./Modal/DerivetiveModal/RemixCard";
 
 
 type WalletConnectComponentProps = {
@@ -80,6 +81,8 @@ const WalletConnectComponent = ({ id }: WalletConnectComponentProps) => {
                             </div>
                         </Card>
                     </div>
+                    <RemixCard assetsId={BigInt(1)} ipId={id as `0x${string}`} />
+
                 </>) :
                 (<>
                     <div className="text-2xl font-bold mb-4 mx-auto">Connect to a wallet</div>
