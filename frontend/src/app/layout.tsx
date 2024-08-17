@@ -32,9 +32,7 @@ export default function RootLayout({
       <body>
         <ProviderWrap>
           <div>
-
             {children}
-
             <Toaster />
           </div>
         </ProviderWrap>

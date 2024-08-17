@@ -41,42 +41,7 @@ contract IPALicenseToken {
         ACCESS_CONTROLLER = AccessController(accessController);
     }
 
-    // function mintLicenseTokenCopyright(
-    //     address ipId,
-    //     uint8 licenseTermsId,
-    //     address ltRecipient,
-    //     uint256 remixType
-    // ) external returns (uint256 tokenId, uint256 startLicenseTokenId) {
-    //     require(remixType <= uint256(RemixType.SOUND), "Invalid RemixType");
-    //     tokenId = SNFT.mint(address(this));
 
-    //     LICENSING_MODULE.attachLicenseTerms(ipId, address(PIL_TEMPLATE), 1);
-
-    //     // Mint a License Token from the attached license terms.
-    //     // Note that the License Token is minted to the ltRecipient.
-    //     startLicenseTokenId = LICENSING_MODULE.mintLicenseTokens({
-    //         licensorIpId: ipId,
-    //         licenseTemplate: address(PIL_TEMPLATE),
-    //         licenseTermsId: licenseTermsId,
-    //         amount: 1,
-    //         receiver: ltRecipient,
-    //         royaltyContext: ""
-    //     });
-
-    //     // Adding remix mapping
-    //     remixTypes[ltRecipient][startLicenseTokenId] = RemixType(remixType);
-
-    //     // TODO: need to double check on the license token id
-    //     uint256[] memory licenseId = new uint256[](licenseTermsId);
-
-    //     LICENSING_MODULE.registerDerivativeWithLicenseTokens(
-    //         ipId,
-    //         licenseId,
-    //         ""
-    //     );
-
-    //     return (startLicenseTokenId, startLicenseTokenId);
-    // }
 
     function mintLicenseTokenCopyright(
         address ipId
