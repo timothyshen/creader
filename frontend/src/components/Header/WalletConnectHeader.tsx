@@ -62,7 +62,19 @@ const WalletConnectComponentHeader = () => {
 
     return (
         <div className="max-h-52 flex flex-col">
-            {!isConnected && <Button onClick={() => handleSign()}>Sign In</Button>}
+            {!isConnected && <Dialog>
+                <DialogTrigger asChild>
+                    <Button variant="link" className='text-xl text-black'>
+                        Connect
+                    </Button>
+                </DialogTrigger>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Are you absolutely sure?</DialogTitle>
+                    </DialogHeader>
+                    <WalletOptions />
+                </DialogContent>
+            </Dialog>}
             {isConnected && !hasSigned && <Button onClick={() => handleSign()}>Sign In</Button>}
             {isConnected && hasSigned && <AccountDisplayHeader />}
         </div>

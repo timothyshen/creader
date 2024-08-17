@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { config } from "@/provider/viemConfig"
 import { useGlobalState } from '@/stores/useGlobalState';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
+import { SessionProvider } from 'next-auth/react';
 
 
 const queryClient = new QueryClient();
@@ -26,7 +27,9 @@ const ProviderWrap = ({ children }: WagmiProviderProps) => {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        {children}
+        <SessionProvider>
+          {children}
+        </SessionProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );
