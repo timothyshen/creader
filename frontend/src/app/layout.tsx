@@ -22,17 +22,6 @@ export const metadata: Metadata = {
   },
 };
 
-
-const LayoutWrap = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <>
-      <Header />
-      {children}
-      <Footer />
-    </>
-  );
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,15 +29,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <ProviderWrap>
-          <div className={inter.className}>
-            <LayoutWrap>{children}</LayoutWrap>
+          <div>
+
+            {children}
+
             <Toaster />
           </div>
         </ProviderWrap>
       </body>
     </html>
-
   );
 }
