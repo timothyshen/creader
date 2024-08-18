@@ -86,6 +86,8 @@ export type { Strings } from "./@openzeppelin/contracts/utils/Strings";
 export { Strings__factory } from "./factories/@openzeppelin/contracts/utils/Strings__factory";
 export type { AccessControlled } from "./@story-protocol/protocol-core/contracts/access/AccessControlled";
 export { AccessControlled__factory } from "./factories/@story-protocol/protocol-core/contracts/access/AccessControlled__factory";
+export type { AccessController } from "./@story-protocol/protocol-core/contracts/access/AccessController";
+export { AccessController__factory } from "./factories/@story-protocol/protocol-core/contracts/access/AccessController__factory";
 export type { IAccessController } from "./@story-protocol/protocol-core/contracts/interfaces/access/IAccessController";
 export { IAccessController__factory } from "./factories/@story-protocol/protocol-core/contracts/interfaces/access/IAccessController__factory";
 export type { IIPAccount } from "./@story-protocol/protocol-core/contracts/interfaces/IIPAccount";
@@ -118,6 +120,8 @@ export type { IIPAssetRegistry } from "./@story-protocol/protocol-core/contracts
 export { IIPAssetRegistry__factory } from "./factories/@story-protocol/protocol-core/contracts/interfaces/registries/IIPAssetRegistry__factory";
 export type { ILicenseRegistry } from "./@story-protocol/protocol-core/contracts/interfaces/registries/ILicenseRegistry";
 export { ILicenseRegistry__factory } from "./factories/@story-protocol/protocol-core/contracts/interfaces/registries/ILicenseRegistry__factory";
+export type { IModuleRegistry } from "./@story-protocol/protocol-core/contracts/interfaces/registries/IModuleRegistry";
+export { IModuleRegistry__factory } from "./factories/@story-protocol/protocol-core/contracts/interfaces/registries/IModuleRegistry__factory";
 export type { AccessPermission } from "./@story-protocol/protocol-core/contracts/lib/AccessPermission";
 export { AccessPermission__factory } from "./factories/@story-protocol/protocol-core/contracts/lib/AccessPermission__factory";
 export type { Errors } from "./@story-protocol/protocol-core/contracts/lib/Errors";

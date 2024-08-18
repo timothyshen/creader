@@ -18,19 +18,8 @@ export const metadata: Metadata = {
     description: "Creating world with the community",
     type: "website",
     locale: "en_US",
-    url: "https://bodhi-6551.vercel.app/",
+    url: "https://creader.vercel.app/",
   },
-};
-
-
-const LayoutWrap = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <>
-      <Header />
-      {children}
-      <Footer />
-    </>
-  );
 };
 
 export default function RootLayout({
@@ -40,15 +29,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <ProviderWrap>
-          <div className={inter.className}>
-            <LayoutWrap>{children}</LayoutWrap>
+          <div>
+            {children}
             <Toaster />
           </div>
         </ProviderWrap>
       </body>
     </html>
-
   );
 }

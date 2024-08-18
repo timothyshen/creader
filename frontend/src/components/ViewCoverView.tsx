@@ -57,7 +57,6 @@ const ViewCoverView = ({ id }: { id: string | undefined }) => {
 
     return (
         <>
-            <p className='my-2 py-2 text-lg font-bold'>Book: </p >
             {works && (
                 // Notice the return statement here and the key prop
                 <>

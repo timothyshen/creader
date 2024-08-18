@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     Card,
     CardContent,
@@ -8,7 +8,7 @@ import {
     CardTitle
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { getBuyPrice, getBalanceOf } from '@/utils/BodhiContract';
+import { getBalanceOf, getBuyPrice } from '@/utils/BodhiContract';
 import { useNativeCurrencyPrice } from '@/hooks/useCurrencyPrice';
 import { TradeModalBuy } from '@/components/Modal/PurchaseModal/TradeModalBuy';
 import { TradeModalSell } from '@/components/Modal/PurchaseModal/TradeModalSell';

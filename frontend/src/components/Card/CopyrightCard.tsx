@@ -9,7 +9,8 @@ import {
 } from '@/components/ui/card'
 import AddNew from '@/components/Modal/ChapterModal/AddNew'
 import { Button } from '@/components/ui/button'
-import { RemixModal } from '../Modal/DerivetiveModal/RemixModal'
+import { RemixModal } from '@/components/Modal/DerivetiveModal/RemixModal'
+import { LicenseModel } from '@/components/Modal/LicenseModel/licenseModel'
 
 interface CopyrightCardProps {
     id: Number,
@@ -64,9 +65,9 @@ export const CopyrightCard = ({
 
             </CardContent>
             <CardFooter className='justify-center flex flex-col gap-2'>
-                {/* <TippingModal coverAcc={coverAcc} /> */}
 
                 <RemixModal assetsId={BigInt(0)} ipId={coverAcc} />
+                <LicenseModel ipId={coverAcc} />
 
                 {owner && setIsMintedBodhi && (
                     <AddNew nftAcc={coverAcc} setIsMintedBodhi={setIsMintedBodhi} />

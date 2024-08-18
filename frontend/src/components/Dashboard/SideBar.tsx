@@ -1,7 +1,7 @@
 // Sidebar.tsx
 import Link from "next/link";
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-import { BookIcon, InfoIcon, PenIcon, SettingsIcon, LayoutDashboardIcon } from "@/components/Common/Icons";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { BookIcon, InfoIcon, LayoutDashboardIcon, PenIcon, SettingsIcon } from "@/components/Common/Icons";
 
 export function Sidebar() {
     return (

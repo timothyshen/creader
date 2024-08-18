@@ -1,4 +1,4 @@
-import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
+import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 import { Bodhi__factory } from "../../../contract-config/typechain";
 import { parseEther } from "viem";
 import { BodhiAddress } from "@/constant/contract-sepolia";

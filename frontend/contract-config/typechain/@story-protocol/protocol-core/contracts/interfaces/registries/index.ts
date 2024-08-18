@@ -4,3 +4,4 @@
 export type { IIPAccountRegistry } from "./IIPAccountRegistry";
 export type { IIPAssetRegistry } from "./IIPAssetRegistry";
 export type { ILicenseRegistry } from "./ILicenseRegistry";
+export type { IModuleRegistry } from "./IModuleRegistry";

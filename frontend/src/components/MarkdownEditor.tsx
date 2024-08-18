@@ -1,6 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import type { ContextStore } from '@uiw/react-md-editor';
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });

@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
 import { StepProps } from "@/types/steptypes"
-import { IIPAccount__factory, Bodhi__factory } from "../../../../contract-config/typechain";
+import { Bodhi__factory, IIPAccount__factory } from "../../../../contract-config/typechain";
 import {
     useWaitForTransactionReceipt,
     useWriteContract,

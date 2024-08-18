@@ -1,10 +1,10 @@
 'use client'
 import {
-    DialogDescription,
     Dialog,
-    DialogTrigger,
     DialogContent,
+    DialogDescription,
     DialogHeader,
+    DialogTrigger,
 } from "@/components/ui/dialog"
 import {
     Form,
@@ -24,7 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea"
 
 import {
-    useAccount, useChainId, type BaseError,
+    type BaseError, useAccount, useChainId,
     useWaitForTransactionReceipt,
     useWriteContract
 } from "wagmi";

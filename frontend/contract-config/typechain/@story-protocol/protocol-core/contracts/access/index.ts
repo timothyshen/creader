@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { AccessControlled } from "./AccessControlled";
+export type { AccessController } from "./AccessController";
