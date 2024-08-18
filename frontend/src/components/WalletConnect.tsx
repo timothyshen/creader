@@ -13,8 +13,8 @@ type WalletConnectComponentProps = {
 
 const WalletConnectComponent = ({ id }: WalletConnectComponentProps) => {
     return (
-        <div className="flex flex-col ">
-            <Account />
+        <div className=" ">
+
             <ViewCoverView id={id} />
             <div className="space-y-2 order-5">
                 <h2 className="text-xl font-bold">NFT Characters</h2>
@@ -66,7 +66,6 @@ const WalletConnectComponent = ({ id }: WalletConnectComponentProps) => {
                     </div>
                 </Card>
             </div>
-            <RemixCard assetsId={BigInt(1)} ipId={id as `0x${string}`} />
         </div>
     )
 }

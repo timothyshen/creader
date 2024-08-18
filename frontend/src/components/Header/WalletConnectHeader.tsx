@@ -1,7 +1,7 @@
 'use client'
 import { AccountDisplayHeader } from "@/components/Header/AccountDisplayHeader";
 import WalletOptions from "@/components/WalletOption";
-import { useAccount, useSignMessage } from "wagmi";
+import { useAccount, useConnect, useSignMessage } from "wagmi";
 import { getTargetNetwork } from "@/utils/network";
 import {
     Dialog,
@@ -13,28 +13,31 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { SiweMessage } from "siwe"
-import { getCsrfToken, signIn } from "next-auth/react"
+import { getCsrfToken, signIn, useSession } from "next-auth/react"
 import { useState } from "react";
 
 
 
 const WalletConnectComponentHeader = () => {
     const { signMessageAsync } = useSignMessage()
+    const { connect, connectors } = useConnect()
     const currentChain = getTargetNetwork();
+    const session = useSession()
+
 
     const [hasSigned, setHasSigned] = useState(false)
 
     const { address, isConnected } = useAccount()
 
     const handleSign = async () => {
-        if (!isConnected) open();
         try {
+            await connect({ connector: connectors[0] })
             const message = new SiweMessage({
                 domain: window.location.host,
                 uri: window.location.origin,
                 version: "1",
                 address: address,
-                statement: process.env.NEXT_PUBLIC_SIGNIN_MESSAGE,
+                statement: session,
                 nonce: await getCsrfToken(),
                 chainId: currentChain.id,
             });

@@ -10,8 +10,12 @@ export const authOptions: AuthOptions = {
       id: "web3",
       name: "web3",
       credentials: {
-        message: { label: "Message", type: "text" },
-        signedMessage: { label: "Signed Message", type: "text" }, // aka signature
+        message: { label: "Message", type: "text", placeholder: "0x0" },
+        signedMessage: {
+          label: "Signed Message",
+          type: "text",
+          placeholder: "0x0",
+        }, // aka signature
       },
       async authorize(credentials, req) {
         if (!credentials?.signedMessage || !credentials?.message) {
@@ -19,17 +23,6 @@ export const authOptions: AuthOptions = {
         }
 
         try {
-          // On the Client side, the SiweMessage()
-          // will be constructed like this:
-          //
-          // const siwe = new SiweMessage({
-          //   address: address,
-          //   statement: process.env.NEXT_PUBLIC_SIGNIN_MESSAGE,
-          //   nonce: await getCsrfToken(),
-          //   expirationTime: new Date(Date.now() + 2*60*60*1000).toString(),
-          //   chainId: chain?.id
-          // });
-
           const siwe = new SiweMessage(JSON.parse(credentials?.message));
           const result = await siwe.verify({
             signature: credentials.signedMessage,
