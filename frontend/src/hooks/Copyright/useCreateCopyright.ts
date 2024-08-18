@@ -12,8 +12,8 @@ import { toast } from "sonner";
 import { ConnectWalletClient } from "@/provider/viemConfig";
 import { getTargetNetwork } from "@/utils/network";
 import {
-  CopyrightNFTAddress,
   BaseSepoliaChainExplorer,
+  CopyrightNFTAddress,
 } from "@/constant/contract-sepolia";
 import { CopyrightNFT__factory } from "../../../contract-config/typechain";
 

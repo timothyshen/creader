@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Sidebar } from "./Dashboard/SideBar"
 import { Header } from "./Dashboard/Header"
-import { BookIcon, DollarSignIcon, UsersIcon, StarIcon, MoveVerticalIcon, Table } from "lucide-react"
+import { BookIcon, DollarSignIcon, MoveVerticalIcon, StarIcon, Table, UsersIcon } from "lucide-react"
 import { BookTable } from "./Dashboard/Table/BookTable"
 import { CommonCard } from "./Dashboard/CommonCard"
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { Progress } from "@/components/ui/progress"
 
 export function Dashboardv1() {

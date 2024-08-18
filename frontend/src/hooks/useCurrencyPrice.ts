@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useInterval } from "usehooks-ts";
 
 import { fetchPriceFromUni } from "@/utils/fetchPriceFromUni";

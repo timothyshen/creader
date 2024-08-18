@@ -2,9 +2,9 @@ import { createConfig, http } from "wagmi";
 import {
   createClient,
   createPublicClient,
-  defineChain,
   createWalletClient,
   custom,
+  defineChain,
 } from "viem";
 import creaderConfig from "./app.config";
 import { StoryClient, StoryConfig } from "@story-protocol/core-sdk";

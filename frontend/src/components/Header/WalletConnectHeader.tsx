@@ -4,11 +4,11 @@ import WalletOptions from "@/components/WalletOption";
 import { useAccount, useSignMessage } from "wagmi";
 import { getTargetNetwork } from "@/utils/network";
 import {
-    DialogTitle,
     Dialog,
-    DialogTrigger,
     DialogContent,
     DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from "@/components/ui/dialog"
 
 import { Button } from "@/components/ui/button"

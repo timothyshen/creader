@@ -16,7 +16,7 @@ import { RemixSelect } from '@/components/Modal/DerivetiveModal/RemixSelect'
 import ImageDerivetive from './DerivetiveType/ImageDerivetive'
 import SoundDerivetive from './DerivetiveType/SoundDerivetive'
 import SettingDerivetive from './DerivetiveType/SettingDerivetive'
-import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
+import { useAccount, useWaitForTransactionReceipt, useWriteContract } from 'wagmi'
 import { ILicensingModule__factory } from '../../../../contract-config/typechain'
 import { RemixModalProps } from './DerivetiveType'
 

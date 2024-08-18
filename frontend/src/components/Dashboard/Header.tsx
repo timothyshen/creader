@@ -1,9 +1,10 @@
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
-import { Sheet, MenuIcon, Link, PenIcon, BookIcon, LayoutDashboardIcon, InfoIcon, SettingsIcon, SearchIcon } from "lucide-react";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "../ui/breadcrumb";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { BookIcon, InfoIcon, LayoutDashboardIcon, Link, MenuIcon, PenIcon, SearchIcon, SettingsIcon, Sheet } from "lucide-react";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../ui/breadcrumb";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { SheetTrigger, SheetContent } from "../ui/sheet";
+import { SheetContent, SheetTrigger } from "../ui/sheet";
+import Image from "next/image";
 
 export function Header() {
     return (
@@ -34,7 +35,7 @@ export function Header() {
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="outline" size="icon" className="overflow-hidden rounded-full">
-                        <img
+                        <Image
                             src="/placeholder.svg"
                             width={36}
                             height={36}

@@ -1,5 +1,5 @@
 'use client'
-import { useAccount, useDisconnect, useBalance } from 'wagmi'
+import { useAccount, useBalance, useDisconnect } from 'wagmi'
 import { Button } from './ui/button'
 
 export function Account() {

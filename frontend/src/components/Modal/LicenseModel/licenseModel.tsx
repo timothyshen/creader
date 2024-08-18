@@ -1,9 +1,9 @@
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import SelectLicense from "./SelectLicense";
 import { useState } from "react";
 import TermsList from "./TermsList";
-import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
+import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi'
 import { ILicensingModule__factory } from '../../../../contract-config/typechain'
 
 interface LicenseModelProps {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTrigger, DialogContent, DialogHeader } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
 import { SelectStep } from "@/components/Modal/ChapterModal/SelectStep";
 import { UploadStep } from "@/components/Modal/ChapterModal/UploadStep";

@@ -1,4 +1,4 @@
-import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
+import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 import { IPALicenseToken__factory } from "../../../contract-config/typechain";
 import { IPALicenseTokenAddress } from "@/constant/contract-sepolia";
 

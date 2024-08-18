@@ -1,5 +1,5 @@
 'use client'
-import { useAccount, useDisconnect, useBalance } from 'wagmi'
+import { useAccount, useBalance, useDisconnect } from 'wagmi'
 import { Button } from '@/components/ui/button'
 import { sliceAddress } from '@/utils/supportFunction'
 import { CreateCopyright } from '@/components/Modal/CreateCopyright'

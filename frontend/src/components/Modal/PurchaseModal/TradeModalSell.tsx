@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button'
 import { SellButton } from '@/components/Modal/PurchaseModal/SellButton'
-import { getSellPrice, getSellPriceAfterFee, getBalanceOf } from '@/utils/BodhiContract'
+import { getBalanceOf, getSellPrice, getSellPriceAfterFee } from '@/utils/BodhiContract'
 import { useAccount } from 'wagmi'
 
 type TradeModalProps = {

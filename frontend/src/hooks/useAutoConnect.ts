@@ -1,6 +1,6 @@
 import { useLocalStorage } from "usehooks-ts";
 import { Connector, useAccount, useConnect } from "wagmi";
-import { useEffect, useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import creaderConfig from "@/provider/app.config";
 import { getTargetNetwork } from "@/utils/network";
 

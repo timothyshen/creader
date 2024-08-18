@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Card, CardHeader, CardTitle, CardDescription, CardFooter, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 export function TrendingBook() {
     return (
         <Card x-chunk="dashboard-06-chunk-2">

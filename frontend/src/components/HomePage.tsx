@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Link from "next/link"
 import { Card } from "@/components/ui/card"
 import { JSX, SVGProps } from "react"
