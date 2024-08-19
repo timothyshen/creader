@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import {ERC1155} from "solmate/src/tokens/ERC1155.sol";
+import "@story-protocol/protocol-core/contracts/registries/IPAssetRegistry.sol";
 //6909 need to check
 import "hardhat/console.sol";
 
@@ -22,11 +23,15 @@ contract Bodhi is ERC1155 {
         uint256 creatorFee
     );
 
+    event ChapterCreated(address indexed sender, address indexed ipId);
+
     struct Asset {
         uint256 id;
         string arTxId; // arweave transaction id
         address creator;
     }
+
+    IPAssetRegistry public immutable REGISTRY_MODULE;
 
     uint256 public assetIndex;
 
@@ -47,9 +52,13 @@ contract Bodhi is ERC1155 {
         Sell
     } // = 0, 1, 2
 
-    constructor() {}
+    constructor(address _registry) {
+        REGISTRY_MODULE = IPAssetRegistry(_registry);
+    }
 
-    function create(string calldata arTxId) public {
+    // Bodhi Contract Functions
+
+    function create(string calldata arTxId) internal returns (uint256) {
         bytes32 txHash = keccak256(abi.encodePacked(arTxId));
         require(txToAssetId[txHash] == 0, "Asset already exists");
         uint256 newAssetId = assetIndex;
@@ -68,6 +77,7 @@ contract Bodhi is ERC1155 {
             0,
             0
         );
+        return assetIndex;
     }
 
     function remove(uint256 assetId) public {
@@ -200,5 +210,48 @@ contract Bodhi is ERC1155 {
 
     function uri(uint256 id) public view override returns (string memory) {
         return assets[id].arTxId;
+    }
+
+    // Story Protocol Functions
+
+    function _registorIPAccount(uint256 assetId) internal returns (address) {
+        address ipId = REGISTRY_MODULE.register(
+            block.chainid,
+            address(this),
+            assetId
+        );
+        return ipId;
+    }
+
+    // function _registerPILTerms(
+    //     address ipId,
+    //     PILTerms calldata template
+    // ) internal returns (address) {
+    //     licenseTerms = PIL_TEMPLATE.registerLicenseTerms(terms);
+
+    //     if (
+    //         LICENSE_REGISTRY.hasIpAttachedLicenseTerms(
+    //             ipId,
+    //             address(PIL_TEMPLATE),
+    //             licenseTermsId
+    //         )
+    //     ) return licenseTermsId;
+
+    //     LICENSING_MODULE.attachLicenseTerms(
+    //         ipId,
+    //         address(PIL_TEMPLATE),
+    //         licenseTermsId
+    //     );
+    // }
+
+    // Public Functions
+
+    function createChapter(
+        string calldata arTxId // PILTerms calldata terms
+    ) external returns (address) {
+        uint256 assetId = create(arTxId);
+        address ipId = _registorIPAccount(assetId);
+        // _registerPILTerms(ipId, PILTerms(arTxId));
+        return ipId;
     }
 }

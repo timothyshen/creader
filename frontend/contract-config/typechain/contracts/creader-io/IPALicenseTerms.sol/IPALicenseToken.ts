@@ -26,11 +26,8 @@ import type {
 export interface IPALicenseTokenInterface extends utils.Interface {
   functions: {
     "ACCESS_CONTROLLER()": FunctionFragment;
-    "BODHI()": FunctionFragment;
-    "IP_ASSET_REGISTRY()": FunctionFragment;
     "LICENSING_MODULE()": FunctionFragment;
     "PIL_TEMPLATE()": FunctionFragment;
-    "SNFT()": FunctionFragment;
     "mintLicenseTokenCopyright(address)": FunctionFragment;
     "remixTypes(address,uint256)": FunctionFragment;
   };
@@ -39,16 +36,10 @@ export interface IPALicenseTokenInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "ACCESS_CONTROLLER"
       | "ACCESS_CONTROLLER()"
-      | "BODHI"
-      | "BODHI()"
-      | "IP_ASSET_REGISTRY"
-      | "IP_ASSET_REGISTRY()"
       | "LICENSING_MODULE"
       | "LICENSING_MODULE()"
       | "PIL_TEMPLATE"
       | "PIL_TEMPLATE()"
-      | "SNFT"
-      | "SNFT()"
       | "mintLicenseTokenCopyright"
       | "mintLicenseTokenCopyright(address)"
       | "remixTypes"
@@ -61,16 +52,6 @@ export interface IPALicenseTokenInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "ACCESS_CONTROLLER()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "BODHI", values?: undefined): string;
-  encodeFunctionData(functionFragment: "BODHI()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "IP_ASSET_REGISTRY",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "IP_ASSET_REGISTRY()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -89,8 +70,6 @@ export interface IPALicenseTokenInterface extends utils.Interface {
     functionFragment: "PIL_TEMPLATE()",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "SNFT", values?: undefined): string;
-  encodeFunctionData(functionFragment: "SNFT()", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "mintLicenseTokenCopyright",
     values: [PromiseOrValue<string>]
@@ -116,16 +95,6 @@ export interface IPALicenseTokenInterface extends utils.Interface {
     functionFragment: "ACCESS_CONTROLLER()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "BODHI", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "BODHI()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "IP_ASSET_REGISTRY",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "IP_ASSET_REGISTRY()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "LICENSING_MODULE",
     data: BytesLike
@@ -142,8 +111,6 @@ export interface IPALicenseTokenInterface extends utils.Interface {
     functionFragment: "PIL_TEMPLATE()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "SNFT", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "SNFT()", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "mintLicenseTokenCopyright",
     data: BytesLike
@@ -192,14 +159,6 @@ export interface IPALicenseToken extends BaseContract {
 
     "ACCESS_CONTROLLER()"(overrides?: CallOverrides): Promise<[string]>;
 
-    BODHI(overrides?: CallOverrides): Promise<[string]>;
-
-    "BODHI()"(overrides?: CallOverrides): Promise<[string]>;
-
-    IP_ASSET_REGISTRY(overrides?: CallOverrides): Promise<[string]>;
-
-    "IP_ASSET_REGISTRY()"(overrides?: CallOverrides): Promise<[string]>;
-
     LICENSING_MODULE(overrides?: CallOverrides): Promise<[string]>;
 
     "LICENSING_MODULE()"(overrides?: CallOverrides): Promise<[string]>;
@@ -207,10 +166,6 @@ export interface IPALicenseToken extends BaseContract {
     PIL_TEMPLATE(overrides?: CallOverrides): Promise<[string]>;
 
     "PIL_TEMPLATE()"(overrides?: CallOverrides): Promise<[string]>;
-
-    SNFT(overrides?: CallOverrides): Promise<[string]>;
-
-    "SNFT()"(overrides?: CallOverrides): Promise<[string]>;
 
     mintLicenseTokenCopyright(
       ipId: PromiseOrValue<string>,
@@ -239,14 +194,6 @@ export interface IPALicenseToken extends BaseContract {
 
   "ACCESS_CONTROLLER()"(overrides?: CallOverrides): Promise<string>;
 
-  BODHI(overrides?: CallOverrides): Promise<string>;
-
-  "BODHI()"(overrides?: CallOverrides): Promise<string>;
-
-  IP_ASSET_REGISTRY(overrides?: CallOverrides): Promise<string>;
-
-  "IP_ASSET_REGISTRY()"(overrides?: CallOverrides): Promise<string>;
-
   LICENSING_MODULE(overrides?: CallOverrides): Promise<string>;
 
   "LICENSING_MODULE()"(overrides?: CallOverrides): Promise<string>;
@@ -254,10 +201,6 @@ export interface IPALicenseToken extends BaseContract {
   PIL_TEMPLATE(overrides?: CallOverrides): Promise<string>;
 
   "PIL_TEMPLATE()"(overrides?: CallOverrides): Promise<string>;
-
-  SNFT(overrides?: CallOverrides): Promise<string>;
-
-  "SNFT()"(overrides?: CallOverrides): Promise<string>;
 
   mintLicenseTokenCopyright(
     ipId: PromiseOrValue<string>,
@@ -286,14 +229,6 @@ export interface IPALicenseToken extends BaseContract {
 
     "ACCESS_CONTROLLER()"(overrides?: CallOverrides): Promise<string>;
 
-    BODHI(overrides?: CallOverrides): Promise<string>;
-
-    "BODHI()"(overrides?: CallOverrides): Promise<string>;
-
-    IP_ASSET_REGISTRY(overrides?: CallOverrides): Promise<string>;
-
-    "IP_ASSET_REGISTRY()"(overrides?: CallOverrides): Promise<string>;
-
     LICENSING_MODULE(overrides?: CallOverrides): Promise<string>;
 
     "LICENSING_MODULE()"(overrides?: CallOverrides): Promise<string>;
@@ -301,10 +236,6 @@ export interface IPALicenseToken extends BaseContract {
     PIL_TEMPLATE(overrides?: CallOverrides): Promise<string>;
 
     "PIL_TEMPLATE()"(overrides?: CallOverrides): Promise<string>;
-
-    SNFT(overrides?: CallOverrides): Promise<string>;
-
-    "SNFT()"(overrides?: CallOverrides): Promise<string>;
 
     mintLicenseTokenCopyright(
       ipId: PromiseOrValue<string>,
@@ -336,14 +267,6 @@ export interface IPALicenseToken extends BaseContract {
 
     "ACCESS_CONTROLLER()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    BODHI(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "BODHI()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    IP_ASSET_REGISTRY(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "IP_ASSET_REGISTRY()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     LICENSING_MODULE(overrides?: CallOverrides): Promise<BigNumber>;
 
     "LICENSING_MODULE()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -351,10 +274,6 @@ export interface IPALicenseToken extends BaseContract {
     PIL_TEMPLATE(overrides?: CallOverrides): Promise<BigNumber>;
 
     "PIL_TEMPLATE()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    SNFT(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "SNFT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     mintLicenseTokenCopyright(
       ipId: PromiseOrValue<string>,
@@ -386,16 +305,6 @@ export interface IPALicenseToken extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    BODHI(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "BODHI()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    IP_ASSET_REGISTRY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "IP_ASSET_REGISTRY()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     LICENSING_MODULE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "LICENSING_MODULE()"(
@@ -405,10 +314,6 @@ export interface IPALicenseToken extends BaseContract {
     PIL_TEMPLATE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "PIL_TEMPLATE()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    SNFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "SNFT()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     mintLicenseTokenCopyright(
       ipId: PromiseOrValue<string>,

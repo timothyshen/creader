@@ -1,22 +1,16 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.23;
 
-import "@story-protocol/protocol-core/contracts/registries/IPAssetRegistry.sol";
 import "@story-protocol/protocol-core/contracts/modules/licensing/LicensingModule.sol";
 import "@story-protocol/protocol-core/contracts/modules/licensing/PILicenseTemplate.sol";
 import "@story-protocol/protocol-core/contracts/access/AccessController.sol";
-import "../shares/interface/IBodhi.sol";
-import {SimpleNFT} from "./SimpleNFT.sol";
 
 /// @title IPALicenseToken
 /// @notice Mint a License Token from Programmable IP License Terms attached to an IP Account.
 contract IPALicenseToken {
-    IPAssetRegistry public immutable IP_ASSET_REGISTRY;
     LicensingModule public immutable LICENSING_MODULE;
     PILicenseTemplate public immutable PIL_TEMPLATE;
     AccessController public immutable ACCESS_CONTROLLER;
-    IBodhi public immutable BODHI;
-    SimpleNFT public immutable SNFT;
 
     /// @notice Enum to represent the type of remix.
     enum RemixType {
@@ -30,18 +24,14 @@ contract IPALicenseToken {
     mapping(address => mapping(uint256 => RemixType)) public remixTypes;
 
     constructor(
-        address ipAssetRegistry,
         address licensingModule,
         address pilTemplate,
         address accessController
     ) {
-        IP_ASSET_REGISTRY = IPAssetRegistry(ipAssetRegistry);
         LICENSING_MODULE = LicensingModule(licensingModule);
         PIL_TEMPLATE = PILicenseTemplate(pilTemplate);
         ACCESS_CONTROLLER = AccessController(accessController);
     }
-
-
 
     function mintLicenseTokenCopyright(
         address ipId
@@ -56,6 +46,6 @@ contract IPALicenseToken {
 
         LICENSING_MODULE.attachLicenseTerms(ipId, address(PIL_TEMPLATE), 1);
 
-        return (ipId);
+        return ipId;
     }
 }

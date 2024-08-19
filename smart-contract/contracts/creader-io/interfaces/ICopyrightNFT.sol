@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 
 interface ICopyrightNFT {
-
     struct Cover {
         uint256 id;
         string title;
@@ -30,7 +29,6 @@ interface ICopyrightNFT {
 
     function createCopyright(
         address to,
-        uint256 chainId,
         string memory title,
         string memory description,
         string memory status

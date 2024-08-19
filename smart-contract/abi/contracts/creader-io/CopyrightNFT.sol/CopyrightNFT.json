@@ -602,11 +602,6 @@
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "chainId",
-        "type": "uint256"
-      },
-      {
         "internalType": "string",
         "name": "_title",
         "type": "string"

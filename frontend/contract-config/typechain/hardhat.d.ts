@@ -293,9 +293,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IPALicenseToken__factory>;
     getContractFactory(
-      name: "SimpleNFT",
+      name: "IMulticall3",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SimpleNFT__factory>;
+    ): Promise<Contracts.IMulticall3__factory>;
     getContractFactory(
       name: "CreaderToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -304,18 +304,6 @@ declare module "hardhat/types/runtime" {
       name: "ICreaderToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ICreaderToken__factory>;
-    getContractFactory(
-      name: "MockERC1155",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MockERC1155__factory>;
-    getContractFactory(
-      name: "MockERC20",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MockERC20__factory>;
-    getContractFactory(
-      name: "MockERC721Second",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MockERC721Second__factory>;
     getContractFactory(
       name: "Bodhi",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -692,10 +680,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IPALicenseToken>;
     getContractAt(
-      name: "SimpleNFT",
+      name: "IMulticall3",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.SimpleNFT>;
+    ): Promise<Contracts.IMulticall3>;
     getContractAt(
       name: "CreaderToken",
       address: string,
@@ -706,21 +694,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ICreaderToken>;
-    getContractAt(
-      name: "MockERC1155",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MockERC1155>;
-    getContractAt(
-      name: "MockERC20",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MockERC20>;
-    getContractAt(
-      name: "MockERC721Second",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MockERC721Second>;
     getContractAt(
       name: "Bodhi",
       address: string,
