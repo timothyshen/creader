@@ -98,7 +98,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                 address: CopyrightNFTAddress as `0x${string}`,
                 abi: CopyrightNFT__factory.abi,
                 functionName: 'createCopyright',
-                args: [data.to, BigInt(data.chainId), data.title, data.description, data.status],
+                args: [data.to, data.title, data.description, data.status],
             })
             console.log(errorLog)
             console.log('writeContract')
@@ -185,7 +185,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                             <p className="font-semibold">Transaction Hash:</p>
                             <a
                                 className="text-blue-600 underline"
-                                href={`${BaseSepoliaChainExplorer}/${hash}`}
+                                href={`${BaseSepoliaChainExplorer}/address/${hash}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >

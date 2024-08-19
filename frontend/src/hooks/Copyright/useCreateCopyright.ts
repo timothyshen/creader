@@ -63,13 +63,7 @@ export const useCreateCopyright = (
         address: CopyrightNFTAddress as `0x${string}`,
         abi: CopyrightNFT__factory.abi,
         functionName: "createCopyright",
-        args: [
-          data.to,
-          BigInt(data.chainId),
-          data.title,
-          data.description,
-          data.status,
-        ],
+        args: [data.to, data.title, data.description, data.status],
       });
     } catch (error) {
       console.log(error);

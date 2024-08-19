@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import {ERC1155} from "solmate/src/tokens/ERC1155.sol";
-import "@story-protocol/protocol-core/contracts/registries/IPAssetRegistry.sol";
 //6909 need to check
 import "hardhat/console.sol";
 
@@ -31,7 +30,6 @@ contract Bodhi is ERC1155 {
         address creator;
     }
 
-    IPAssetRegistry public immutable REGISTRY_MODULE;
 
     uint256 public assetIndex;
 
@@ -51,11 +49,6 @@ contract Bodhi is ERC1155 {
         Buy,
         Sell
     } // = 0, 1, 2
-
-    constructor(address _registry) {
-        REGISTRY_MODULE = IPAssetRegistry(_registry);
-    }
-
     // Bodhi Contract Functions
 
     function create(string calldata arTxId) internal returns (uint256) {
@@ -210,48 +203,5 @@ contract Bodhi is ERC1155 {
 
     function uri(uint256 id) public view override returns (string memory) {
         return assets[id].arTxId;
-    }
-
-    // Story Protocol Functions
-
-    function _registorIPAccount(uint256 assetId) internal returns (address) {
-        address ipId = REGISTRY_MODULE.register(
-            block.chainid,
-            address(this),
-            assetId
-        );
-        return ipId;
-    }
-
-    // function _registerPILTerms(
-    //     address ipId,
-    //     PILTerms calldata template
-    // ) internal returns (address) {
-    //     licenseTerms = PIL_TEMPLATE.registerLicenseTerms(terms);
-
-    //     if (
-    //         LICENSE_REGISTRY.hasIpAttachedLicenseTerms(
-    //             ipId,
-    //             address(PIL_TEMPLATE),
-    //             licenseTermsId
-    //         )
-    //     ) return licenseTermsId;
-
-    //     LICENSING_MODULE.attachLicenseTerms(
-    //         ipId,
-    //         address(PIL_TEMPLATE),
-    //         licenseTermsId
-    //     );
-    // }
-
-    // Public Functions
-
-    function createChapter(
-        string calldata arTxId // PILTerms calldata terms
-    ) external returns (address) {
-        uint256 assetId = create(arTxId);
-        address ipId = _registorIPAccount(assetId);
-        // _registerPILTerms(ipId, PILTerms(arTxId));
-        return ipId;
     }
 }

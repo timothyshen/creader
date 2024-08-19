@@ -46,7 +46,7 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
             const receiptIdLocal = receipt.id;
             const data = encodeFunctionData({
                 abi: Bodhi__factory.abi,
-                functionName: 'create',
+                functionName: 'createChapter',
                 args: [receiptIdLocal],
             });
 
