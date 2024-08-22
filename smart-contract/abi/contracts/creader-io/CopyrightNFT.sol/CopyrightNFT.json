@@ -18,11 +18,6 @@
       },
       {
         "internalType": "address",
-        "name": "_creaderToken",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
         "name": "_registry",
         "type": "address"
       }
@@ -575,19 +570,6 @@
       {
         "internalType": "address",
         "name": "nftAccount",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "creaderToken",
-    "outputs": [
-      {
-        "internalType": "contract CreaderToken",
-        "name": "",
         "type": "address"
       }
     ],

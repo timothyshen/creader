@@ -66,7 +66,6 @@ export interface CopyrightNFTInterface extends utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "coverToToken(uint256)": FunctionFragment;
     "covers(uint256)": FunctionFragment;
-    "creaderToken()": FunctionFragment;
     "createCopyright(address,string,string,string)": FunctionFragment;
     "getAllCoypright()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
@@ -102,8 +101,6 @@ export interface CopyrightNFTInterface extends utils.Interface {
       | "coverToToken(uint256)"
       | "covers"
       | "covers(uint256)"
-      | "creaderToken"
-      | "creaderToken()"
       | "createCopyright"
       | "createCopyright(address,string,string,string)"
       | "getAllCoypright"
@@ -190,14 +187,6 @@ export interface CopyrightNFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "covers(uint256)",
     values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "creaderToken",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "creaderToken()",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "createCopyright",
@@ -390,14 +379,6 @@ export interface CopyrightNFTInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "covers", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "covers(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "creaderToken",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "creaderToken()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -813,10 +794,6 @@ export interface CopyrightNFT extends BaseContract {
       }
     >;
 
-    creaderToken(overrides?: CallOverrides): Promise<[string]>;
-
-    "creaderToken()"(overrides?: CallOverrides): Promise<[string]>;
-
     createCopyright(
       to: PromiseOrValue<string>,
       _title: PromiseOrValue<string>,
@@ -1069,10 +1046,6 @@ export interface CopyrightNFT extends BaseContract {
     }
   >;
 
-  creaderToken(overrides?: CallOverrides): Promise<string>;
-
-  "creaderToken()"(overrides?: CallOverrides): Promise<string>;
-
   createCopyright(
     to: PromiseOrValue<string>,
     _title: PromiseOrValue<string>,
@@ -1324,10 +1297,6 @@ export interface CopyrightNFT extends BaseContract {
         nftAccount: string;
       }
     >;
-
-    creaderToken(overrides?: CallOverrides): Promise<string>;
-
-    "creaderToken()"(overrides?: CallOverrides): Promise<string>;
 
     createCopyright(
       to: PromiseOrValue<string>,
@@ -1687,10 +1656,6 @@ export interface CopyrightNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    creaderToken(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "creaderToken()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     createCopyright(
       to: PromiseOrValue<string>,
       _title: PromiseOrValue<string>,
@@ -1919,10 +1884,6 @@ export interface CopyrightNFT extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    creaderToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "creaderToken()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     createCopyright(
       to: PromiseOrValue<string>,

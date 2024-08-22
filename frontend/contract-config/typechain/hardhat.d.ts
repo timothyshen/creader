@@ -281,6 +281,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IPAssetRegistry__factory>;
     getContractFactory(
+      name: "ChapterNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ChapterNFT__factory>;
+    getContractFactory(
       name: "CopyrightNFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CopyrightNFT__factory>;
@@ -328,6 +332,14 @@ declare module "hardhat/types/runtime" {
       name: "ERC1155TokenReceiver",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC1155TokenReceiver__factory>;
+    getContractFactory(
+      name: "ERC721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721__factory>;
+    getContractFactory(
+      name: "ERC721TokenReceiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721TokenReceiver__factory>;
 
     getContractAt(
       name: "AccessManagedUpgradeable",
@@ -665,6 +677,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IPAssetRegistry>;
     getContractAt(
+      name: "ChapterNFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ChapterNFT>;
+    getContractAt(
       name: "CopyrightNFT",
       address: string,
       signer?: ethers.Signer
@@ -724,6 +741,16 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ERC1155TokenReceiver>;
+    getContractAt(
+      name: "ERC721",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721>;
+    getContractAt(
+      name: "ERC721TokenReceiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721TokenReceiver>;
 
     // default types
     getContractFactory(

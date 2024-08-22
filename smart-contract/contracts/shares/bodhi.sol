@@ -30,7 +30,6 @@ contract Bodhi is ERC1155 {
         address creator;
     }
 
-
     uint256 public assetIndex;
 
     address immutable owner;
@@ -49,9 +48,10 @@ contract Bodhi is ERC1155 {
         Buy,
         Sell
     } // = 0, 1, 2
+
     // Bodhi Contract Functions
 
-    function create(string calldata arTxId) internal returns (uint256) {
+    function create(string calldata arTxId) external returns (uint256) {
         bytes32 txHash = keccak256(abi.encodePacked(arTxId));
         require(txToAssetId[txHash] == 0, "Asset already exists");
         uint256 newAssetId = assetIndex;

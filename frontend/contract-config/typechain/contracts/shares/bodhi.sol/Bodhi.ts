@@ -32,14 +32,13 @@ export interface BodhiInterface extends utils.Interface {
   functions: {
     "CREATOR_FEE_PERCENT()": FunctionFragment;
     "CREATOR_PREMINT()": FunctionFragment;
-    "REGISTRY_MODULE()": FunctionFragment;
     "assetIndex()": FunctionFragment;
     "assets(uint256)": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
     "buy(uint256,uint256)": FunctionFragment;
     "checkIfUserHasShares(address,uint256)": FunctionFragment;
-    "createChapter(string)": FunctionFragment;
+    "create(string)": FunctionFragment;
     "getAssetIdsByAddress(address)": FunctionFragment;
     "getBuyPrice(uint256,uint256)": FunctionFragment;
     "getBuyPriceAfterFee(uint256,uint256)": FunctionFragment;
@@ -66,8 +65,6 @@ export interface BodhiInterface extends utils.Interface {
       | "CREATOR_FEE_PERCENT()"
       | "CREATOR_PREMINT"
       | "CREATOR_PREMINT()"
-      | "REGISTRY_MODULE"
-      | "REGISTRY_MODULE()"
       | "assetIndex"
       | "assetIndex()"
       | "assets"
@@ -80,8 +77,8 @@ export interface BodhiInterface extends utils.Interface {
       | "buy(uint256,uint256)"
       | "checkIfUserHasShares"
       | "checkIfUserHasShares(address,uint256)"
-      | "createChapter"
-      | "createChapter(string)"
+      | "create"
+      | "create(string)"
       | "getAssetIdsByAddress"
       | "getAssetIdsByAddress(address)"
       | "getBuyPrice"
@@ -137,14 +134,6 @@ export interface BodhiInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "REGISTRY_MODULE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "REGISTRY_MODULE()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "assetIndex",
     values?: undefined
   ): string;
@@ -193,11 +182,11 @@ export interface BodhiInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "createChapter",
+    functionFragment: "create",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "createChapter(string)",
+    functionFragment: "create(string)",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -385,14 +374,6 @@ export interface BodhiInterface extends utils.Interface {
     functionFragment: "CREATOR_PREMINT()",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "REGISTRY_MODULE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "REGISTRY_MODULE()",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "assetIndex", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "assetIndex()",
@@ -429,12 +410,9 @@ export interface BodhiInterface extends utils.Interface {
     functionFragment: "checkIfUserHasShares(address,uint256)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "create", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "createChapter",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "createChapter(string)",
+    functionFragment: "create(string)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -734,10 +712,6 @@ export interface Bodhi extends BaseContract {
 
     "CREATOR_PREMINT()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    REGISTRY_MODULE(overrides?: CallOverrides): Promise<[string]>;
-
-    "REGISTRY_MODULE()"(overrides?: CallOverrides): Promise<[string]>;
-
     assetIndex(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "assetIndex()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -812,12 +786,12 @@ export interface Bodhi extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    createChapter(
+    create(
       arTxId: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "createChapter(string)"(
+    "create(string)"(
       arTxId: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -1045,10 +1019,6 @@ export interface Bodhi extends BaseContract {
 
   "CREATOR_PREMINT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  REGISTRY_MODULE(overrides?: CallOverrides): Promise<string>;
-
-  "REGISTRY_MODULE()"(overrides?: CallOverrides): Promise<string>;
-
   assetIndex(overrides?: CallOverrides): Promise<BigNumber>;
 
   "assetIndex()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1123,12 +1093,12 @@ export interface Bodhi extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  createChapter(
+  create(
     arTxId: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "createChapter(string)"(
+  "create(string)"(
     arTxId: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -1356,10 +1326,6 @@ export interface Bodhi extends BaseContract {
 
     "CREATOR_PREMINT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    REGISTRY_MODULE(overrides?: CallOverrides): Promise<string>;
-
-    "REGISTRY_MODULE()"(overrides?: CallOverrides): Promise<string>;
-
     assetIndex(overrides?: CallOverrides): Promise<BigNumber>;
 
     "assetIndex()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1434,15 +1400,15 @@ export interface Bodhi extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    createChapter(
+    create(
       arTxId: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<string>;
+    ): Promise<BigNumber>;
 
-    "createChapter(string)"(
+    "create(string)"(
       arTxId: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<string>;
+    ): Promise<BigNumber>;
 
     getAssetIdsByAddress(
       addr: PromiseOrValue<string>,
@@ -1763,10 +1729,6 @@ export interface Bodhi extends BaseContract {
 
     "CREATOR_PREMINT()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    REGISTRY_MODULE(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "REGISTRY_MODULE()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     assetIndex(overrides?: CallOverrides): Promise<BigNumber>;
 
     "assetIndex()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1829,12 +1791,12 @@ export interface Bodhi extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    createChapter(
+    create(
       arTxId: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "createChapter(string)"(
+    "create(string)"(
       arTxId: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -2069,12 +2031,6 @@ export interface Bodhi extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    REGISTRY_MODULE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "REGISTRY_MODULE()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     assetIndex(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "assetIndex()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -2137,12 +2093,12 @@ export interface Bodhi extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    createChapter(
+    create(
       arTxId: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "createChapter(string)"(
+    "create(string)"(
       arTxId: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;

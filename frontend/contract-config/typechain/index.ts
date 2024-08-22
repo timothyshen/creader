@@ -146,6 +146,8 @@ export type { IPAccountRegistry } from "./@story-protocol/protocol-core/contract
 export { IPAccountRegistry__factory } from "./factories/@story-protocol/protocol-core/contracts/registries/IPAccountRegistry__factory";
 export type { IPAssetRegistry } from "./@story-protocol/protocol-core/contracts/registries/IPAssetRegistry";
 export { IPAssetRegistry__factory } from "./factories/@story-protocol/protocol-core/contracts/registries/IPAssetRegistry__factory";
+export type { ChapterNFT } from "./contracts/creader-io/ChapterNFT";
+export { ChapterNFT__factory } from "./factories/contracts/creader-io/ChapterNFT__factory";
 export type { CopyrightNFT } from "./contracts/creader-io/CopyrightNFT";
 export { CopyrightNFT__factory } from "./factories/contracts/creader-io/CopyrightNFT__factory";
 export type { ICopyrightNFT } from "./contracts/creader-io/interfaces/ICopyrightNFT";
@@ -168,3 +170,5 @@ export type { IERC6551Registry } from "./erc6551/interfaces/IERC6551Registry";
 export { IERC6551Registry__factory } from "./factories/erc6551/interfaces/IERC6551Registry__factory";
 export type { ERC1155TokenReceiver } from "./solmate/src/tokens/ERC1155.sol/ERC1155TokenReceiver";
 export { ERC1155TokenReceiver__factory } from "./factories/solmate/src/tokens/ERC1155.sol/ERC1155TokenReceiver__factory";
+export type { ERC721TokenReceiver } from "./solmate/src/tokens/ERC721.sol/ERC721TokenReceiver";
+export { ERC721TokenReceiver__factory } from "./factories/solmate/src/tokens/ERC721.sol/ERC721TokenReceiver__factory";

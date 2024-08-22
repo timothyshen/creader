@@ -12,7 +12,6 @@ import "@openzeppelin/contracts/utils/Base64.sol";
 import "@story-protocol/protocol-core/contracts/registries/IPAssetRegistry.sol";
 
 import "./interfaces/ICopyrightNFT.sol";
-import "../creaderToken/CreaderToken.sol";
 import "./lib/NFTMetadata.sol";
 
 /**
@@ -22,8 +21,6 @@ import "./lib/NFTMetadata.sol";
 contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
     using NFTMetadata for uint256;
     uint256 private _tokenIds;
-
-    CreaderToken public creaderToken;
 
     IPAssetRegistry public immutable REGISTRY;
 
@@ -73,12 +70,10 @@ contract CopyrightNFT is ERC721URIStorage, ICopyrightNFT {
         string memory baseURI_,
         string memory _name,
         string memory _symbol,
-        address _creaderToken,
         address _registry
     ) ERC721(_name, _symbol) {
         // Constructor function
         baseURI = baseURI_; // Setting base URI
-        creaderToken = CreaderToken(_creaderToken); // Initializing CreaderToken instance
         REGISTRY = IPAssetRegistry(_registry);
     }
 

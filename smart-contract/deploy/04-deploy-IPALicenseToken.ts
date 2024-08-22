@@ -21,5 +21,4 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   console.log(deployment.address);
 };
 
-func.tags = ["all", name];
 export default func;

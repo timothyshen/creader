@@ -8,14 +8,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
   const chainId = network.config.chainId;
-  const creaderToken = await deployments.get("CreaderToken");
   const REGISTRY = "0xd43fE0d865cb5C26b1351d3eAf2E3064BE3276F6";
 
   const args: any[] = [
     "https://creader.io/",
     "Token bounded copyright",
     "TBC",
-    creaderToken.address,
     REGISTRY,
   ];
   const deployment = await deploy(name, {
