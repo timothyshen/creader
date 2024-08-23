@@ -12,15 +12,19 @@ type MarkdownEditorProps = {
 }
 
 const MarkdownEditor = ({ setValue, value }: MarkdownEditorProps) => {
-
     const onChange = useCallback<OnChange>((val) => {
         setValue(val || '');
-    }, []);
+    }, [setValue]);
 
     return (
-        <main className="w-full h-full mx-auto">
-            <MDEditor style={{ width: '100%', minHeight: '700px' }} value={value} onChange={onChange} height={700} />
-        </main>
+        <div className="w-full h-[500px]">
+            <MDEditor
+                value={value}
+                onChange={onChange}
+                className="w-full h-full"
+                preview="edit"
+            />
+        </div>
     );
 }
 
