@@ -30,6 +30,7 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
     } = useWriteContract()
 
     const [text, setText] = useState<string>()
+    const [title, setTitle] = useState<string>()
 
     const handleUpload = async () => {
 
@@ -46,7 +47,7 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
             const receiptIdLocal = receipt.id;
             const data = encodeFunctionData({
                 abi: Bodhi__factory.abi,
-                functionName: 'createChapter',
+                functionName: 'create',
                 args: [receiptIdLocal],
             });
 
@@ -100,6 +101,19 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
                 </DialogDescription>
             </DialogHeader>
             <div className="w-full">
+                <p>Upload your chapter now!</p>
+                <div className="mb-4">
+                    <label htmlFor="chapterTitle" className="block text-sm font-medium text-gray-700">Chapter Title</label>
+                    <input
+                        type="text"
+                        id="chapterTitle"
+                        name="chapterTitle"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        placeholder="Enter chapter title"
+                        onChange={(e) => setTitle(e.target.value)}
+                        value={title}
+                    />
+                </div>
                 <MarkdownEditor setValue={setText} value={text} />
                 {/* <Textarea onChange={(e: { target: { value: SetStateAction<string | undefined>; }; }) => setText(e.target.value)} placeholder="Type your message here." /> */}
 

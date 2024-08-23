@@ -185,7 +185,7 @@ export const CreateCopyright: React.FC<CreateCopyrightProps> = ({ setIsMinted })
                             <p className="font-semibold">Transaction Hash:</p>
                             <a
                                 className="text-blue-600 underline"
-                                href={`${BaseSepoliaChainExplorer}/address/${hash}`}
+                                href={`${BaseSepoliaChainExplorer}/tx/${hash}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >

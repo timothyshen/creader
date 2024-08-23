@@ -37,7 +37,7 @@ const WalletConnectComponentHeader = () => {
                 uri: window.location.origin,
                 version: "1",
                 address: address,
-                statement: session,
+                statement: "Sign in to our application",
                 nonce: await getCsrfToken(),
                 chainId: currentChain.id,
             });
@@ -51,8 +51,7 @@ const WalletConnectComponentHeader = () => {
             const response = await signIn("web3", {
                 message: JSON.stringify(message),
                 signedMessage,
-                redirect: true,
-                callbackUrl: '/hidden'
+                redirect: false,
             });
             if (response?.error) {
                 console.log("Error occured:", response.error);
