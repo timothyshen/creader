@@ -1,9 +1,12 @@
+'use client'
 import { ListCoverView } from '@/components/ListCoverView'
 import React from 'react'
 import { Header } from '@/components/Header/Header'
 import { Footer } from '@/components/Footer'
+import { useAutoConnect } from "@/hooks/useAutoConnect";
 
 export default function Home() {
+    useAutoConnect();
     return (
         <>
             <Header />
