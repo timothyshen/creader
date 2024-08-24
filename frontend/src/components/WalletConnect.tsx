@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import { Account } from "@/components/AccountDisplay";
 import ViewCoverView from "./ViewCoverView";
 import { Card } from "./ui/card";
-import { RemixCard } from "./Modal/DerivetiveModal/RemixCard";
+import { Character, CharacterCard } from "./RankingBoard";
 
 
 type WalletConnectComponentProps = {
@@ -12,61 +11,29 @@ type WalletConnectComponentProps = {
 
 
 const WalletConnectComponent = ({ id }: WalletConnectComponentProps) => {
-    return (
-        <div className=" ">
 
-            <ViewCoverView id={id} />
-            <div className="space-y-2 order-5">
-                <h2 className="text-xl font-bold">NFT Characters</h2>
-                <Card className="p-4 space-y-4">
-                    <div className="flex justify-between">
-                        <div>
-                            <h3 className="text-lg font-bold">Character 1</h3>
-                            <p>0x5130...342A</p>
-                            <img
-                                src="/placeholder.svg"
-                                alt="Character 1"
-                                width={100}
-                                height={100}
-                                className="rounded-full"
-                                style={{ aspectRatio: "100/100", objectFit: "cover" }}
-                            />
-                            <p>Price: 0.05 ETH</p>
-                        </div>
-                    </div>
-                    <div className="flex justify-between">
-                        <div>
-                            <h3 className="text-lg font-bold">Character 2</h3>
-                            <p>0xD745...93ef</p>
-                            <img
-                                src="/placeholder.svg"
-                                alt="Character 2"
-                                width={100}
-                                height={100}
-                                className="rounded-full"
-                                style={{ aspectRatio: "100/100", objectFit: "cover" }}
-                            />
-                            <p>Price: 0.08 ETH</p>
-                        </div>
-                    </div>
-                    <div className="flex justify-between">
-                        <div>
-                            <h3 className="text-lg font-bold">Character 3</h3>
-                            <p>0x1234...5678</p>
-                            <img
-                                src="/placeholder.svg"
-                                alt="Character 3"
-                                width={100}
-                                height={100}
-                                className="rounded-full"
-                                style={{ aspectRatio: "100/100", objectFit: "cover" }}
-                            />
-                            <p>Price: 0.03 ETH</p>
-                        </div>
-                    </div>
-                </Card>
-            </div>
+    const characters: Character[] = [
+        { id: "1", name: "Character 1", address: "0x5130...342A", imageUrl: "/placeholder.svg", price: 0.05 },
+        { id: "2", name: "Character 2", address: "0xD745...93ef", imageUrl: "/placeholder.svg", price: 0.08 },
+        { id: "3", name: "Character 3", address: "0x1234...5678", imageUrl: "/placeholder.svg", price: 0.03 },
+    ];
+    return (
+        <main className="min-h-screen p-4 sm:p-6 md:p-10 flex justify-center mx-auto">
+      <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="md:col-span-2">
+          {/* Left column content */}
+          <ViewCoverView id={params.id} />
         </div>
+        <div className="space-y-4">
+          <Card className="p-4">
+            {characters.map((character) => (
+              <CharacterCard key={character.id} character={character} />
+            ))}
+          </Card>
+          <RemixCard assetsId={BigInt(1)} ipId={params.id as `0x${string}`} />
+        </div>
+      </div>
+    </main>
     )
 }
 

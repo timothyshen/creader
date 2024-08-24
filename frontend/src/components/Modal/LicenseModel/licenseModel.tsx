@@ -62,40 +62,46 @@ export const LicenseModel = ({
                     <SelectLicense setLicense={setLicense} />
                     {license && license !== "" && <TermsList order={parseInt(license)} />}
                 </div>
-                <DialogFooter className="flex flex-col items-center space-y-4">
-                    <Button
-                        onClick={handleMintLicenseToken}
-                        disabled={isPending || isConfirming}
-                        className="w-full"
-                    >
-                        {isPending || isConfirming ? 'Processing...' : 'Attach License Terms'}
-                    </Button>
-                    {(isConfirming || isConfirmed || hash || error) && (
-                        <div className="w-full p-4 bg-gray-100 border border-gray-200 rounded-md space-y-2">
-                            {isConfirming && (
-                                <p className="text-yellow-600 font-semibold">Confirming transaction...</p>
-                            )}
-                            {isConfirmed && (
-                                <p className="text-green-600 font-semibold">License terms attached successfully!</p>
-                            )}
-                            {error && (
-                                <p className="text-red-600 font-semibold">Error: {error.message}</p>
-                            )}
-                            {hash && (
-                                <div>
-                                    <p className="font-semibold">Transaction Hash:</p>
-                                    <a
-                                        className="text-blue-600 hover:text-blue-800 underline break-all"
-                                        href={`${BaseSepoliaChainExplorer}/tx/${hash}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {sliceAddress(hash)}
-                                    </a>
+                <DialogFooter>
+                    <div className="flex flex-col items-end space-y-4">
+                        <div>
+                            <Button
+                                onClick={handleMintLicenseToken}
+                                disabled={isPending || isConfirming}
+                                className="w-max"
+                            >
+                                {isPending || isConfirming ? 'Processing...' : 'Attach License Terms'}
+                            </Button>
+                        </div>
+                        <div>
+                            {(isConfirming || isConfirmed || hash || error) && (
+                                <div className="w-full p-4 bg-gray-100 border border-gray-200 rounded-md space-y-2">
+                                    {isConfirming && (
+                                        <p className="text-yellow-600 font-semibold">Confirming transaction...</p>
+                                    )}
+                                    {isConfirmed && (
+                                        <p className="text-green-600 font-semibold">License terms attached successfully!</p>
+                                    )}
+                                    {error && (
+                                        <p className="text-red-600 font-semibold">Error: {error.message}</p>
+                                    )}
+                                    {hash && (
+                                        <div>
+                                            <p className="font-semibold">Transaction Hash:</p>
+                                            <a
+                                                className="text-blue-600 hover:text-blue-800 underline break-all"
+                                                href={`${BaseSepoliaChainExplorer}/tx/${hash}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {sliceAddress(hash)}
+                                            </a>
+                                        </div>
+                                    )}
                                 </div>
                             )}
                         </div>
-                    )}
+                    </div>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
