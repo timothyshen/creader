@@ -4,7 +4,6 @@ import { CopyrightCard } from './Card/CopyrightCard';
 import { useAccount } from 'wagmi';
 import { BodhiCardView } from '@/components/BodhiCardView';
 import { PriceData } from '@/types/steptypes';
-import { useRouter } from 'next/navigation';
 
 
 

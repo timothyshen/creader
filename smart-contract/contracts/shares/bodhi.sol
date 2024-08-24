@@ -22,6 +22,8 @@ contract Bodhi is ERC1155 {
         uint256 creatorFee
     );
 
+    event ChapterCreated(address indexed sender, address indexed ipId);
+
     struct Asset {
         uint256 id;
         string arTxId; // arweave transaction id
@@ -47,9 +49,9 @@ contract Bodhi is ERC1155 {
         Sell
     } // = 0, 1, 2
 
-    constructor() {}
+    // Bodhi Contract Functions
 
-    function create(string calldata arTxId) public {
+    function create(string calldata arTxId) external returns (uint256) {
         bytes32 txHash = keccak256(abi.encodePacked(arTxId));
         require(txToAssetId[txHash] == 0, "Asset already exists");
         uint256 newAssetId = assetIndex;
@@ -68,6 +70,7 @@ contract Bodhi is ERC1155 {
             0,
             0
         );
+        return assetIndex;
     }
 
     function remove(uint256 assetId) public {

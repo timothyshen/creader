@@ -5,6 +5,8 @@ import { useState } from "react";
 import TermsList from "./TermsList";
 import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi'
 import { ILicensingModule__factory } from '../../../../contract-config/typechain'
+import { sliceAddress } from "@/utils/supportFunction";
+import { BaseSepoliaChainExplorer } from '@/constant/contract-sepolia';
 
 interface LicenseModelProps {
     ipId: `0x${string}`;
@@ -45,7 +47,7 @@ export const LicenseModel = ({
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className='text-lg text-white'>
+                <Button>
                     Attach License
                 </Button>
             </DialogTrigger>
@@ -61,10 +63,45 @@ export const LicenseModel = ({
                     {license && license !== "" && <TermsList order={parseInt(license)} />}
                 </div>
                 <DialogFooter>
-                    <Button onClick={handleMintLicenseToken}>Attach License Terms</Button>
-                    {isConfirming && <p>Confirming...</p>}
-                    {isConfirmed && <p>Confirmed</p>}
-                    {error && <p>Error: {error.message}</p>}
+                    <div className="flex flex-col items-end space-y-4">
+                        <div>
+                            <Button
+                                onClick={handleMintLicenseToken}
+                                disabled={isPending || isConfirming}
+                                className="w-max"
+                            >
+                                {isPending || isConfirming ? 'Processing...' : 'Attach License Terms'}
+                            </Button>
+                        </div>
+                        <div>
+                            {(isConfirming || isConfirmed || hash || error) && (
+                                <div className="w-full p-4 bg-gray-100 border border-gray-200 rounded-md space-y-2">
+                                    {isConfirming && (
+                                        <p className="text-yellow-600 font-semibold">Confirming transaction...</p>
+                                    )}
+                                    {isConfirmed && (
+                                        <p className="text-green-600 font-semibold">License terms attached successfully!</p>
+                                    )}
+                                    {error && (
+                                        <p className="text-red-600 font-semibold">Error: {error.message}</p>
+                                    )}
+                                    {hash && (
+                                        <div>
+                                            <p className="font-semibold">Transaction Hash:</p>
+                                            <a
+                                                className="text-blue-600 hover:text-blue-800 underline break-all"
+                                                href={`${BaseSepoliaChainExplorer}/tx/${hash}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {sliceAddress(hash)}
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

@@ -281,6 +281,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IPAssetRegistry__factory>;
     getContractFactory(
+      name: "ChapterNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ChapterNFT__factory>;
+    getContractFactory(
       name: "CopyrightNFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CopyrightNFT__factory>;
@@ -293,9 +297,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IPALicenseToken__factory>;
     getContractFactory(
-      name: "SimpleNFT",
+      name: "IMulticall3",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SimpleNFT__factory>;
+    ): Promise<Contracts.IMulticall3__factory>;
     getContractFactory(
       name: "CreaderToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -304,18 +308,6 @@ declare module "hardhat/types/runtime" {
       name: "ICreaderToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ICreaderToken__factory>;
-    getContractFactory(
-      name: "MockERC1155",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MockERC1155__factory>;
-    getContractFactory(
-      name: "MockERC20",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MockERC20__factory>;
-    getContractFactory(
-      name: "MockERC721Second",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.MockERC721Second__factory>;
     getContractFactory(
       name: "Bodhi",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -340,6 +332,14 @@ declare module "hardhat/types/runtime" {
       name: "ERC1155TokenReceiver",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC1155TokenReceiver__factory>;
+    getContractFactory(
+      name: "ERC721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721__factory>;
+    getContractFactory(
+      name: "ERC721TokenReceiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721TokenReceiver__factory>;
 
     getContractAt(
       name: "AccessManagedUpgradeable",
@@ -677,6 +677,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IPAssetRegistry>;
     getContractAt(
+      name: "ChapterNFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ChapterNFT>;
+    getContractAt(
       name: "CopyrightNFT",
       address: string,
       signer?: ethers.Signer
@@ -692,10 +697,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IPALicenseToken>;
     getContractAt(
-      name: "SimpleNFT",
+      name: "IMulticall3",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.SimpleNFT>;
+    ): Promise<Contracts.IMulticall3>;
     getContractAt(
       name: "CreaderToken",
       address: string,
@@ -706,21 +711,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ICreaderToken>;
-    getContractAt(
-      name: "MockERC1155",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MockERC1155>;
-    getContractAt(
-      name: "MockERC20",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MockERC20>;
-    getContractAt(
-      name: "MockERC721Second",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.MockERC721Second>;
     getContractAt(
       name: "Bodhi",
       address: string,
@@ -751,6 +741,16 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ERC1155TokenReceiver>;
+    getContractAt(
+      name: "ERC721",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721>;
+    getContractAt(
+      name: "ERC721TokenReceiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721TokenReceiver>;
 
     // default types
     getContractFactory(

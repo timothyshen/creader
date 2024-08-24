@@ -3,5 +3,4 @@
 /* eslint-disable */
 export * as creaderIo from "./creader-io";
 export * as creaderToken from "./creaderToken";
-export * as mock from "./mock";
 export * as shares from "./shares";

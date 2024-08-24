@@ -3,5 +3,6 @@
 /* eslint-disable */
 export * as ipaLicenseTermsSol from "./IPALicenseTerms.sol";
 export * as interfaces from "./interfaces";
+export * as lib from "./lib";
+export { ChapterNFT__factory } from "./ChapterNFT__factory";
 export { CopyrightNFT__factory } from "./CopyrightNFT__factory";
-export { SimpleNFT__factory } from "./SimpleNFT__factory";

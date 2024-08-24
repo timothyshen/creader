@@ -5,7 +5,5 @@ import type * as creaderIo from "./creader-io";
 export type { creaderIo };
 import type * as creaderToken from "./creaderToken";
 export type { creaderToken };
-import type * as mock from "./mock";
-export type { mock };
 import type * as shares from "./shares";
 export type { shares };

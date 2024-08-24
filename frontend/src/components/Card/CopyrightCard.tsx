@@ -67,8 +67,6 @@ export const CopyrightCard = ({
             <CardFooter className='justify-center flex flex-col gap-2'>
 
                 <RemixModal assetsId={BigInt(0)} ipId={coverAcc} />
-                <LicenseModel ipId={coverAcc} />
-
                 {owner && setIsMintedBodhi && (
                     <AddNew nftAcc={coverAcc} setIsMintedBodhi={setIsMintedBodhi} />
                 )}

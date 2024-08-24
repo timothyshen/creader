@@ -5,5 +5,7 @@ import type * as ipaLicenseTermsSol from "./IPALicenseTerms.sol";
 export type { ipaLicenseTermsSol };
 import type * as interfaces from "./interfaces";
 export type { interfaces };
+import type * as lib from "./lib";
+export type { lib };
+export type { ChapterNFT } from "./ChapterNFT";
 export type { CopyrightNFT } from "./CopyrightNFT";
-export type { SimpleNFT } from "./SimpleNFT";

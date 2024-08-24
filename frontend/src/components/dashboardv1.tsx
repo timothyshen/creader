@@ -3,16 +3,16 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Sidebar } from "./Dashboard/SideBar"
 import { Header } from "./Dashboard/Header"
-import { BookIcon, DollarSignIcon, MoveVerticalIcon, StarIcon, Table, UsersIcon } from "lucide-react"
+import { BookIcon, DollarSignIcon, MoveVerticalIcon, StarIcon, UsersIcon } from "lucide-react"
 import { BookTable } from "./Dashboard/Table/BookTable"
 import { CommonCard } from "./Dashboard/CommonCard"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { Progress } from "@/components/ui/progress"
+import { CreateCopyright } from "./Modal/CreateCopyright"
 
 export function Dashboardv1() {
   return (
     <>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card className="sm:col-span-4" x-chunk="dashboard-05-chunk-0">
           <CardHeader className="pb-3">
             <CardTitle>Your Books</CardTitle>
@@ -21,7 +21,7 @@ export function Dashboardv1() {
             </CardDescription>
           </CardHeader>
           <CardFooter>
-            <Button>Publish New Book</Button>
+            <CreateCopyright />
           </CardFooter>
         </Card>
         <CommonCard title="Total Books" icon={<BookIcon className="w-4 h-4 text-muted-foreground" />} value="24" description="+3 from last month" />
@@ -48,7 +48,7 @@ export function Dashboardv1() {
             <CardDescription>Manage your published books.</CardDescription>
           </CardHeader>
           <CardContent>
-
+            <BookTable />
           </CardContent>
           <CardFooter>
             <div className="text-xs text-muted-foreground">

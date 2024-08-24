@@ -19,5 +19,4 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   // deployments.log(`npx hardhat verify --network ${network.name} ${deployment.address}`)
 };
 
-func.tags = ["all", name];
 export default func;

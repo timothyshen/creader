@@ -18,11 +18,6 @@
       },
       {
         "internalType": "address",
-        "name": "_creaderToken",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
         "name": "_registry",
         "type": "address"
       }
@@ -582,29 +577,11 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "creaderToken",
-    "outputs": [
-      {
-        "internalType": "contract CreaderToken",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
         "name": "to",
         "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "chainId",
-        "type": "uint256"
       },
       {
         "internalType": "string",

@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
 import { StepProps } from "@/types/steptypes"
-import { Bodhi__factory, IIPAccount__factory } from "../../../../contract-config/typechain";
+import { ChapterNFT__factory, IIPAccount__factory } from "../../../../contract-config/typechain";
 import {
     useWaitForTransactionReceipt,
     useWriteContract,
@@ -14,10 +14,13 @@ import {
 import { encodeFunctionData, parseEther } from "viem";
 import getWebIrys from "@/provider/irys";
 import { useState } from "react";
-import { BodhiAddress } from '@/constant/contract-sepolia'
+import { ChapterNFTAddress } from '@/constant/contract-sepolia'
 import MarkdownEditor from "@/components/MarkdownEditor"
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { ArrowBigLeft } from "lucide-react";
 import { sliceAddress } from "@/utils/supportFunction";
+import { LicenseModel } from "@/components/Modal/LicenseModel/licenseModel";
 
 
 export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setIsMintedBodhi }) => {
@@ -30,11 +33,13 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
     } = useWriteContract()
 
     const [text, setText] = useState<string>()
+    const [title, setTitle] = useState<string>()
+    const [ipId, setIpId] = useState<string>()
 
     const handleUpload = async () => {
 
 
-        if (text === undefined || nftAcc === undefined) return;
+        if (text === undefined || nftAcc === undefined || title === undefined) return;
         const webIrys = await getWebIrys();
         try {
             // console.log('uploading');
@@ -45,9 +50,9 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
             // Use the receipt.id directly here
             const receiptIdLocal = receipt.id;
             const data = encodeFunctionData({
-                abi: Bodhi__factory.abi,
-                functionName: 'create',
-                args: [receiptIdLocal],
+                abi: ChapterNFT__factory.abi,
+                functionName: 'createChapter',
+                args: [title, receiptIdLocal],
             });
 
             // console.log('data', data);
@@ -59,12 +64,12 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
                 abi: IIPAccount__factory.abi,
                 functionName: 'execute',
                 args: [
-                    BodhiAddress as `0x${string}`,
+                    ChapterNFTAddress as `0x${string}`,
                     parseEther('0'),
                     data,
                 ],
             });
-
+            setIpId("0x0");
 
         } catch (e) {
             console.log("Error uploading data ", e);
@@ -76,6 +81,7 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
         useWaitForTransactionReceipt({
             hash,
         })
+    console.log(error)
 
     if (isConfirmed === true) {
         if (setOpen) {
@@ -88,42 +94,54 @@ export const UploadStep: React.FC<StepProps> = ({ setStep, nftAcc, setOpen, setI
     return (
         <>
             <DialogHeader>
-                <DialogTitle>
-                    <Button className="p-0" variant='link' onClick={() => setStep("select")}>
-                        <ArrowBigLeft className="" />
-                        Back
+                <DialogTitle className="flex items-center gap-2">
+                    <Button variant="ghost" size="icon" onClick={() => setStep("select")}>
+                        <ArrowBigLeft className="h-4 w-4" />
                     </Button>
-                    <p>Upload your chapter now!</p>
+                    <span>Upload your chapter now!</span>
                 </DialogTitle>
                 <DialogDescription>
                     Upload your book
                 </DialogDescription>
             </DialogHeader>
-            <div className="w-full">
-                <MarkdownEditor setValue={setText} value={text} />
-                {/* <Textarea onChange={(e: { target: { value: SetStateAction<string | undefined>; }; }) => setText(e.target.value)} placeholder="Type your message here." /> */}
-
-            </div>
-            <DialogFooter>
-                <div className="flex justify-between">
-                    <Button variant='link' onClick={() => setStep("select")}>
-                        Cancel
-                    </Button>
-                    <Button variant='default' onClick={handleUpload}>
-                        {isConfirming ? "loading" : "Upload"}
-                    </Button>
+            <div className="space-y-4">
+                <div className="space-y-2">
+                    <Label htmlFor="chapterTitle">Chapter Title</Label>
+                    <Input
+                        id="chapterTitle"
+                        placeholder="Enter chapter title"
+                        onChange={(e) => setTitle(e.target.value)}
+                        value={title}
+                    />
                 </div>
-            </DialogFooter>
-            <div className='mt-2'>
-                {error && (
-                    <div className='p-2 bg-red-100 border border-red-400 text-red-700 rounded-md max-w-md mx-auto overflow-hidden'>
-                        <p>{error.message}</p>
-                    </div>
-                )}
-                {isConfirming && <p>Confirming...</p>}
-                {isConfirmed && <p>Confirmed!</p>}
-                {hash && <div>Transaction Hash: {sliceAddress(hash)}</div>}
+                <MarkdownEditor setValue={setText} value={text} />
             </div>
+            <DialogFooter className="flex justify-between items-center">
+                <Button variant="ghost" onClick={() => setStep("select")}>
+                    Cancel
+                </Button>
+                <Button onClick={handleUpload} disabled={isPending || isConfirming}>
+                    {true ? "Loading..." : "Upload"}
+                </Button>
+                <LicenseModel ipId={ipId as `0x${string}`} />
+            </DialogFooter>
+            {error && (
+                <p className="text-red-600">{error.message}</p>
+            )}
+            {/* {(error || isConfirming || isConfirmed || hash) && (
+                <div className="mt-4 p-4 bg-gray-100 rounded-md">
+                    {error && (
+                        <p className="text-red-600">{error.message}</p>
+                    )}
+                    {isConfirming && <p className="text-yellow-600">Confirming...</p>}
+                    {isConfirmed && <p className="text-green-600">Confirmed!</p>}
+                    {hash && (
+                        <p className="text-blue-600">
+                            Transaction Hash: {sliceAddress(hash)}
+                        </p>
+                    )}
+                </div>
+            )} */}
         </>
     );
 }

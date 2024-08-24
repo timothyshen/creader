@@ -10,11 +10,10 @@ export const authOptions: AuthOptions = {
       id: "web3",
       name: "web3",
       credentials: {
-        message: { label: "Message", type: "text", placeholder: "0x0" },
+        message: { label: "Message", type: "text" },
         signedMessage: {
           label: "Signed Message",
           type: "text",
-          placeholder: "0x0",
         }, // aka signature
       },
       async authorize(credentials, req) {
@@ -31,8 +30,8 @@ export const authOptions: AuthOptions = {
 
           if (!result.success) throw new Error("Invalid Signature");
 
-          if (result.data.statement !== process.env.NEXT_PUBLIC_SIGNIN_MESSAGE)
-            throw new Error("Statement Mismatch");
+          // if (result.data.statement !== process.env.NEXT_PUBLIC_SIGNIN_MESSAGE)
+          //   throw new Error("Statement Mismatch");
 
           // if (new Date(result.data.expirationTime as string) < new Date())
           //   throw new Error("Signature Already expired");
@@ -59,9 +58,6 @@ export const authOptions: AuthOptions = {
       session.user.token = token;
       return session;
     },
-  },
-  pages: {
-    signIn: "/auth",
   },
 };
 

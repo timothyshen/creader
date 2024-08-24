@@ -12,7 +12,7 @@ export const useBodhiCreate = () => {
       return writeContract({
         address: BodhiAddress as `0x${string}`,
         abi: Bodhi__factory.abi,
-        functionName: "create",
+        functionName: "createChapter",
         args: [arTxId],
       });
     } catch (error) {

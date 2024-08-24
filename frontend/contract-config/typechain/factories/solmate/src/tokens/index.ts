@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as erc1155Sol from "./ERC1155.sol";
+export * as erc721Sol from "./ERC721.sol";

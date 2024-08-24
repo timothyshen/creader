@@ -544,6 +544,7 @@ export interface BodhiInterface extends utils.Interface {
 
   events: {
     "ApprovalForAll(address,address,bool)": EventFragment;
+    "ChapterCreated(address,address)": EventFragment;
     "Create(uint256,address,string)": EventFragment;
     "Remove(uint256,address)": EventFragment;
     "Trade(uint8,uint256,address,uint256,uint256,uint256)": EventFragment;
@@ -555,6 +556,10 @@ export interface BodhiInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ApprovalForAll(address,address,bool)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ChapterCreated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ChapterCreated(address,address)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Create"): EventFragment;
   getEvent(
@@ -589,6 +594,17 @@ export type ApprovalForAllEvent = TypedEvent<
 >;
 
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
+
+export interface ChapterCreatedEventObject {
+  sender: string;
+  ipId: string;
+}
+export type ChapterCreatedEvent = TypedEvent<
+  [string, string],
+  ChapterCreatedEventObject
+>;
+
+export type ChapterCreatedEventFilter = TypedEventFilter<ChapterCreatedEvent>;
 
 export interface CreateEventObject {
   assetId: BigNumber;
@@ -1387,12 +1403,12 @@ export interface Bodhi extends BaseContract {
     create(
       arTxId: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<BigNumber>;
 
     "create(string)"(
       arTxId: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<BigNumber>;
 
     getAssetIdsByAddress(
       addr: PromiseOrValue<string>,
@@ -1620,6 +1636,15 @@ export interface Bodhi extends BaseContract {
       operator?: PromiseOrValue<string> | null,
       approved?: null
     ): ApprovalForAllEventFilter;
+
+    "ChapterCreated(address,address)"(
+      sender?: PromiseOrValue<string> | null,
+      ipId?: PromiseOrValue<string> | null
+    ): ChapterCreatedEventFilter;
+    ChapterCreated(
+      sender?: PromiseOrValue<string> | null,
+      ipId?: PromiseOrValue<string> | null
+    ): ChapterCreatedEventFilter;
 
     "Create(uint256,address,string)"(
       assetId?: PromiseOrValue<BigNumberish> | null,

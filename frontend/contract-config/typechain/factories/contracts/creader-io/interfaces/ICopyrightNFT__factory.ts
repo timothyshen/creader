@@ -86,11 +86,6 @@ const _abi = [
         type: "address",
       },
       {
-        internalType: "uint256",
-        name: "chainId",
-        type: "uint256",
-      },
-      {
         internalType: "string",
         name: "title",
         type: "string",

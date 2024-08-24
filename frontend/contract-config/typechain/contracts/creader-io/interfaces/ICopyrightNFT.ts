@@ -59,7 +59,7 @@ export declare namespace ICopyrightNFT {
 
 export interface ICopyrightNFTInterface extends utils.Interface {
   functions: {
-    "createCopyright(address,uint256,string,string,string)": FunctionFragment;
+    "createCopyright(address,string,string,string)": FunctionFragment;
     "getAllCoypright()": FunctionFragment;
     "getAuthorCover(address)": FunctionFragment;
     "getCover(uint256)": FunctionFragment;
@@ -69,7 +69,7 @@ export interface ICopyrightNFTInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "createCopyright"
-      | "createCopyright(address,uint256,string,string,string)"
+      | "createCopyright(address,string,string,string)"
       | "getAllCoypright"
       | "getAllCoypright()"
       | "getAuthorCover"
@@ -84,17 +84,15 @@ export interface ICopyrightNFTInterface extends utils.Interface {
     functionFragment: "createCopyright",
     values: [
       PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "createCopyright(address,uint256,string,string,string)",
+    functionFragment: "createCopyright(address,string,string,string)",
     values: [
       PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>
@@ -146,7 +144,7 @@ export interface ICopyrightNFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "createCopyright(address,uint256,string,string,string)",
+    functionFragment: "createCopyright(address,string,string,string)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -250,16 +248,14 @@ export interface ICopyrightNFT extends BaseContract {
   functions: {
     createCopyright(
       to: PromiseOrValue<string>,
-      chainId: PromiseOrValue<BigNumberish>,
       title: PromiseOrValue<string>,
       description: PromiseOrValue<string>,
       status: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "createCopyright(address,uint256,string,string,string)"(
+    "createCopyright(address,string,string,string)"(
       to: PromiseOrValue<string>,
-      chainId: PromiseOrValue<BigNumberish>,
       title: PromiseOrValue<string>,
       description: PromiseOrValue<string>,
       status: PromiseOrValue<string>,
@@ -311,16 +307,14 @@ export interface ICopyrightNFT extends BaseContract {
 
   createCopyright(
     to: PromiseOrValue<string>,
-    chainId: PromiseOrValue<BigNumberish>,
     title: PromiseOrValue<string>,
     description: PromiseOrValue<string>,
     status: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "createCopyright(address,uint256,string,string,string)"(
+  "createCopyright(address,string,string,string)"(
     to: PromiseOrValue<string>,
-    chainId: PromiseOrValue<BigNumberish>,
     title: PromiseOrValue<string>,
     description: PromiseOrValue<string>,
     status: PromiseOrValue<string>,
@@ -372,16 +366,14 @@ export interface ICopyrightNFT extends BaseContract {
   callStatic: {
     createCopyright(
       to: PromiseOrValue<string>,
-      chainId: PromiseOrValue<BigNumberish>,
       title: PromiseOrValue<string>,
       description: PromiseOrValue<string>,
       status: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "createCopyright(address,uint256,string,string,string)"(
+    "createCopyright(address,string,string,string)"(
       to: PromiseOrValue<string>,
-      chainId: PromiseOrValue<BigNumberish>,
       title: PromiseOrValue<string>,
       description: PromiseOrValue<string>,
       status: PromiseOrValue<string>,
@@ -464,16 +456,14 @@ export interface ICopyrightNFT extends BaseContract {
   estimateGas: {
     createCopyright(
       to: PromiseOrValue<string>,
-      chainId: PromiseOrValue<BigNumberish>,
       title: PromiseOrValue<string>,
       description: PromiseOrValue<string>,
       status: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "createCopyright(address,uint256,string,string,string)"(
+    "createCopyright(address,string,string,string)"(
       to: PromiseOrValue<string>,
-      chainId: PromiseOrValue<BigNumberish>,
       title: PromiseOrValue<string>,
       description: PromiseOrValue<string>,
       status: PromiseOrValue<string>,
@@ -522,16 +512,14 @@ export interface ICopyrightNFT extends BaseContract {
   populateTransaction: {
     createCopyright(
       to: PromiseOrValue<string>,
-      chainId: PromiseOrValue<BigNumberish>,
       title: PromiseOrValue<string>,
       description: PromiseOrValue<string>,
       status: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "createCopyright(address,uint256,string,string,string)"(
+    "createCopyright(address,string,string,string)"(
       to: PromiseOrValue<string>,
-      chainId: PromiseOrValue<BigNumberish>,
       title: PromiseOrValue<string>,
       description: PromiseOrValue<string>,
       status: PromiseOrValue<string>,
